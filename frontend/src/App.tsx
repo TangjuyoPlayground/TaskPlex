@@ -4,6 +4,7 @@ import { HomeDashboard } from './pages/HomeDashboard';
 import { VideoScreen } from './pages/VideoScreen';
 import { ImageScreen } from './pages/ImageScreen';
 import { RegexScreen } from './pages/RegexScreen';
+import { UnitsScreen } from './pages/UnitsScreen';
 // PDF Module
 import { PDFDashboard } from './pages/pdf/PDFDashboard';
 import { PDFCompress } from './pages/pdf/PDFCompress';
@@ -38,7 +39,7 @@ function App() {
           </Route>
 
           <Route path="regex" element={<RegexScreen />} />
-          <Route path="units" element={<Placeholder title="Unit Converter" />} />
+          <Route path="units" element={<UnitsScreen />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -55,6 +55,14 @@ export interface RegexResponse {
   error?: string;
 }
 
+export interface UnitConversionResponse {
+  success: boolean;
+  value: number;
+  unit: string;
+  message?: string;
+  error?: string;
+}
+
 export const ApiService = {
   // Video
   compressVideo: async (file: File, quality: string) => {
@@ -130,6 +138,16 @@ export const ApiService = {
       pattern,
       text,
       flags
+    });
+    return response.data;
+  },
+
+  // Units
+  convertUnits: async (value: number, fromUnit: string, toUnit: string) => {
+    const response = await api.post<UnitConversionResponse>('/units/convert', {
+      value,
+      from_unit: fromUnit,
+      to_unit: toUnit
     });
     return response.data;
   },
