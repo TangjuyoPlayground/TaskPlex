@@ -5,9 +5,10 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      # - ./backend:/app # Désactivé pour éviter les conflits, décommentez pour le dév
-      - taskplex_temp:/app/temp_files
+      - ./backend:/app:z
+      - taskplex_temp:/app/temp_files:z
     environment:
+      - PYTHONDONTWRITEBYTECODE=1
       - CORS_ORIGINS=http://localhost:5173,http://localhost:3000,http://localhost
     restart: unless-stopped
 
