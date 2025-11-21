@@ -3,6 +3,7 @@ import { Layout } from './components/Layout';
 import { HomeDashboard } from './pages/HomeDashboard';
 import { VideoScreen } from './pages/VideoScreen';
 import { ImageScreen } from './pages/ImageScreen';
+import { RegexScreen } from './pages/RegexScreen';
 // PDF Module
 import { PDFDashboard } from './pages/pdf/PDFDashboard';
 import { PDFCompress } from './pages/pdf/PDFCompress';
@@ -36,7 +37,7 @@ function App() {
             <Route path="reorganize" element={<PDFReorganize />} />
           </Route>
 
-          <Route path="regex" element={<Placeholder title="Regex Tester" />} />
+          <Route path="regex" element={<RegexScreen />} />
           <Route path="units" element={<Placeholder title="Unit Converter" />} />
         </Route>
       </Routes>
