@@ -40,6 +40,21 @@ export interface ImageProcessingResponse {
   dimensions?: { width: number; height: number };
 }
 
+export interface RegexMatch {
+  match: string;
+  start: number;
+  end: number;
+  groups: string[];
+  named_groups: Record<string, string>;
+}
+
+export interface RegexResponse {
+  success: boolean;
+  matches: RegexMatch[];
+  count: number;
+  error?: string;
+}
+
 export const ApiService = {
   // Video
   compressVideo: async (file: File, quality: string) => {
@@ -106,6 +121,16 @@ export const ApiService = {
     formData.append('output_format', outputFormat);
     formData.append('quality', quality);
     const response = await api.post<ImageProcessingResponse>('/image/convert', formData);
+    return response.data;
+  },
+
+  // Regex
+  testRegex: async (pattern: string, text: string, flags: string) => {
+    const response = await api.post<RegexResponse>('/regex/validate', {
+      pattern,
+      text,
+      flags
+    });
     return response.data;
   },
   
