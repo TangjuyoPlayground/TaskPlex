@@ -5,7 +5,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./backend:/app
+      # - ./backend:/app # Désactivé pour éviter les conflits, décommentez pour le dév
       - taskplex_temp:/app/temp_files
     environment:
       - CORS_ORIGINS=http://localhost:5173,http://localhost:3000,http://localhost
