@@ -1,0 +1,54 @@
+# System
+.DS_Store
+Thumbs.db
+*.log
+
+# IDE
+.vscode/
+.idea/
+.cursor/
+*.swp
+*.swo
+
+# Python / Backend
+__pycache__/
+*.py[cod]
+*$py.class
+backend/venv/
+backend/venv_build/
+backend/.env
+backend/temp_files/
+backend/build/
+backend/dist/
+*.spec
+
+# Node / Frontend
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+frontend/dist/
+frontend/build/
+frontend/.env
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+
+# Tauri
+frontend/src-tauri/target/
+frontend/src-tauri/binaries/
+frontend/src-tauri/gen/
+
+# Docker
+.docker/
+docker-compose.override.yml
+
+# App artifacts
+*.deb
+*.rpm
+*.AppImage
+*.dmg
+*.exe
+

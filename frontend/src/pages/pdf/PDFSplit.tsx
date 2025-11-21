@@ -1,0 +1,165 @@
+import React, { useState } from 'react';
+import { Split, Upload, Download, FileText, Check, Settings2 } from 'lucide-react';
+import { ApiService } from '../../services/api';
+import type { PDFProcessingResponse } from '../../services/api';
+
+export const PDFSplit: React.FC = () => {
+  const [file, setFile] = useState<File | null>(null);
+  const [mode, setMode] = useState<'all' | 'range'>('all');
+  const [range, setRange] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState<PDFProcessingResponse | null>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setFile(e.target.files[0]);
+      setResult(null);
+    }
+  };
+
+  const handleSplit = async () => {
+    if (!file) return;
+    setLoading(true);
+    try {
+      const res = await ApiService.splitPDF(
+        file,
+        mode === 'range' ? undefined : undefined, // If 'all', no params needed (server default)
+        mode === 'range' ? range : undefined
+      );
+      setResult(res);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="p-8 max-w-4xl mx-auto">
+      <div className="text-center mb-10">
+        <h1 className="text-3xl font-bold text-gray-900 mb-2 flex items-center justify-center gap-3">
+          <Split className="text-blue-600" size={32} />
+          Split PDF
+        </h1>
+        <p className="text-gray-600">Extract pages from your PDF or save each page as a separate PDF.</p>
+      </div>
+
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
+        {!file ? (
+          <div className="border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:bg-gray-50 transition-colors relative group cursor-pointer">
+            <input 
+              type="file" 
+              accept=".pdf" 
+              onChange={handleFileChange} 
+              className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" 
+            />
+            <div className="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-200">
+              <Upload className="w-10 h-10 text-blue-600" />
+            </div>
+            <h3 className="text-xl font-bold text-gray-900 mb-2">Select PDF file</h3>
+            <p className="text-gray-500">or drop PDF here</p>
+          </div>
+        ) : (
+          <div className="space-y-8">
+            <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl border border-gray-200">
+              <div className="p-3 bg-blue-100 rounded-lg">
+                <FileText className="w-8 h-8 text-blue-600" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="font-semibold text-gray-900 truncate">{file.name}</p>
+                <p className="text-sm text-gray-500">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+              </div>
+              <button 
+                onClick={() => { setFile(null); setResult(null); }}
+                className="px-4 py-2 text-sm font-medium text-gray-600 hover:bg-gray-200 rounded-lg transition-colors"
+              >
+                Change
+              </button>
+            </div>
+
+            {!result ? (
+              <div className="space-y-6">
+                <div className="grid grid-cols-2 gap-4">
+                  <button
+                    onClick={() => setMode('all')}
+                    className={`p-4 rounded-xl border-2 text-left transition-all ${
+                      mode === 'all' 
+                        ? 'border-blue-600 bg-blue-50 ring-1 ring-blue-600' 
+                        : 'border-gray-200 hover:border-gray-300'
+                    }`}
+                  >
+                    <div className="flex justify-between items-start mb-2">
+                      <Split className={mode === 'all' ? 'text-blue-600' : 'text-gray-400'} />
+                      {mode === 'all' && <Check size={16} className="text-blue-600" />}
+                    </div>
+                    <h4 className={`font-bold ${mode === 'all' ? 'text-blue-900' : 'text-gray-900'}`}>Extract All Pages</h4>
+                    <p className={`text-sm ${mode === 'all' ? 'text-blue-700' : 'text-gray-500'}`}>Save every page as a separate PDF file</p>
+                  </button>
+
+                  <button
+                    onClick={() => setMode('range')}
+                    className={`p-4 rounded-xl border-2 text-left transition-all ${
+                      mode === 'range' 
+                        ? 'border-blue-600 bg-blue-50 ring-1 ring-blue-600' 
+                        : 'border-gray-200 hover:border-gray-300'
+                    }`}
+                  >
+                    <div className="flex justify-between items-start mb-2">
+                      <Settings2 className={mode === 'range' ? 'text-blue-600' : 'text-gray-400'} />
+                      {mode === 'range' && <Check size={16} className="text-blue-600" />}
+                    </div>
+                    <h4 className={`font-bold ${mode === 'range' ? 'text-blue-900' : 'text-gray-900'}`}>Custom Ranges</h4>
+                    <p className={`text-sm ${mode === 'range' ? 'text-blue-700' : 'text-gray-500'}`}>Extract specific pages (e.g. 1-5, 8, 11-13)</p>
+                  </button>
+                </div>
+
+                {mode === 'range' && (
+                  <div className="animate-in fade-in slide-in-from-top-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Page Ranges</label>
+                    <input
+                      type="text"
+                      value={range}
+                      onChange={(e) => setRange(e.target.value)}
+                      placeholder="e.g. 1-5, 8, 11-13"
+                      className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    />
+                  </div>
+                )}
+
+                <button
+                  onClick={handleSplit}
+                  disabled={loading || (mode === 'range' && !range)}
+                  className="w-full py-4 bg-blue-600 text-white rounded-xl font-bold text-lg hover:bg-blue-700 transition-all shadow-lg hover:shadow-blue-200 disabled:bg-gray-300 disabled:cursor-not-allowed disabled:shadow-none flex items-center justify-center gap-2"
+                >
+                  {loading ? 'Splitting PDF...' : 'Split PDF'}
+                </button>
+              </div>
+            ) : (
+              <div className="bg-blue-50 border border-blue-100 rounded-xl p-6 text-center animate-in fade-in slide-in-from-bottom-4">
+                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Download className="w-8 h-8 text-blue-600" />
+                </div>
+                <h3 className="text-xl font-bold text-blue-900 mb-2">PDF Split Successful!</h3>
+                <p className="text-blue-700 mb-6">Created {result.filenames?.length} separate PDF files.</p>
+                
+                <div className="grid gap-2 max-h-60 overflow-y-auto mb-4">
+                  {result.filenames?.map((fname, i) => (
+                    <a
+                      key={i}
+                      href={ApiService.getDownloadUrl(`/api/v1/download/${fname}`)}
+                      download
+                      className="flex items-center justify-between p-3 bg-white rounded-lg border border-blue-100 hover:border-blue-300 transition-colors text-sm text-gray-700"
+                    >
+                      <span className="truncate">{fname}</span>
+                      <Download size={16} className="text-blue-600 ml-2" />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
