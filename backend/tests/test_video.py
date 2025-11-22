@@ -43,15 +43,26 @@ def test_convert_video_invalid_format(client):
     assert response.status_code in [400, 422]
 
 
-def test_convert_video_invalid_output_format(client, sample_image):
+def test_convert_video_invalid_output_format(client):
     """Test video conversion with invalid output format"""
+    # Create a dummy file for testing
+    from pathlib import Path
+
+    from PIL import Image
+
+    test_dir = Path(__file__).parent / "temp"
+    test_dir.mkdir(exist_ok=True)
+    img_path = test_dir / "test_video_image.png"
+    img = Image.new("RGB", (100, 100), color="blue")
+    img.save(img_path)
+
     # Using image as mock video file (will fail format validation first)
-    with open(sample_image, "rb") as f:
+    with open(img_path, "rb") as f:
         response = client.post(
             "/api/v1/video/convert",
             files={"file": ("test.mp4", f, "video/mp4")},
             data={"output_format": "invalid_format", "quality": "medium"},
         )
 
-    # Should fail due to invalid output format
+    # Should fail due to invalid output format or invalid input format
     assert response.status_code in [400, 422]
