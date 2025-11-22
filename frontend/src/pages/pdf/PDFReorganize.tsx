@@ -10,9 +10,9 @@ import { useReorganizePDF } from '../../hooks/usePDF';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
 
-// Configure PDF.js worker locally
-// We use static copy in vite.config.ts to place this file at root
-pdfjs.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
+// Configure PDF.js worker using CDN to ensure correct version and MIME type
+// This avoids issues with local Nginx configuration or bundler paths
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 interface PDFPage {
   id: string;
@@ -176,7 +176,7 @@ export const PDFReorganize: React.FC = () => {
                     onLoadSuccess={onDocumentLoadSuccess}
                     className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 max-w-5xl mx-auto"
                     loading={<div className="col-span-full text-center py-12 text-gray-400">Loading PDF Preview...</div>}
-                    error={<div className="col-span-full text-center py-12 text-red-500">Failed to load PDF file. Please ensure the PDF is valid and the worker is loaded.</div>}
+                    error={<div className="col-span-full text-center py-12 text-red-500">Failed to load PDF file. Please ensure you are connected to internet for the worker to load.</div>}
                   >
                     {pages.map((page) => (
                       <SortablePage key={page.id} page={page} />
