@@ -210,11 +210,34 @@ jobs:
     steps:
       - name: Check Job Status
         run: |
-          if [ "${{ needs.lint-backend.result }}" != "success" ] || \
-             [ "${{ needs.lint-frontend.result }}" != "success" ] || \
-             [ "${{ needs.test-backend.result }}" != "success" ] || \
-             [ "${{ needs.test-frontend.result }}" != "success" ]; then
+          echo "📊 Checking job results:"
+          echo "  lint-backend: ${{ needs.lint-backend.result }}"
+          echo "  lint-frontend: ${{ needs.lint-frontend.result }}"
+          echo "  test-backend: ${{ needs.test-backend.result }}"
+          echo "  test-frontend: ${{ needs.test-frontend.result }}"
+          
+          failed_jobs=()
+          
+          if [ "${{ needs.lint-backend.result }}" != "success" ]; then
+            failed_jobs+=("lint-backend")
+          fi
+          
+          if [ "${{ needs.lint-frontend.result }}" != "success" ]; then
+            failed_jobs+=("lint-frontend")
+          fi
+          
+          if [ "${{ needs.test-backend.result }}" != "success" ]; then
+            failed_jobs+=("test-backend")
+          fi
+          
+          if [ "${{ needs.test-frontend.result }}" != "success" ]; then
+            failed_jobs+=("test-frontend")
+          fi
+          
+          if [ ${#failed_jobs[@]} -gt 0 ]; then
             echo "❌ Quality gate failed"
+            echo "Failed jobs: ${failed_jobs[*]}"
             exit 1
           fi
-          echo "✅ Quality gate passed"
+          
+          echo "✅ Quality gate passed - All jobs succeeded"
