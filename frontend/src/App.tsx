@@ -7,7 +7,7 @@ import { LoadingFallback } from './components/LoadingFallback';
 import { ErrorBoundary } from './components/ErrorBoundary';
 
 // Helper function to create lazy components with better error handling
-const createLazyComponent = <T extends React.ComponentType<any>>(
+const createLazyComponent = <T extends React.ComponentType<Record<string, unknown>>>(
   importFn: () => Promise<{ [K: string]: T }>,
   componentName: string
 ) => {

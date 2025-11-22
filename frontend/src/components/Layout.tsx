@@ -4,7 +4,7 @@ import { LayoutDashboard, Video, Image, FileText, Regex, Ruler, Menu } from 'luc
 
 // Preload route components on hover for better UX
 const preloadRoute = (routePath: string) => {
-  const routeMap: Record<string, () => Promise<any>> = {
+  const routeMap: Record<string, () => Promise<unknown>> = {
     '/': () => import('../pages/HomeDashboard'),
     '/video': () => import('../pages/VideoScreen'),
     '/image': () => import('../pages/ImageScreen'),
