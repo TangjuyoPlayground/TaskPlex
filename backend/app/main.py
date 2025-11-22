@@ -2,15 +2,25 @@
 AnyTools API - Main application file
 FastAPI application with multi-purpose file processing endpoints
 """
+
+import asyncio
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
-from contextlib import asynccontextmanager
+from fastapi.responses import FileResponse, JSONResponse
 import uvicorn
-import asyncio
 
-from app.config import API_TITLE, API_VERSION, API_DESCRIPTION, HOST, PORT, DEBUG
-from app.api import video, image, pdf, regex, units
+from app.api import image, pdf, regex, units, video
+from app.config import (
+    API_DESCRIPTION,
+    API_TITLE,
+    API_VERSION,
+    DEBUG,
+    HOST,
+    PORT,
+    TEMP_DIR,
+)
 from app.utils.file_handler import cleanup_temp_files
 
 
@@ -37,13 +47,13 @@ async def lifespan(app: FastAPI):
     print("🚀 Starting AnyTools API...")
     cleanup_temp_files()
     print("✅ Temporary files cleaned up (files older than 10 minutes removed)")
-    
+
     # Start background cleanup task
     cleanup_task = asyncio.create_task(periodic_cleanup())
     print("🔄 Periodic cleanup task started (runs every 5 minutes)")
-    
+
     yield
-    
+
     # Shutdown: Cancel background task and clean up temp files
     print("🛑 Shutting down AnyTools API...")
     cleanup_task.cancel()
@@ -85,7 +95,7 @@ async def root():
         "status": "healthy",
         "message": "AnyTools API is running",
         "version": API_VERSION,
-        "docs": "/docs"
+        "docs": "/docs",
     }
 
 
@@ -103,8 +113,8 @@ async def health_check():
             "image": "/api/v1/image",
             "pdf": "/api/v1/pdf",
             "regex": "/api/v1/regex",
-            "units": "/api/v1/units"
-        }
+            "units": "/api/v1/units",
+        },
     }
 
 
@@ -117,9 +127,6 @@ app.include_router(units.router, prefix="/api/v1")
 
 
 # Download endpoint for processed files
-from fastapi.responses import FileResponse
-from app.config import TEMP_DIR
-
 @app.get("/api/v1/download/{filename}", tags=["Download"])
 async def download_file(filename: str):
     """
@@ -128,14 +135,9 @@ async def download_file(filename: str):
     file_path = TEMP_DIR / filename
     if not file_path.exists():
         return JSONResponse(
-            status_code=404,
-            content={"success": False, "message": "File not found"}
+            status_code=404, content={"success": False, "message": "File not found"}
         )
-    return FileResponse(
-        path=file_path,
-        filename=filename,
-        media_type="application/octet-stream"
-    )
+    return FileResponse(path=file_path, filename=filename, media_type="application/octet-stream")
 
 
 # Global exception handler
@@ -149,16 +151,10 @@ async def global_exception_handler(request: Request, exc: Exception):
         content={
             "success": False,
             "message": f"Internal server error: {str(exc)}",
-            "path": str(request.url)
-        }
+            "path": str(request.url),
+        },
     )
 
 
 if __name__ == "__main__":
-    uvicorn.run(
-        "app.main:app",
-        host=HOST,
-        port=PORT,
-        reload=DEBUG
-    )
-
+    uvicorn.run("app.main:app", host=HOST, port=PORT, reload=DEBUG)
