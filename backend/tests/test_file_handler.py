@@ -2,7 +2,6 @@
 Tests for file handler utilities
 """
 
-from pathlib import Path
 
 from app.utils.file_handler import (
     calculate_compression_ratio,
