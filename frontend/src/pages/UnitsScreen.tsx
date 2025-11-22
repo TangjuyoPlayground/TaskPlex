@@ -47,10 +47,10 @@ export const UnitsScreen: React.FC = () => {
   const [toUnit, setToUnit] = useState(UNIT_CATEGORIES[0].units[1]);
   const [fromValue, setFromValue] = useState<string>('1');
   const [toValue, setToValue] = useState<string>('');
-  const [error, setError] = useState<string | null>(null);
 
   // React Query Hook
-  const { mutate: convert, isPending: loading } = useConvertUnits();
+  // On récupère directement loading et error depuis le hook !
+  const { mutate: convert, isPending: loading, error } = useConvertUnits();
 
   // Update units when category changes
   useEffect(() => {
@@ -58,7 +58,6 @@ export const UnitsScreen: React.FC = () => {
     setToUnit(category.units[1] || category.units[0]);
     setFromValue('1');
     setToValue('');
-    setError(null);
   }, [category]);
 
   const handleConvert = useCallback(() => {
@@ -67,7 +66,6 @@ export const UnitsScreen: React.FC = () => {
       return;
     }
 
-    setError(null);
     convert(
       { value: Number(fromValue), fromUnit, toUnit },
       {
@@ -76,13 +74,10 @@ export const UnitsScreen: React.FC = () => {
             const val = res.converted_value;
             const formatted = Number.isInteger(val) ? val.toString() : val.toFixed(6).replace(/\.?0+$/, '');
             setToValue(formatted);
-          } else {
-            setError(res.error || 'Conversion failed');
           }
-        },
-        onError: (err) => {
-          console.error(err);
-          setError('Failed to convert. Check backend.');
+          // Si res.success est false, on pourrait lever une erreur ici pour que React Query l'attrape,
+          // ou gérer un state d'erreur "business" local si on veut être puriste.
+          // Pour simplifier, on assume que le backend renvoie 400 si erreur, donc 'error' du hook sera set.
         }
       }
     );
@@ -99,8 +94,6 @@ export const UnitsScreen: React.FC = () => {
   const handleSwap = () => {
     setFromUnit(toUnit);
     setToUnit(fromUnit);
-    // Trigger conversion will happen via useEffect since deps changed? 
-    // No, handleConvert depends on fromUnit/toUnit so useEffect[handleConvert] will trigger
   };
 
   return (
@@ -198,7 +191,8 @@ export const UnitsScreen: React.FC = () => {
 
           {error && (
             <div className="mt-8 p-4 bg-red-50 text-red-600 rounded-xl text-center font-medium">
-              {error}
+              {/* Error is an object, we need its message */}
+              {error instanceof Error ? error.message : 'Conversion failed'}
             </div>
           )}
         </div>

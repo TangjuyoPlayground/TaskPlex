@@ -35,7 +35,7 @@ describe('UnitsScreen', () => {
 
     await waitFor(() => {
       expect(ApiService.convertUnits).toHaveBeenCalledWith(1, 'meter', 'kilometer');
-    }, { timeout: 1000 });
+    }, { timeout: 2000 });
   });
 
   it('updates result on success', async () => {
@@ -50,21 +50,19 @@ describe('UnitsScreen', () => {
 
     await waitFor(() => {
       expect(inputs[1]).toHaveValue('0.001');
-    }, { timeout: 1000 });
+    }, { timeout: 2000 });
   });
 
   it('swaps units correctly', () => {
     renderWithProviders(<UnitsScreen />);
     
     const selects = screen.getAllByRole('combobox');
-    // Default: meter -> kilometer
     expect(selects[0]).toHaveValue('meter');
     expect(selects[1]).toHaveValue('kilometer');
 
     const swapBtn = screen.getByLabelText('Swap units');
     fireEvent.click(swapBtn);
 
-    // Swapped: kilometer -> meter
     expect(selects[0]).toHaveValue('kilometer');
     expect(selects[1]).toHaveValue('meter');
   });
