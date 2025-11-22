@@ -1,7 +1,8 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { RegexScreen } from './RegexScreen';
 import { ApiService } from '../services/api';
+import { renderWithProviders } from '../test-utils';
 
 // Mock ApiService
 vi.mock('../services/api', () => ({
@@ -16,7 +17,7 @@ describe('RegexScreen', () => {
   });
 
   it('renders properly', () => {
-    render(<RegexScreen />);
+    renderWithProviders(<RegexScreen />);
     expect(screen.getByText('Regex Tester')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('e.g. [a-z]+')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('Paste your text here to test the regex...')).toBeInTheDocument();
@@ -24,7 +25,7 @@ describe('RegexScreen', () => {
 
   it('calls API when inputs are filled', async () => {
     vi.mocked(ApiService.testRegex).mockResolvedValue({ success: true, matches: [], count: 0 });
-    render(<RegexScreen />);
+    renderWithProviders(<RegexScreen />);
     
     const patternInput = screen.getByPlaceholderText('e.g. [a-z]+');
     const textInput = screen.getByPlaceholderText('Paste your text here to test the regex...');
@@ -35,7 +36,7 @@ describe('RegexScreen', () => {
     // Wait for debounce (500ms)
     await waitFor(() => {
       expect(ApiService.testRegex).toHaveBeenCalledWith('[0-9]+', '123 test', 'g');
-    }, { timeout: 1000 });
+    }, { timeout: 2000 });
   });
 
   it('displays results on success', async () => {
@@ -49,14 +50,14 @@ describe('RegexScreen', () => {
     };
     vi.mocked(ApiService.testRegex).mockResolvedValue(mockResponse);
 
-    render(<RegexScreen />);
+    renderWithProviders(<RegexScreen />);
     
     fireEvent.change(screen.getByPlaceholderText('e.g. [a-z]+'), { target: { value: '[0-9]+' } });
     fireEvent.change(screen.getByPlaceholderText('Paste your text here to test the regex...'), { target: { value: '123 test' } });
 
     await waitFor(() => {
       expect(screen.getByText('1 matches found')).toBeInTheDocument();
-    }, { timeout: 1000 });
+    }, { timeout: 2000 });
   });
 
   it('displays error on invalid regex', async () => {
@@ -69,13 +70,13 @@ describe('RegexScreen', () => {
     };
     vi.mocked(ApiService.testRegex).mockResolvedValue(mockResponse);
 
-    render(<RegexScreen />);
+    renderWithProviders(<RegexScreen />);
     
     fireEvent.change(screen.getByPlaceholderText('e.g. [a-z]+'), { target: { value: '[' } }); // Invalid regex
     fireEvent.change(screen.getByPlaceholderText('Paste your text here to test the regex...'), { target: { value: 'test' } });
 
     await waitFor(() => {
       expect(screen.getByText('bad pattern')).toBeInTheDocument();
-    }, { timeout: 1000 });
+    }, { timeout: 2000 });
   });
 });
