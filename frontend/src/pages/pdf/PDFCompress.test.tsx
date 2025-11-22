@@ -1,7 +1,6 @@
 import { screen } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { PDFCompress } from './PDFCompress';
-import { ApiService } from '../../services/api';
 import { renderWithProviders } from '../../test-utils';
 
 // Mock ApiService
@@ -23,4 +22,3 @@ describe('PDFCompress', () => {
     expect(screen.getByText('Select PDF file')).toBeInTheDocument();
   });
 });
-

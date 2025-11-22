@@ -1,7 +1,6 @@
 import { screen } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { VideoScreen } from './VideoScreen';
-import { ApiService } from '../services/api';
 import { renderWithProviders } from '../test-utils';
 
 // Mock ApiService
@@ -24,4 +23,3 @@ describe('VideoScreen', () => {
     expect(screen.getByText('Operation')).toBeInTheDocument();
   });
 });
-

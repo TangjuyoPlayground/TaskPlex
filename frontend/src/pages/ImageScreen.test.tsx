@@ -1,7 +1,6 @@
 import { screen } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { ImageScreen } from './ImageScreen';
-import { ApiService } from '../services/api';
 import { renderWithProviders } from '../test-utils';
 
 // Mock ApiService
@@ -14,7 +13,9 @@ vi.mock('../services/api', () => ({
 }));
 
 // Mock URL.createObjectURL
-global.URL.createObjectURL = vi.fn();
+if (typeof window !== 'undefined') {
+  window.URL.createObjectURL = vi.fn();
+}
 
 describe('ImageScreen', () => {
   beforeEach(() => {
@@ -27,4 +28,3 @@ describe('ImageScreen', () => {
     expect(screen.getByText('Operation')).toBeInTheDocument();
   });
 });
-
