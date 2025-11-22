@@ -21,7 +21,7 @@ export const VideoScreen: React.FC = () => {
   useEffect(() => {
     compressMutation.reset();
     convertMutation.reset();
-  }, [operation, file, compressMutation.reset, convertMutation.reset]);
+  }, [operation, file, compressMutation, convertMutation]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {

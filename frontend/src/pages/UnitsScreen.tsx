@@ -52,13 +52,14 @@ export const UnitsScreen: React.FC = () => {
   // On récupère directement loading et error depuis le hook !
   const { mutate: convert, isPending: loading, error } = useConvertUnits();
 
-  // Update units when category changes
-  useEffect(() => {
-    setFromUnit(category.units[0]);
-    setToUnit(category.units[1] || category.units[0]);
+  // Update units when category changes - use derived state instead of setState in effect
+  const handleCategoryChange = (newCategory: typeof UNIT_CATEGORIES[0]) => {
+    setCategory(newCategory);
+    setFromUnit(newCategory.units[0]);
+    setToUnit(newCategory.units[1] || newCategory.units[0]);
     setFromValue('1');
     setToValue('');
-  }, [category]);
+  };
 
   const handleConvert = useCallback(() => {
     if (!fromValue || isNaN(Number(fromValue))) {
@@ -111,7 +112,7 @@ export const UnitsScreen: React.FC = () => {
         {UNIT_CATEGORIES.map((cat) => (
           <button
             key={cat.id}
-            onClick={() => setCategory(cat)}
+            onClick={() => handleCategoryChange(cat)}
             className={`flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all duration-200 ${
               category.id === cat.id
                 ? 'bg-blue-600 text-white shadow-lg scale-105'
