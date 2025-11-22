@@ -57,20 +57,19 @@ def test_split_pdf(client, sample_pdf):
 
 def test_merge_pdfs(client, sample_pdf):
     """Test merging PDFs"""
-    files = [
-        ("files", ("test1.pdf", open(sample_pdf, "rb"), "application/pdf")),
-        ("files", ("test2.pdf", open(sample_pdf, "rb"), "application/pdf")),
-    ]
+    import contextlib
+    with contextlib.ExitStack() as stack:
+        files = [
+            ("files", ("test1.pdf", stack.enter_context(open(sample_pdf, "rb")), "application/pdf")),
+            ("files", ("test2.pdf", stack.enter_context(open(sample_pdf, "rb")), "application/pdf")),
+        ]
 
-    response = client.post("/api/v1/pdf/merge", files=files)
+        response = client.post("/api/v1/pdf/merge", files=files)
 
-    for _, (_, f, _) in files:
-        f.close()
-
-    assert response.status_code == 200
-    data = response.json()
-    assert data["success"] is True
-    assert "download_url" in data
+        assert response.status_code == 200
+        data = response.json()
+        assert data["success"] is True
+        assert "download_url" in data
 
 
 def test_reorganize_pdf(client, sample_pdf):
