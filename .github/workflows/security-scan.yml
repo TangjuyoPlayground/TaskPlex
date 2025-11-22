@@ -93,11 +93,13 @@ jobs:
 
       # Note: Upload SARIF may fail for PRs from forks due to security restrictions
       # This is expected behavior and the scan still runs successfully
+      # Each upload must have a unique category to avoid conflicts
       - name: Upload Trivy scan results to GitHub Security (Backend)
         uses: github/codeql-action/upload-sarif@v4
         if: always() && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
         with:
           sarif_file: 'trivy-backend-results.sarif'
+          category: 'trivy-backend'
         continue-on-error: true
 
       - name: Upload Trivy scan results to GitHub Security (Frontend)
@@ -105,5 +107,6 @@ jobs:
         if: always() && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
         with:
           sarif_file: 'trivy-frontend-results.sarif'
+          category: 'trivy-frontend'
         continue-on-error: true
 

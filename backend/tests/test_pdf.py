@@ -58,10 +58,17 @@ def test_split_pdf(client, sample_pdf):
 def test_merge_pdfs(client, sample_pdf):
     """Test merging PDFs"""
     import contextlib
+
     with contextlib.ExitStack() as stack:
         files = [
-            ("files", ("test1.pdf", stack.enter_context(open(sample_pdf, "rb")), "application/pdf")),
-            ("files", ("test2.pdf", stack.enter_context(open(sample_pdf, "rb")), "application/pdf")),
+            (
+                "files",
+                ("test1.pdf", stack.enter_context(open(sample_pdf, "rb")), "application/pdf"),
+            ),
+            (
+                "files",
+                ("test2.pdf", stack.enter_context(open(sample_pdf, "rb")), "application/pdf"),
+            ),
         ]
 
         response = client.post("/api/v1/pdf/merge", files=files)
