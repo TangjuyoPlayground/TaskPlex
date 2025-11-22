@@ -2,7 +2,7 @@
 PDF processing service using PyPDF2 and PyMuPDF
 """
 from pathlib import Path
-from typing import List, Optional, Dict
+from typing import List, Optional
 import PyPDF2
 import fitz  # PyMuPDF
 from app.utils.file_handler import get_file_size

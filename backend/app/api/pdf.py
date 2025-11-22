@@ -2,11 +2,8 @@
 PDF processing API endpoints
 """
 from fastapi import APIRouter, UploadFile, File, Form, HTTPException
-from fastapi.responses import FileResponse
-from pathlib import Path
 from typing import List, Optional
 import shutil
-import zipfile
 from app.models.pdf import PDFProcessingResponse, PDFInfoResponse
 from app.services.pdf_service import merge_pdfs, compress_pdf, split_pdf, reorganize_pdf, get_pdf_info
 from app.utils.file_handler import save_upload_file, delete_file, generate_unique_filename

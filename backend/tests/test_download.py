@@ -1,5 +1,3 @@
-import os
-
 def test_download_file(client, sample_image):
     """Test file download endpoint"""
     # First create a file via compression to get a valid download URL

@@ -1,5 +1,3 @@
-import os
-
 def test_pdf_info(client, sample_pdf):
     """Test retrieving PDF information"""
     with open(sample_pdf, "rb") as f:

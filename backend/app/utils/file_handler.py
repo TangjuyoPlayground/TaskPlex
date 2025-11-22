@@ -1,12 +1,10 @@
 """
 File handling utilities for upload, download, and temporary file management
 """
-import os
 import uuid
 import shutil
 from pathlib import Path
 from datetime import datetime, timedelta
-from typing import BinaryIO
 from fastapi import UploadFile
 from app.config import TEMP_DIR, TEMP_FILE_CLEANUP_MINUTES
 

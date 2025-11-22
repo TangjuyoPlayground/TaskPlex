@@ -6,7 +6,7 @@ from pathlib import Path
 from app.models.image import ImageProcessingResponse
 from app.services.image_service import compress_image, convert_image
 from app.utils.file_handler import save_upload_file, delete_file, generate_unique_filename
-from app.utils.validators import validate_image_format, get_file_extension, sanitize_filename
+from app.utils.validators import validate_image_format
 from app.config import TEMP_DIR
 
 router = APIRouter(prefix="/image", tags=["Image"])

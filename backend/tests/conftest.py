@@ -2,7 +2,6 @@ import pytest
 from fastapi.testclient import TestClient
 from pathlib import Path
 import shutil
-import os
 import sys
 
 # Ajouter le dossier backend au path pour les imports

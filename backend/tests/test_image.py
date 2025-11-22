@@ -1,6 +1,3 @@
-import os
-from pathlib import Path
-
 def test_compress_image(client, sample_image):
     """Test image compression endpoint"""
     with open(sample_image, "rb") as f:

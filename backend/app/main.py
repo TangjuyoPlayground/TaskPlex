@@ -4,12 +4,12 @@ FastAPI application with multi-purpose file processing endpoints
 """
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, FileResponse
 from contextlib import asynccontextmanager
 import uvicorn
 import asyncio
 
-from app.config import API_TITLE, API_VERSION, API_DESCRIPTION, HOST, PORT, DEBUG
+from app.config import API_TITLE, API_VERSION, API_DESCRIPTION, HOST, PORT, DEBUG, TEMP_DIR
 from app.api import video, image, pdf, regex, units
 from app.utils.file_handler import cleanup_temp_files
 
@@ -117,9 +117,6 @@ app.include_router(units.router, prefix="/api/v1")
 
 
 # Download endpoint for processed files
-from fastapi.responses import FileResponse
-from app.config import TEMP_DIR
-
 @app.get("/api/v1/download/{filename}", tags=["Download"])
 async def download_file(filename: str):
     """
