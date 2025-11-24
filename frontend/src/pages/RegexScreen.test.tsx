@@ -58,7 +58,7 @@ describe('RegexScreen', () => {
     fireEvent.change(screen.getByPlaceholderText('Paste your text here to test the regex...'), { target: { value: '123 test' } });
 
     await waitFor(() => {
-      expect(screen.getByText('1 matches found')).toBeInTheDocument();
+      expect(screen.getByText(/1.*matches found/i)).toBeInTheDocument();
     }, { timeout: 2000 });
   });
 

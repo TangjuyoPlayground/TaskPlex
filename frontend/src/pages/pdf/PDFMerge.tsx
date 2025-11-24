@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Merge, Upload, Download, FileText, Plus, X } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { ApiService } from '../../services/api';
 import { useMergePDFs } from '../../hooks/usePDF';
 
 export const PDFMerge: React.FC = () => {
+  const { t } = useTranslation();
   const [files, setFiles] = useState<File[]>([]);
   const { mutate, isPending: loading, data: result, error, reset } = useMergePDFs();
 
@@ -32,9 +34,9 @@ export const PDFMerge: React.FC = () => {
       <div className="text-center mb-10">
         <h1 className="text-3xl font-bold text-gray-900 mb-2 flex items-center justify-center gap-3">
           <Merge className="text-red-600" size={32} />
-          Merge PDF
+          {t('pdf.merge.title')}
         </h1>
-        <p className="text-gray-600">Combine multiple PDFs into one unified document.</p>
+        <p className="text-gray-600">{t('pdf.merge.description')}</p>
       </div>
 
       <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
@@ -50,8 +52,8 @@ export const PDFMerge: React.FC = () => {
             <div className="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-200">
               <Upload className="w-10 h-10 text-red-600" />
             </div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">Select PDF files</h3>
-            <p className="text-gray-500">or drop PDFs here</p>
+            <h3 className="text-xl font-bold text-gray-900 mb-2">{t('pdf.merge.selectFiles')}</h3>
+            <p className="text-gray-500">{t('pdf.merge.dropFiles')}</p>
           </div>
         ) : (
           <div className="space-y-8">
@@ -83,7 +85,7 @@ export const PDFMerge: React.FC = () => {
                   className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" 
                 />
                 <Plus size={20} />
-                <span className="font-medium">Add more files</span>
+                <span className="font-medium">{t('pdf.merge.addMore')}</span>
               </div>
             </div>
 
@@ -99,7 +101,7 @@ export const PDFMerge: React.FC = () => {
                 disabled={loading || files.length < 2}
                 className="w-full py-4 bg-red-600 text-white rounded-xl font-bold text-lg hover:bg-red-700 transition-all shadow-lg hover:shadow-red-200 disabled:bg-gray-300 disabled:cursor-not-allowed disabled:shadow-none flex items-center justify-center gap-2"
               >
-                {loading ? 'Merging PDFs...' : `Merge ${files.length} PDFs`}
+                {loading ? t('pdf.merge.merging') : t('pdf.merge.mergeBtn')}
               </button>
             ) : (
               <div className="bg-red-50 border border-red-100 rounded-xl p-6 text-center animate-in fade-in slide-in-from-bottom-4">
@@ -115,7 +117,7 @@ export const PDFMerge: React.FC = () => {
                     download
                     className="inline-flex items-center gap-2 px-8 py-3 bg-red-600 text-white rounded-lg font-bold hover:bg-red-700 transition-colors shadow-md"
                   >
-                    Download Merged PDF
+                    {t('pdf.merge.downloadResult')}
                   </a>
                 )}
               </div>
