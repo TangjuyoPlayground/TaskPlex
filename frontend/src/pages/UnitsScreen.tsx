@@ -1,47 +1,50 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Calculator, ArrowRightLeft, Scale, Ruler, Thermometer, Clock, HardDrive, Activity } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { useConvertUnits } from '../hooks/useUnits';
 
-const UNIT_CATEGORIES = [
+const getUnitCategories = (t: (key: string) => string) => [
   {
     id: 'length',
-    label: 'Length',
+    label: t('units.length'),
     icon: Ruler,
     units: ['meter', 'kilometer', 'centimeter', 'millimeter', 'mile', 'yard', 'foot', 'inch']
   },
   {
     id: 'mass',
-    label: 'Mass',
+    label: t('units.mass'),
     icon: Scale,
     units: ['kilogram', 'gram', 'milligram', 'metric_ton', 'pound', 'ounce']
   },
   {
     id: 'temperature',
-    label: 'Temperature',
+    label: t('units.temperature'),
     icon: Thermometer,
     units: ['degC', 'degF', 'kelvin']
   },
   {
     id: 'time',
-    label: 'Time',
+    label: t('units.time'),
     icon: Clock,
     units: ['second', 'minute', 'hour', 'day', 'week', 'year']
   },
   {
     id: 'digital',
-    label: 'Digital Storage',
+    label: t('units.digital'),
     icon: HardDrive,
     units: ['bit', 'byte', 'kilobyte', 'megabyte', 'gigabyte', 'terabyte']
   },
   {
     id: 'speed',
-    label: 'Speed',
+    label: t('units.speed'),
     icon: Activity,
     units: ['meter/second', 'kilometer/hour', 'mile/hour', 'knot']
   }
 ];
 
 export const UnitsScreen: React.FC = () => {
+  const { t } = useTranslation();
+  const UNIT_CATEGORIES = getUnitCategories(t);
   const [category, setCategory] = useState(UNIT_CATEGORIES[0]);
   const [fromUnit, setFromUnit] = useState(UNIT_CATEGORIES[0].units[0]);
   const [toUnit, setToUnit] = useState(UNIT_CATEGORIES[0].units[1]);
@@ -102,9 +105,9 @@ export const UnitsScreen: React.FC = () => {
       <div className="text-center mb-12">
         <h1 className="text-3xl font-bold text-gray-900 mb-2 flex items-center justify-center gap-3">
           <Calculator className="text-blue-600" size={32} />
-          Unit Converter
+          {t('units.title')}
         </h1>
-        <p className="text-gray-600">Convert between thousands of units instantly</p>
+        <p className="text-gray-600">{t('home.unitConverterDesc')}</p>
       </div>
 
       {/* Categories */}
@@ -132,7 +135,7 @@ export const UnitsScreen: React.FC = () => {
             
             {/* Left Side (From) */}
             <div className="flex-1 w-full space-y-4">
-              <label className="block text-sm font-medium text-gray-500 uppercase tracking-wider">From</label>
+              <label className="block text-sm font-medium text-gray-500 uppercase tracking-wider">{t('units.from')}</label>
               <input
                 type="number"
                 value={fromValue}
@@ -154,7 +157,7 @@ export const UnitsScreen: React.FC = () => {
             {/* Swap Button */}
             <button 
               onClick={handleSwap}
-              aria-label="Swap units"
+              aria-label={t('units.swap')}
               className="p-4 rounded-full bg-gray-50 text-blue-600 hover:bg-blue-50 hover:text-blue-700 transition-colors group"
             >
               <ArrowRightLeft size={24} className="group-hover:rotate-180 transition-transform duration-300" />
@@ -162,7 +165,7 @@ export const UnitsScreen: React.FC = () => {
 
             {/* Right Side (To) */}
             <div className="flex-1 w-full space-y-4">
-              <label className="block text-sm font-medium text-gray-500 uppercase tracking-wider">To</label>
+              <label className="block text-sm font-medium text-gray-500 uppercase tracking-wider">{t('units.to')}</label>
               <div className="relative">
                 <input
                   type="text"
@@ -193,7 +196,7 @@ export const UnitsScreen: React.FC = () => {
           {error && (
             <div className="mt-8 p-4 bg-red-50 text-red-600 rounded-xl text-center font-medium">
               {/* Error is an object, we need its message */}
-              {error instanceof Error ? error.message : 'Conversion failed'}
+              {error instanceof Error ? error.message : t('common.error')}
             </div>
           )}
         </div>

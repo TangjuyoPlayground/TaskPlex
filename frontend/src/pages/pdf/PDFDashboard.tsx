@@ -1,36 +1,37 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Minimize2, Merge, Split, RefreshCw, ArrowRight } from 'lucide-react';
 
-const tools = [
+const getTools = (t: (key: string) => string) => [
   {
     id: 'compress',
-    title: 'Compress PDF',
-    description: 'Reduce file size while optimizing for maximal PDF quality.',
+    title: t('pdf.tools.compress'),
+    description: t('pdf.tools.compressDesc'),
     icon: Minimize2,
     color: 'bg-green-50 text-green-600',
     hover: 'hover:border-green-200 hover:shadow-green-100'
   },
   {
     id: 'merge',
-    title: 'Merge PDF',
-    description: 'Combine PDFs in the order you want with the easiest PDF merger.',
+    title: t('pdf.tools.merge'),
+    description: t('pdf.tools.mergeDesc'),
     icon: Merge,
     color: 'bg-red-50 text-red-600',
     hover: 'hover:border-red-200 hover:shadow-red-100'
   },
   {
     id: 'split',
-    title: 'Split PDF',
-    description: 'Separate one page or a whole set for easy conversion into independent PDF files.',
+    title: t('pdf.tools.split'),
+    description: t('pdf.tools.splitDesc'),
     icon: Split,
     color: 'bg-blue-50 text-blue-600',
     hover: 'hover:border-blue-200 hover:shadow-blue-100'
   },
   {
     id: 'reorganize',
-    title: 'Organize PDF',
-    description: 'Sort pages of your PDF file however you like. Delete PDF pages or add PDF pages to your document at will.',
+    title: t('pdf.tools.organize'),
+    description: t('pdf.tools.organizeDesc'),
     icon: RefreshCw,
     color: 'bg-purple-50 text-purple-600',
     hover: 'hover:border-purple-200 hover:shadow-purple-100'
@@ -39,13 +40,15 @@ const tools = [
 
 export const PDFDashboard: React.FC = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
+  const tools = getTools(t);
 
   return (
     <div className="p-8 max-w-7xl mx-auto">
       <div className="text-center mb-12">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">PDF Tools</h1>
+        <h1 className="text-3xl font-bold text-gray-900 mb-4">{t('pdf.title')}</h1>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-          Merge, split, compress, and organize your PDFs in just a few clicks.
+          {t('pdf.subtitle')}
         </p>
       </div>
 
@@ -66,7 +69,7 @@ export const PDFDashboard: React.FC = () => {
               {tool.description}
             </p>
             <div className="flex items-center text-sm font-medium text-gray-900 opacity-0 group-hover:opacity-100 transition-opacity -translate-x-2 group-hover:translate-x-0 duration-200">
-              Open Tool <ArrowRight size={16} className="ml-1" />
+              {t('pdf.tools.openTool')} <ArrowRight size={16} className="ml-1" />
             </div>
           </button>
         ))}

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Video, FileVideo, Download, Play, Upload } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { ApiService } from '../services/api';
 import { useCompressVideo, useConvertVideo } from '../hooks/useVideo';
 
 export const VideoScreen: React.FC = () => {
+  const { t } = useTranslation();
   const [file, setFile] = useState<File | null>(null);
   const [operation, setOperation] = useState<'compress' | 'convert'>('compress');
   const [quality, setQuality] = useState('medium');
@@ -51,7 +53,7 @@ export const VideoScreen: React.FC = () => {
     <div className="p-6 max-w-6xl mx-auto">
       <h1 className="text-2xl font-bold mb-6 flex items-center gap-2">
         <Video className="w-8 h-8 text-purple-600" />
-        Video Processing
+        {t('video.title')}
       </h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -59,7 +61,7 @@ export const VideoScreen: React.FC = () => {
         <div className="space-y-6">
           {/* Operation Selector */}
           <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
-            <label className="block text-sm font-medium text-gray-700 mb-3">Operation</label>
+            <label className="block text-sm font-medium text-gray-700 mb-3">{t('video.operation')}</label>
             <div className="flex gap-2 p-1 bg-gray-100 rounded-lg">
               {(['compress', 'convert'] as const).map((op) => (
                 <button
@@ -71,7 +73,7 @@ export const VideoScreen: React.FC = () => {
                       : 'text-gray-500 hover:text-gray-700'
                   }`}
                 >
-                  {op.charAt(0).toUpperCase() + op.slice(1)}
+                  {t(`video.${op}`)}
                 </button>
               ))}
             </div>
@@ -79,7 +81,7 @@ export const VideoScreen: React.FC = () => {
 
           {/* File Input */}
           <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
-            <label className="block text-sm font-medium text-gray-700 mb-3">Video File</label>
+            <label className="block text-sm font-medium text-gray-700 mb-3">{t('video.videoFile')}</label>
             <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:bg-gray-50 transition-colors relative">
               <input
                 type="file"
@@ -95,7 +97,7 @@ export const VideoScreen: React.FC = () => {
               ) : (
                 <div className="text-gray-500">
                   <Upload className="w-8 h-8 mx-auto mb-2 text-gray-400" />
-                  <p>Drag and drop or click to select</p>
+                  <p>{t('video.dragDrop')}</p>
                 </div>
               )}
             </div>
@@ -103,7 +105,7 @@ export const VideoScreen: React.FC = () => {
 
           {/* Quality Selector */}
           <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
-            <label className="block text-sm font-medium text-gray-700 mb-3">Quality</label>
+            <label className="block text-sm font-medium text-gray-700 mb-3">{t('video.quality')}</label>
             <div className="flex gap-2">
               {['low', 'medium', 'high'].map((q) => (
                 <button
@@ -124,7 +126,7 @@ export const VideoScreen: React.FC = () => {
           {/* Format Selector (Convert only) */}
           {operation === 'convert' && (
             <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
-              <label className="block text-sm font-medium text-gray-700 mb-3">Output Format</label>
+              <label className="block text-sm font-medium text-gray-700 mb-3">{t('video.outputFormat')}</label>
               <select
                 value={format}
                 onChange={(e) => setFormat(e.target.value)}
@@ -147,7 +149,7 @@ export const VideoScreen: React.FC = () => {
                 : 'bg-purple-600 hover:bg-purple-700 hover:shadow-xl transform hover:-translate-y-0.5'
             }`}
           >
-            {loading ? 'Processing...' : `${operation === 'compress' ? 'Compress' : 'Convert'} Video`}
+            {loading ? t('video.processing') : operation === 'compress' ? t('video.compressVideo') : t('video.convertVideo')}
           </button>
           
           {errorMessage && (
@@ -159,7 +161,7 @@ export const VideoScreen: React.FC = () => {
 
         {/* RIGHT COLUMN: RESULT & PREVIEW */}
         <div className="space-y-6">
-          <h2 className="text-lg font-semibold text-gray-800">Result</h2>
+          <h2 className="text-lg font-semibold text-gray-800">{t('video.result')}</h2>
           
           {result && result.success ? (
             <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 animate-in fade-in duration-500">
@@ -177,7 +179,7 @@ export const VideoScreen: React.FC = () => {
                 <p className="text-green-800 font-medium">{result.message}</p>
                 {result.compression_ratio && (
                    <p className="text-green-600 text-sm mt-1">
-                     Compression: {result.compression_ratio.toFixed(1)}%
+                     {t('video.compression')}: {result.compression_ratio.toFixed(1)}%
                    </p>
                 )}
               </div>
@@ -189,14 +191,14 @@ export const VideoScreen: React.FC = () => {
                   className="flex items-center justify-center gap-2 w-full py-3 bg-green-600 text-white rounded-lg font-bold hover:bg-green-700 transition-colors"
                 >
                   <Download className="w-5 h-5" />
-                  Download Result
+                  {t('video.downloadResult')}
                 </a>
               )}
             </div>
           ) : (
             <div className="h-64 bg-gray-50 border-2 border-dashed border-gray-200 rounded-xl flex flex-col items-center justify-center text-gray-400">
               <Play className="w-12 h-12 mb-2 opacity-20" />
-              <p>Preview will appear here</p>
+              <p>{t('video.preview')}</p>
             </div>
           )}
         </div>

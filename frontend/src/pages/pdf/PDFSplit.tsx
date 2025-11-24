@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Split, Upload, Download, FileText, Check, Settings2 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { ApiService } from '../../services/api';
 import { useSplitPDF } from '../../hooks/usePDF';
 
 export const PDFSplit: React.FC = () => {
+  const { t } = useTranslation();
   const [file, setFile] = useState<File | null>(null);
   const [mode, setMode] = useState<'all' | 'range'>('all');
   const [range, setRange] = useState('');
@@ -33,9 +35,9 @@ export const PDFSplit: React.FC = () => {
       <div className="text-center mb-10">
         <h1 className="text-3xl font-bold text-gray-900 mb-2 flex items-center justify-center gap-3">
           <Split className="text-blue-600" size={32} />
-          Split PDF
+          {t('pdf.split.title')}
         </h1>
-        <p className="text-gray-600">Extract pages from your PDF or save each page as a separate PDF.</p>
+        <p className="text-gray-600">{t('pdf.split.description')}</p>
       </div>
 
       <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
@@ -50,8 +52,8 @@ export const PDFSplit: React.FC = () => {
             <div className="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-200">
               <Upload className="w-10 h-10 text-blue-600" />
             </div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">Select PDF file</h3>
-            <p className="text-gray-500">or drop PDF here</p>
+            <h3 className="text-xl font-bold text-gray-900 mb-2">{t('pdf.split.selectFile')}</h3>
+            <p className="text-gray-500">{t('pdf.split.dropFile')}</p>
           </div>
         ) : (
           <div className="space-y-8">
@@ -67,7 +69,7 @@ export const PDFSplit: React.FC = () => {
                 onClick={() => { setFile(null); reset(); }}
                 className="px-4 py-2 text-sm font-medium text-gray-600 hover:bg-gray-200 rounded-lg transition-colors"
               >
-                Change
+                {t('pdf.split.change')}
               </button>
             </div>
 
@@ -92,8 +94,8 @@ export const PDFSplit: React.FC = () => {
                       <Split className={mode === 'all' ? 'text-blue-600' : 'text-gray-400'} />
                       {mode === 'all' && <Check size={16} className="text-blue-600" />}
                     </div>
-                    <h4 className={`font-bold ${mode === 'all' ? 'text-blue-900' : 'text-gray-900'}`}>Extract All Pages</h4>
-                    <p className={`text-sm ${mode === 'all' ? 'text-blue-700' : 'text-gray-500'}`}>Save every page as a separate PDF file</p>
+                    <h4 className={`font-bold ${mode === 'all' ? 'text-blue-900' : 'text-gray-900'}`}>{t('pdf.split.allPages')}</h4>
+                    <p className={`text-sm ${mode === 'all' ? 'text-blue-700' : 'text-gray-500'}`}>{t('pdf.split.allPagesDesc')}</p>
                   </button>
 
                   <button
@@ -108,19 +110,19 @@ export const PDFSplit: React.FC = () => {
                       <Settings2 className={mode === 'range' ? 'text-blue-600' : 'text-gray-400'} />
                       {mode === 'range' && <Check size={16} className="text-blue-600" />}
                     </div>
-                    <h4 className={`font-bold ${mode === 'range' ? 'text-blue-900' : 'text-gray-900'}`}>Custom Ranges</h4>
-                    <p className={`text-sm ${mode === 'range' ? 'text-blue-700' : 'text-gray-500'}`}>Extract specific pages (e.g. 1-5, 8, 11-13)</p>
+                    <h4 className={`font-bold ${mode === 'range' ? 'text-blue-900' : 'text-gray-900'}`}>{t('pdf.split.pageRange')}</h4>
+                    <p className={`text-sm ${mode === 'range' ? 'text-blue-700' : 'text-gray-500'}`}>{t('pdf.split.pageRangeDesc')}</p>
                   </button>
                 </div>
 
                 {mode === 'range' && (
                   <div className="animate-in fade-in slide-in-from-top-2">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Page Ranges</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">{t('pdf.split.pageRange')}</label>
                     <input
                       type="text"
                       value={range}
                       onChange={(e) => setRange(e.target.value)}
-                      placeholder="e.g. 1-5, 8, 11-13"
+                      placeholder={t('pdf.split.rangePlaceholder')}
                       className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
@@ -131,7 +133,7 @@ export const PDFSplit: React.FC = () => {
                   disabled={loading || (mode === 'range' && !range)}
                   className="w-full py-4 bg-blue-600 text-white rounded-xl font-bold text-lg hover:bg-blue-700 transition-all shadow-lg hover:shadow-blue-200 disabled:bg-gray-300 disabled:cursor-not-allowed disabled:shadow-none flex items-center justify-center gap-2"
                 >
-                  {loading ? 'Splitting PDF...' : 'Split PDF'}
+                  {loading ? t('pdf.split.splitting') : t('pdf.split.splitBtn')}
                 </button>
               </div>
             ) : (
@@ -139,8 +141,8 @@ export const PDFSplit: React.FC = () => {
                 <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Download className="w-8 h-8 text-blue-600" />
                 </div>
-                <h3 className="text-xl font-bold text-blue-900 mb-2">PDF Split Successful!</h3>
-                <p className="text-blue-700 mb-6">Created {result.filenames?.length} separate PDF files.</p>
+                <h3 className="text-xl font-bold text-blue-900 mb-2">{t('common.success')}!</h3>
+                <p className="text-blue-700 mb-6">{t('pdf.split.downloadResult')}</p>
                 
                 <div className="grid gap-2 max-h-60 overflow-y-auto mb-4">
                   {result.filenames?.map((fname, i) => (
