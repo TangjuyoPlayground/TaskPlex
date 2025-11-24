@@ -20,6 +20,6 @@ describe('PDFCompress', () => {
   it('renders properly', () => {
     renderWithProviders(<PDFCompress />);
     expect(screen.getByText('Compress PDF')).toBeInTheDocument();
-    expect(screen.getByText('Select PDF file')).toBeInTheDocument();
+    expect(screen.getByText(/Select PDF file/i)).toBeInTheDocument();
   });
 });

@@ -26,6 +26,6 @@ describe('ImageScreen', () => {
   it('renders properly', () => {
     renderWithProviders(<ImageScreen />);
     expect(screen.getByText('Image Processing')).toBeInTheDocument();
-    expect(screen.getByText('Operation')).toBeInTheDocument();
+    expect(screen.getByText(/Operation/i)).toBeInTheDocument();
   });
 });

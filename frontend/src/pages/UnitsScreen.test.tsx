@@ -20,8 +20,9 @@ describe('UnitsScreen', () => {
   it('renders properly', () => {
     renderWithProviders(<UnitsScreen />);
     expect(screen.getByText('Unit Converter')).toBeInTheDocument();
-    expect(screen.getByText('Length')).toBeInTheDocument();
-    expect(screen.getByText('Mass')).toBeInTheDocument();
+    // Length and Mass appear in category buttons, use getAllByText
+    expect(screen.getAllByText(/Length/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/Mass/i).length).toBeGreaterThan(0);
   });
 
   it('calls API when input changes', async () => {

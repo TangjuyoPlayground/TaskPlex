@@ -21,6 +21,6 @@ describe('VideoScreen', () => {
   it('renders properly', () => {
     renderWithProviders(<VideoScreen />);
     expect(screen.getByText('Video Processing')).toBeInTheDocument();
-    expect(screen.getByText('Operation')).toBeInTheDocument();
+    expect(screen.getByText(/Operation/i)).toBeInTheDocument();
   });
 });

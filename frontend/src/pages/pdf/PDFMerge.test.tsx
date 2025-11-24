@@ -20,6 +20,6 @@ describe('PDFMerge', () => {
   it('renders properly', () => {
     renderWithProviders(<PDFMerge />);
     expect(screen.getByText('Merge PDF')).toBeInTheDocument();
-    expect(screen.getByText('Select PDF files')).toBeInTheDocument();
+    expect(screen.getByText(/Select PDF files/i)).toBeInTheDocument();
   });
 });

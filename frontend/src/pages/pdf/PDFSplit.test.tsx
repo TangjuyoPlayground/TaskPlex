@@ -1,6 +1,7 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
+import '@testing-library/jest-dom/vitest';
 import { PDFSplit } from './PDFSplit';
 import { renderWithProviders } from '../../test-utils';
 
@@ -20,6 +21,6 @@ describe('PDFSplit', () => {
   it('renders properly', () => {
     renderWithProviders(<PDFSplit />);
     expect(screen.getByText('Split PDF')).toBeInTheDocument();
-    expect(screen.getByText('Select PDF file')).toBeInTheDocument();
+    expect(screen.getByText(/Select PDF file/i)).toBeInTheDocument();
   });
 });

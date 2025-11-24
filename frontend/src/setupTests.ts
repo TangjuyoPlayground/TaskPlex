@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom';
 import { vi } from 'vitest';
+import './i18n/config'; // Initialize i18n for tests
 
 // Mock de l'API Tauri si nécessaire pour les composants qui l'utilisent directement
 // (Ici on utilise surtout axios via api.ts, donc on mockera axios)

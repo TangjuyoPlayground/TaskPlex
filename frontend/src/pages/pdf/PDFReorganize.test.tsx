@@ -27,6 +27,6 @@ describe('PDFReorganize', () => {
   it('renders properly', () => {
     renderWithProviders(<PDFReorganize />);
     expect(screen.getByText('Organize PDF')).toBeInTheDocument();
-    expect(screen.getByText('Select PDF file')).toBeInTheDocument();
+    expect(screen.getByText(/Select PDF file/i)).toBeInTheDocument();
   });
 });

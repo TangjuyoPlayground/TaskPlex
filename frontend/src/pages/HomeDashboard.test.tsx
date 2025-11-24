@@ -18,24 +18,25 @@ describe('HomeDashboard', () => {
 
   it('renders tool categories', () => {
     renderWithRouter(<HomeDashboard />);
-    expect(screen.getByText('All Tools')).toBeInTheDocument();
-    expect(screen.getByText('Media')).toBeInTheDocument();
-    expect(screen.getByText('Documents')).toBeInTheDocument();
+    expect(screen.getByText(/All Tools/i)).toBeInTheDocument();
+    expect(screen.getByText(/Media/i)).toBeInTheDocument();
+    // Documents appears in both button and description, so use getAllByText
+    expect(screen.getAllByText(/Documents/i).length).toBeGreaterThan(0);
   });
 
   it('filters tools when clicking a category', () => {
     renderWithRouter(<HomeDashboard />);
     
     // Au début, tous les outils sont là (ex: Video Tools et Regex Tester)
-    expect(screen.getByText('Video Tools')).toBeInTheDocument();
-    expect(screen.getByText('Regex Tester')).toBeInTheDocument();
+    expect(screen.getByText(/Video Tools/i)).toBeInTheDocument();
+    expect(screen.getByText(/Regex Tester/i)).toBeInTheDocument();
 
     // Clique sur "Media"
-    fireEvent.click(screen.getByText('Media'));
+    fireEvent.click(screen.getByText(/Media/i));
 
     // Video Tools doit être là, mais Regex Tester (Developer tool) ne devrait plus être visible
-    expect(screen.getByText('Video Tools')).toBeInTheDocument();
+    expect(screen.getByText(/Video Tools/i)).toBeInTheDocument();
     // Note: queryByText renvoie null si pas trouvé, getByText lance une erreur
-    expect(screen.queryByText('Regex Tester')).not.toBeInTheDocument();
+    expect(screen.queryByText(/Regex Tester/i)).not.toBeInTheDocument();
   });
 });
