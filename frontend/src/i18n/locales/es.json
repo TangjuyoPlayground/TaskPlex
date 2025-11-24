@@ -94,7 +94,9 @@
     "result": "Resultado",
     "preview": "La vista previa aparecerá aquí",
     "compression": "Compresión",
-    "downloadResult": "Descargar resultado"
+    "downloadResult": "Descargar resultado",
+    "original": "Original",
+    "reducedBy": "Reducido en"
   },
   "pdf": {
     "title": "Herramientas PDF",
@@ -191,7 +193,43 @@
     "temperature": "Temperatura",
     "time": "Tiempo",
     "digital": "Almacenamiento digital",
-    "speed": "Velocidad"
+    "speed": "Velocidad",
+    "equals": "equivale a",
+    "unitNames": {
+      "meter": "metro",
+      "kilometer": "kilómetro",
+      "centimeter": "centímetro",
+      "millimeter": "milímetro",
+      "mile": "milla",
+      "yard": "yarda",
+      "foot": "pie",
+      "inch": "pulgada",
+      "kilogram": "kilogramo",
+      "gram": "gramo",
+      "milligram": "miligramo",
+      "metric_ton": "tonelada métrica",
+      "pound": "libra",
+      "ounce": "onza",
+      "degC": "Celsius",
+      "degF": "Fahrenheit",
+      "kelvin": "Kelvin",
+      "second": "segundo",
+      "minute": "minuto",
+      "hour": "hora",
+      "day": "día",
+      "week": "semana",
+      "year": "año",
+      "bit": "bit",
+      "byte": "byte",
+      "kilobyte": "kilobyte",
+      "megabyte": "megabyte",
+      "gigabyte": "gigabyte",
+      "terabyte": "terabyte",
+      "meter/second": "metro/segundo",
+      "kilometer/hour": "kilómetro/hora",
+      "mile/hour": "milla/hora",
+      "knot": "nudo"
+    }
   }
 }
 

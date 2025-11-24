@@ -15,6 +15,16 @@ fi
 echo "🔧 Activating virtual environment..."
 source venv/bin/activate
 
+# Ensure pip is available in venv
+if ! python -m pip --version &>/dev/null; then
+    echo "📦 Installing pip in virtual environment..."
+    python -m ensurepip --upgrade
+fi
+
+# Upgrade pip, setuptools, and wheel
+echo "⬆️  Upgrading pip, setuptools, and wheel..."
+python -m pip install --upgrade pip setuptools wheel --quiet
+
 # Check if dependencies are installed
 if ! python -c "import fastapi" 2>/dev/null; then
     echo "📦 Installing dependencies..."

@@ -55,6 +55,14 @@ export const UnitsScreen: React.FC = () => {
   // On récupère directement loading et error depuis le hook !
   const { mutate: convert, isPending: loading, error } = useConvertUnits();
 
+  // Helper function to translate unit names
+  const translateUnit = (unit: string): string => {
+    const translationKey = `units.unitNames.${unit}`;
+    const translated = t(translationKey);
+    // If translation doesn't exist, fallback to formatted unit name
+    return translated !== translationKey ? translated : unit.replace(/_/g, ' ');
+  };
+
   // Update units when category changes - use derived state instead of setState in effect
   const handleCategoryChange = (newCategory: typeof UNIT_CATEGORIES[0]) => {
     setCategory(newCategory);
@@ -149,7 +157,7 @@ export const UnitsScreen: React.FC = () => {
                 className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-700 font-medium focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
               >
                 {category.units.map(u => (
-                  <option key={u} value={u}>{u.replace(/_/g, ' ')}</option>
+                  <option key={u} value={u}>{translateUnit(u)}</option>
                 ))}
               </select>
             </div>
@@ -186,7 +194,7 @@ export const UnitsScreen: React.FC = () => {
                 className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-700 font-medium focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
               >
                 {category.units.map(u => (
-                  <option key={u} value={u}>{u.replace(/_/g, ' ')}</option>
+                  <option key={u} value={u}>{translateUnit(u)}</option>
                 ))}
               </select>
             </div>
@@ -203,9 +211,9 @@ export const UnitsScreen: React.FC = () => {
         
         {/* Footer info */}
         <div className="bg-gray-50 px-8 py-4 border-t border-gray-100 flex justify-between items-center text-sm text-gray-500">
-          <span>1 {fromUnit.replace(/_/g, ' ')} =</span>
+          <span>1 {translateUnit(fromUnit)} {t('units.equals')}</span>
           <span className="font-mono">
-            {toValue && fromValue ? (Number(toValue) / Number(fromValue)).toPrecision(4) : '-'} {toUnit.replace(/_/g, ' ')}
+            {toValue && fromValue ? (Number(toValue) / Number(fromValue)).toPrecision(4) : '-'} {translateUnit(toUnit)}
           </span>
         </div>
       </div>
