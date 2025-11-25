@@ -14,7 +14,13 @@
     "download": "Descargar",
     "process": "Procesar",
     "reset": "Restablecer",
-    "back": "Volver"
+    "back": "Volver",
+    "lightMode": "Modo claro",
+    "darkMode": "Modo oscuro",
+    "theme": "Tema",
+    "themeLight": "Claro",
+    "themeDark": "Oscuro",
+    "themeSystem": "Sistema"
   },
   "sidebar": {
     "noFavorites": "Sin favoritos aún",
@@ -46,13 +52,15 @@
     "organizePdfDesc": "Reorganiza, elimina o rota páginas en tus archivos PDF.",
     "convertImage": "Convertir imagen",
     "convertImageDesc": "Transforma imágenes a formatos PNG, JPG, WEBP en segundos.",
-    "new": "Nuevo"
+    "new": "Nuevo",
+    "comingSoon": "Próximamente"
   },
   "settings": {
     "title": "Configuración",
     "language": "Idioma",
     "languageDesc": "Elige tu idioma preferido",
     "appearance": "Apariencia",
+    "appearanceDesc": "Personaliza la apariencia de la aplicación",
     "theme": "Tema",
     "light": "Claro",
     "dark": "Oscuro",
@@ -233,6 +241,456 @@
       "kilometer/hour": "kilómetro/hora",
       "mile/hour": "milla/hora",
       "knot": "nudo"
+    }
+  },
+  "categories": {
+    "all": "Todas las herramientas",
+    "media": "Medios",
+    "document": "Documentos",
+    "developer": "Desarrollador",
+    "data": "Datos y Conversión",
+    "security": "Seguridad",
+    "text": "Herramientas de Texto",
+    "files": "Herramientas de Archivos",
+    "design": "Diseño",
+    "utility": "Utilidades"
+  },
+  "placeholder": {
+    "comingSoon": "Próximamente",
+    "comingSoonDesc": "Este módulo está actualmente en desarrollo. ¡Estamos trabajando duro para traerte funciones increíbles!",
+    "plannedFeatures": "Características planificadas",
+    "feature1": "Procesamiento 100% local",
+    "feature2": "Interfaz rápida e intuitiva",
+    "feature3": "Soporte de múltiples archivos",
+    "backToDashboard": "Volver al panel",
+    "moduleNotFound": "Módulo no encontrado",
+    "moduleNotFoundDesc": "El módulo solicitado no existe.",
+    "helpText": "¿Tienes sugerencias? ¡Déjanos saber qué funciones te gustaría ver!"
+  },
+  "modules": {
+    "video": {
+      "compress": {
+        "title": "Comprimir video",
+        "description": "Reducir el tamaño del archivo de video sin perder calidad"
+      },
+      "convert": {
+        "title": "Convertir video",
+        "description": "Convertir videos entre diferentes formatos"
+      },
+      "extractAudio": {
+        "title": "Extraer audio",
+        "description": "Extraer pista de audio del video (MP4 a MP3/WAV)"
+      },
+      "trim": {
+        "title": "Recortar video",
+        "description": "Cortar y extraer segmentos de video"
+      },
+      "merge": {
+        "title": "Fusionar videos",
+        "description": "Combinar múltiples videos en uno"
+      },
+      "rotate": {
+        "title": "Rotar video",
+        "description": "Rotar video 90°, 180° o 270°"
+      },
+      "addSubtitles": {
+        "title": "Agregar subtítulos",
+        "description": "Agregar archivos de subtítulos SRT/VTT a videos"
+      },
+      "extractFrames": {
+        "title": "Extraer fotogramas",
+        "description": "Extraer imágenes de fotogramas de video"
+      },
+      "toGif": {
+        "title": "Video a GIF",
+        "description": "Crear GIF animado desde video"
+      },
+      "changeSpeed": {
+        "title": "Cambiar velocidad",
+        "description": "Acelerar o ralentizar reproducción de video"
+      }
+    },
+    "audio": {
+      "convert": {
+        "title": "Convertir audio",
+        "description": "Convertir entre formatos MP3, WAV, FLAC, OGG"
+      },
+      "compress": {
+        "title": "Comprimir audio",
+        "description": "Reducir el tamaño del archivo de audio"
+      },
+      "trim": {
+        "title": "Recortar audio",
+        "description": "Cortar y extraer segmentos de audio"
+      },
+      "merge": {
+        "title": "Fusionar audio",
+        "description": "Combinar múltiples archivos de audio"
+      },
+      "normalize": {
+        "title": "Normalizar audio",
+        "description": "Normalizar volumen en múltiples archivos"
+      },
+      "fade": {
+        "title": "Fundido de audio",
+        "description": "Agregar efectos de fundido"
+      },
+      "silenceRemove": {
+        "title": "Eliminar silencio",
+        "description": "Eliminar automáticamente partes silenciosas"
+      },
+      "metadata": {
+        "title": "Metadatos de audio",
+        "description": "Editar etiquetas ID3 y metadatos"
+      }
+    },
+    "image": {
+      "compress": {
+        "title": "Comprimir imagen",
+        "description": "Reducir el tamaño del archivo de imagen"
+      },
+      "convert": {
+        "title": "Convertir imagen",
+        "description": "Convertir entre formatos PNG, JPG, WEBP"
+      },
+      "resize": {
+        "title": "Redimensionar imagen",
+        "description": "Cambiar las dimensiones de la imagen"
+      },
+      "crop": {
+        "title": "Recortar imagen",
+        "description": "Recortar y ajustar imágenes"
+      },
+      "rotate": {
+        "title": "Rotar imagen",
+        "description": "Rotar imágenes"
+      },
+      "flip": {
+        "title": "Voltear imagen",
+        "description": "Voltear horizontal o verticalmente"
+      },
+      "filters": {
+        "title": "Filtros de imagen",
+        "description": "Aplicar filtros (B&N, sepia, vintage)"
+      },
+      "removeBg": {
+        "title": "Eliminar fondo",
+        "description": "Eliminar automáticamente el fondo"
+      },
+      "toIcon": {
+        "title": "Crear icono",
+        "description": "Convertir imagen al formato .ico"
+      },
+      "extractColors": {
+        "title": "Extraer colores",
+        "description": "Extraer paleta de colores de la imagen"
+      },
+      "adjust": {
+        "title": "Ajustar imagen",
+        "description": "Ajustar brillo, contraste, saturación"
+      },
+      "merge": {
+        "title": "Fusionar imágenes",
+        "description": "Combinar múltiples imágenes"
+      },
+      "addText": {
+        "title": "Agregar texto",
+        "description": "Agregar texto sobre imágenes"
+      },
+      "collage": {
+        "title": "Crear collage",
+        "description": "Crear collages de imágenes"
+      },
+      "watermark": {
+        "title": "Agregar marca de agua",
+        "description": "Agregar marca de agua a imágenes"
+      }
+    },
+    "pdf": {
+      "compress": {
+        "title": "Comprimir PDF",
+        "description": "Reducir el tamaño del archivo PDF"
+      },
+      "merge": {
+        "title": "Fusionar PDF",
+        "description": "Combinar múltiples PDF en uno"
+      },
+      "split": {
+        "title": "Dividir PDF",
+        "description": "Extraer páginas de un PDF"
+      },
+      "reorganize": {
+        "title": "Organizar PDF",
+        "description": "Reorganizar, eliminar o rotar páginas PDF"
+      },
+      "toImages": {
+        "title": "PDF a imágenes",
+        "description": "Convertir páginas PDF a PNG/JPG"
+      },
+      "imagesToPdf": {
+        "title": "Imágenes a PDF",
+        "description": "Combinar imágenes en PDF"
+      },
+      "extractText": {
+        "title": "Extraer texto",
+        "description": "Extraer texto de un PDF"
+      },
+      "watermark": {
+        "title": "Agregar marca de agua",
+        "description": "Agregar marca de agua de texto o imagen al PDF"
+      },
+      "password": {
+        "title": "Proteger con contraseña",
+        "description": "Agregar o eliminar contraseña del PDF"
+      },
+      "toWord": {
+        "title": "PDF a Word",
+        "description": "Convertir PDF a documento Word editable"
+      },
+      "wordToPdf": {
+        "title": "Word a PDF",
+        "description": "Convertir documentos Word a PDF"
+      },
+      "ocr": {
+        "title": "OCR",
+        "description": "Extraer texto de PDF escaneados"
+      }
+    },
+    "dev": {
+      "regex": {
+        "title": "Probador Regex",
+        "description": "Probar y depurar expresiones regulares"
+      },
+      "units": {
+        "title": "Convertidor de unidades",
+        "description": "Convertir entre miles de unidades"
+      },
+      "jsonFormatter": {
+        "title": "Formateador JSON",
+        "description": "Formatear y minificar JSON"
+      },
+      "xmlFormatter": {
+        "title": "Formateador XML",
+        "description": "Formatear y minificar XML"
+      },
+      "hashGenerator": {
+        "title": "Generador de hash",
+        "description": "Generar hashes MD5, SHA1, SHA256"
+      },
+      "base64": {
+        "title": "Codificador Base64",
+        "description": "Codificar y decodificar Base64"
+      },
+      "urlEncoder": {
+        "title": "Codificador URL",
+        "description": "Codificar y decodificar URLs"
+      },
+      "uuid": {
+        "title": "Generador UUID",
+        "description": "Generar identificadores UUID v4"
+      },
+      "passwordGenerator": {
+        "title": "Generador de contraseñas",
+        "description": "Generar contraseñas seguras"
+      },
+      "qrGenerator": {
+        "title": "Generador de código QR",
+        "description": "Crear códigos QR"
+      },
+      "qrReader": {
+        "title": "Lector de código QR",
+        "description": "Decodificar códigos QR desde imágenes"
+      },
+      "colorConverter": {
+        "title": "Convertidor de colores",
+        "description": "Convertir entre HEX, RGB, HSL"
+      },
+      "loremIpsum": {
+        "title": "Lorem Ipsum",
+        "description": "Generar texto de relleno"
+      },
+      "codeFormatter": {
+        "title": "Formateador de código",
+        "description": "Formatear código JavaScript, Python, HTML, CSS"
+      },
+      "cssMinifier": {
+        "title": "Minificador CSS",
+        "description": "Minificar archivos CSS"
+      },
+      "jsMinifier": {
+        "title": "Minificador JS",
+        "description": "Minificar archivos JavaScript"
+      },
+      "htmlValidator": {
+        "title": "Validador HTML",
+        "description": "Validar sintaxis HTML"
+      },
+      "barcodeGenerator": {
+        "title": "Generador de códigos de barras",
+        "description": "Crear códigos de barras (EAN, UPC, etc.)"
+      },
+      "numberConverter": {
+        "title": "Convertidor de números",
+        "description": "Convertir binario, decimal, hexadecimal"
+      },
+      "fakeDataGenerator": {
+        "title": "Generador de datos",
+        "description": "Generar datos de prueba (JSON)"
+      }
+    },
+    "data": {
+      "csvToJson": {
+        "title": "CSV a JSON",
+        "description": "Convertir archivos CSV a JSON"
+      },
+      "jsonToCsv": {
+        "title": "JSON a CSV",
+        "description": "Convertir JSON a CSV"
+      },
+      "csvEditor": {
+        "title": "Editor CSV",
+        "description": "Visualizar y editar archivos CSV"
+      },
+      "dateCalculator": {
+        "title": "Calculadora de fechas",
+        "description": "Calcular diferencias de fechas"
+      },
+      "excelToPdf": {
+        "title": "Excel a PDF",
+        "description": "Convertir hojas de cálculo a PDF"
+      },
+      "chartGenerator": {
+        "title": "Generador de gráficos",
+        "description": "Crear gráficos desde datos"
+      },
+      "calculator": {
+        "title": "Calculadora científica",
+        "description": "Calculadora científica avanzada"
+      },
+      "currencyConverter": {
+        "title": "Convertidor de divisas",
+        "description": "Convertir divisas (tasas fijas)"
+      }
+    },
+    "security": {
+      "fileEncryption": {
+        "title": "Cifrado de archivos",
+        "description": "Cifrar y descifrar archivos (AES)"
+      },
+      "fileHash": {
+        "title": "Hash de archivos",
+        "description": "Calcular checksums de archivos"
+      },
+      "passwordChecker": {
+        "title": "Verificador de contraseñas",
+        "description": "Verificar la fuerza de una contraseña"
+      }
+    },
+    "text": {
+      "wordCounter": {
+        "title": "Contador de palabras",
+        "description": "Contar palabras, caracteres, párrafos"
+      },
+      "caseConverter": {
+        "title": "Convertidor de mayúsculas",
+        "description": "Convertir mayúsculas (MAYÚSCULAS, minúsculas, Título)"
+      },
+      "slugGenerator": {
+        "title": "Generador de slug",
+        "description": "Crear slugs compatibles con URL"
+      },
+      "textDiff": {
+        "title": "Comparación de textos",
+        "description": "Comparar dos textos"
+      },
+      "spellChecker": {
+        "title": "Corrector ortográfico",
+        "description": "Verificar ortografía con diccionarios"
+      },
+      "keywordExtractor": {
+        "title": "Extractor de palabras clave",
+        "description": "Extraer palabras clave de un texto"
+      },
+      "accentRemover": {
+        "title": "Eliminador de acentos",
+        "description": "Eliminar acentos de un texto"
+      },
+      "emailExtractor": {
+        "title": "Extractor de emails",
+        "description": "Extraer direcciones de email de un texto"
+      },
+      "urlExtractor": {
+        "title": "Extractor de URLs",
+        "description": "Extraer URLs de un texto"
+      }
+    },
+    "files": {
+      "zipCompress": {
+        "title": "Crear ZIP",
+        "description": "Comprimir archivos en archivo ZIP"
+      },
+      "zipExtract": {
+        "title": "Extraer ZIP",
+        "description": "Extraer archivos ZIP"
+      },
+      "batchRename": {
+        "title": "Renombrado por lotes",
+        "description": "Renombrar múltiples archivos a la vez"
+      },
+      "duplicateFinder": {
+        "title": "Buscador de duplicados",
+        "description": "Encontrar archivos duplicados"
+      },
+      "rarCompress": {
+        "title": "Crear RAR",
+        "description": "Comprimir archivos en archivo RAR"
+      },
+      "rarExtract": {
+        "title": "Extraer RAR",
+        "description": "Extraer archivos RAR"
+      },
+      "7zCompress": {
+        "title": "Crear 7Z",
+        "description": "Comprimir archivos en archivo 7Z"
+      },
+      "7zExtract": {
+        "title": "Extraer 7Z",
+        "description": "Extraer archivos 7Z"
+      },
+      "fileCompare": {
+        "title": "Comparación de archivos",
+        "description": "Comparar dos archivos (diff)"
+      }
+    },
+    "design": {
+      "favicon": {
+        "title": "Generador de favicon",
+        "description": "Crear favicons desde imágenes"
+      },
+      "palette": {
+        "title": "Generador de paletas",
+        "description": "Extraer paletas de colores"
+      },
+      "gradient": {
+        "title": "Generador de degradados",
+        "description": "Crear degradados CSS"
+      },
+      "pattern": {
+        "title": "Generador de patrones",
+        "description": "Crear patrones y texturas"
+      },
+      "logo": {
+        "title": "Generador de logos",
+        "description": "Crear logos simples"
+      },
+      "badge": {
+        "title": "Generador de insignias",
+        "description": "Crear insignias (estilo GitHub)"
+      },
+      "diagram": {
+        "title": "Creador de diagramas",
+        "description": "Crear diagramas de flujo simples"
+      }
     }
   }
 }

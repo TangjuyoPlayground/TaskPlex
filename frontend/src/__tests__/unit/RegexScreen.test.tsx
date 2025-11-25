@@ -2,12 +2,12 @@ import React from 'react';
 import { screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import '@testing-library/jest-dom'; // Explicit import to ensure types are loaded
-import { RegexScreen } from './RegexScreen';
-import { ApiService } from '../services/api';
-import { renderWithProviders } from '../test-utils';
+import { RegexScreen } from '../../pages/RegexScreen';
+import { ApiService } from '../../services/api';
+import { renderWithProviders } from '../../test-utils';
 
 // Mock ApiService
-vi.mock('../services/api', () => ({
+vi.mock('../../services/api', () => ({
   ApiService: {
     testRegex: vi.fn(),
   },
@@ -82,3 +82,4 @@ describe('RegexScreen', () => {
     }, { timeout: 2000 });
   });
 });
+

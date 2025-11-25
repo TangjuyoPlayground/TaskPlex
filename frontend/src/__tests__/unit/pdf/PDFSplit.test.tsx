@@ -2,11 +2,11 @@ import React from 'react';
 import { screen } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import '@testing-library/jest-dom/vitest';
-import { PDFSplit } from './PDFSplit';
-import { renderWithProviders } from '../../test-utils';
+import { PDFSplit } from '../../../pages/pdf/PDFSplit';
+import { renderWithProviders } from '../../../test-utils';
 
 // Mock ApiService
-vi.mock('../../services/api', () => ({
+vi.mock('../../../services/api', () => ({
   ApiService: {
     splitPDF: vi.fn(),
     getDownloadUrl: vi.fn((path) => path),
@@ -24,3 +24,4 @@ describe('PDFSplit', () => {
     expect(screen.getByText(/Select PDF file/i)).toBeInTheDocument();
   });
 });
+

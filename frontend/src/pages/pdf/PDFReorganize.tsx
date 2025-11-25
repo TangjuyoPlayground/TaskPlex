@@ -30,7 +30,7 @@ const SortablePage = ({ page }: { page: PDFPage }) => {
   };
 
   return (
-    <div ref={setNodeRef} style={style} className="relative group bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden cursor-move hover:shadow-md transition-shadow" {...attributes} {...listeners}>
+    <div ref={setNodeRef} style={style} className="relative group bg-white dark:bg-gray-700 rounded-lg shadow-sm border border-gray-200 dark:border-gray-600 overflow-hidden cursor-move hover:shadow-md transition-shadow" {...attributes} {...listeners}>
       <div className="p-2 pointer-events-none">
         <Page 
           pageNumber={page.originalIndex + 1} 
@@ -40,7 +40,7 @@ const SortablePage = ({ page }: { page: PDFPage }) => {
           className="mx-auto shadow-sm"
         />
       </div>
-      <div className="bg-gray-50 px-3 py-2 text-xs text-center font-medium border-t border-gray-100 text-gray-600">
+      <div className="bg-gray-50 dark:bg-gray-600 px-3 py-2 text-xs text-center font-medium border-t border-gray-100 dark:border-gray-500 text-gray-600 dark:text-gray-300">
         {t('pdf.reorganize.page')} {page.originalIndex + 1}
       </div>
     </div>
@@ -110,53 +110,53 @@ export const PDFReorganize: React.FC = () => {
   return (
     <div className="p-8 max-w-6xl mx-auto h-screen flex flex-col">
       <div className="text-center mb-6 flex-none">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2 flex items-center justify-center gap-3">
-          <RefreshCw className="text-purple-600" size={32} />
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2 flex items-center justify-center gap-3">
+          <RefreshCw className="text-purple-600 dark:text-purple-400" size={32} />
           {t('pdf.reorganize.title')}
         </h1>
-        <p className="text-gray-600">{t('pdf.reorganize.description')}</p>
+        <p className="text-gray-600 dark:text-gray-400">{t('pdf.reorganize.description')}</p>
       </div>
 
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-200 flex-1 flex flex-col min-h-0 overflow-hidden">
+      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 flex-1 flex flex-col min-h-0 overflow-hidden">
         {!file ? (
           <div className="flex-1 flex items-center justify-center p-12">
-            <div className="border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:bg-gray-50 transition-colors relative group cursor-pointer max-w-xl w-full">
+            <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl p-12 text-center hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors relative group cursor-pointer max-w-xl w-full">
               <input 
                 type="file" 
                 accept=".pdf" 
                 onChange={handleFileChange} 
                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" 
               />
-              <div className="w-20 h-20 bg-purple-50 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-200">
-                <Upload className="w-10 h-10 text-purple-600" />
+              <div className="w-20 h-20 bg-purple-50 dark:bg-purple-900/30 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-200">
+                <Upload className="w-10 h-10 text-purple-600 dark:text-purple-400" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">{t('pdf.reorganize.selectFile')}</h3>
-              <p className="text-gray-500">{t('pdf.reorganize.dropFile')}</p>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{t('pdf.reorganize.selectFile')}</h3>
+              <p className="text-gray-500 dark:text-gray-400">{t('pdf.reorganize.dropFile')}</p>
             </div>
           </div>
         ) : (
           <div className="flex-1 flex flex-col min-h-0">
             {/* Toolbar */}
-            <div className="p-4 border-b border-gray-200 flex items-center justify-between bg-white flex-none">
+            <div className="p-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between bg-white dark:bg-gray-800 flex-none">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-purple-100 rounded-lg">
-                  <FileText className="w-5 h-5 text-purple-600" />
+                <div className="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
+                  <FileText className="w-5 h-5 text-purple-600 dark:text-purple-400" />
                 </div>
-                <span className="font-medium text-gray-900">{file.name}</span>
-                <span className="text-sm text-gray-500">({pages.length} pages)</span>
+                <span className="font-medium text-gray-900 dark:text-white">{file.name}</span>
+                <span className="text-sm text-gray-500 dark:text-gray-400">({pages.length} pages)</span>
               </div>
               <div className="flex gap-3 items-center">
-                {errorMessage && <span className="text-red-600 text-sm mr-2">{errorMessage}</span>}
+                {errorMessage && <span className="text-red-600 dark:text-red-400 text-sm mr-2">{errorMessage}</span>}
                 <button 
                   onClick={() => { setFile(null); reset(); }}
-                  className="px-4 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+                  className="px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
                 >
                   {t('common.cancel')}
                 </button>
                 <button
                   onClick={handleReorganize}
                   disabled={loading}
-                  className="px-6 py-2 bg-purple-600 text-white rounded-lg font-bold hover:bg-purple-700 transition-all shadow-md hover:shadow-lg disabled:bg-gray-300 disabled:cursor-not-allowed disabled:shadow-none flex items-center gap-2"
+                  className="px-6 py-2 bg-purple-600 text-white rounded-lg font-bold hover:bg-purple-700 transition-all shadow-md hover:shadow-lg disabled:bg-gray-300 dark:disabled:bg-gray-600 disabled:cursor-not-allowed disabled:shadow-none flex items-center gap-2"
                 >
                   {loading ? t('pdf.reorganize.organizing') : t('pdf.reorganize.organizeBtn')}
                 </button>
@@ -164,7 +164,7 @@ export const PDFReorganize: React.FC = () => {
             </div>
 
             {/* Grid Area */}
-            <div className="flex-1 overflow-y-auto bg-gray-50 p-8">
+            <div className="flex-1 overflow-y-auto bg-gray-50 dark:bg-gray-900 p-8">
               <DndContext 
                 sensors={sensors} 
                 collisionDetection={closestCenter} 
@@ -178,8 +178,8 @@ export const PDFReorganize: React.FC = () => {
                     file={file}
                     onLoadSuccess={onDocumentLoadSuccess}
                     className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 max-w-5xl mx-auto"
-                    loading={<div className="col-span-full text-center py-12 text-gray-400">{t('common.loading')}</div>}
-                    error={<div className="col-span-full text-center py-12 text-red-500">{t('common.error')}</div>}
+                    loading={<div className="col-span-full text-center py-12 text-gray-400 dark:text-gray-500">{t('common.loading')}</div>}
+                    error={<div className="col-span-full text-center py-12 text-red-500 dark:text-red-400">{t('common.error')}</div>}
                   >
                     {pages.map((page) => (
                       <SortablePage key={page.id} page={page} />
