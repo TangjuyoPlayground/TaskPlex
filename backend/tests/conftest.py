@@ -23,7 +23,7 @@ def setup_test_env():
     TEMP_DIR.mkdir(exist_ok=True, parents=True)
 
     yield
-    
+
     # No cleanup needed - pytest's tmp_path handles temporary files automatically
 
 
@@ -36,7 +36,7 @@ def client():
 @pytest.fixture
 def sample_image(tmp_path):
     """Create a dummy image for testing
-    
+
     Uses pytest's tmp_path fixture for isolation in parallel tests.
     """
     from PIL import Image
@@ -50,7 +50,7 @@ def sample_image(tmp_path):
 @pytest.fixture
 def sample_pdf(tmp_path):
     """Create a dummy PDF for testing
-    
+
     Uses pytest's tmp_path fixture which provides a unique temporary directory
     per test, avoiding race conditions in parallel test execution.
     """
