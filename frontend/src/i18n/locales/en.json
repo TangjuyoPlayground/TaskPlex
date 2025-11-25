@@ -14,7 +14,13 @@
     "download": "Download",
     "process": "Process",
     "reset": "Reset",
-    "back": "Back"
+    "back": "Back",
+    "lightMode": "Light Mode",
+    "darkMode": "Dark Mode",
+    "theme": "Theme",
+    "themeLight": "Light",
+    "themeDark": "Dark",
+    "themeSystem": "System"
   },
   "sidebar": {
     "noFavorites": "No favorites yet",
@@ -46,13 +52,15 @@
     "organizePdfDesc": "Rearrange, delete or rotate pages in your PDF files.",
     "convertImage": "Convert Image",
     "convertImageDesc": "Transform images to PNG, JPG, WEBP formats in seconds.",
-    "new": "New"
+    "new": "New",
+    "comingSoon": "Coming Soon"
   },
   "settings": {
     "title": "Settings",
     "language": "Language",
     "languageDesc": "Choose your preferred language",
     "appearance": "Appearance",
+    "appearanceDesc": "Customize the look and feel of the application",
     "theme": "Theme",
     "light": "Light",
     "dark": "Dark",
@@ -233,6 +241,456 @@
       "kilometer/hour": "kilometer/hour",
       "mile/hour": "mile/hour",
       "knot": "knot"
+    }
+  },
+  "categories": {
+    "all": "All Tools",
+    "media": "Media",
+    "document": "Documents",
+    "developer": "Developer",
+    "data": "Data & Conversion",
+    "security": "Security",
+    "text": "Text Tools",
+    "files": "File Tools",
+    "design": "Design",
+    "utility": "Utilities"
+  },
+  "placeholder": {
+    "comingSoon": "Coming Soon",
+    "comingSoonDesc": "This module is currently under development. We're working hard to bring you amazing features!",
+    "plannedFeatures": "Planned Features",
+    "feature1": "100% local processing",
+    "feature2": "Fast and intuitive interface",
+    "feature3": "Multiple file support",
+    "backToDashboard": "Back to Dashboard",
+    "moduleNotFound": "Module Not Found",
+    "moduleNotFoundDesc": "The requested module doesn't exist.",
+    "helpText": "Have suggestions? Let us know what features you'd like to see!"
+  },
+  "modules": {
+    "video": {
+      "compress": {
+        "title": "Compress Video",
+        "description": "Reduce video file size without losing quality"
+      },
+      "convert": {
+        "title": "Convert Video",
+        "description": "Convert videos between different formats"
+      },
+      "extractAudio": {
+        "title": "Extract Audio",
+        "description": "Extract audio track from video (MP4 to MP3/WAV)"
+      },
+      "trim": {
+        "title": "Trim Video",
+        "description": "Cut and extract video segments"
+      },
+      "merge": {
+        "title": "Merge Videos",
+        "description": "Combine multiple videos into one"
+      },
+      "rotate": {
+        "title": "Rotate Video",
+        "description": "Rotate video by 90°, 180°, or 270°"
+      },
+      "addSubtitles": {
+        "title": "Add Subtitles",
+        "description": "Add SRT/VTT subtitle files to videos"
+      },
+      "extractFrames": {
+        "title": "Extract Frames",
+        "description": "Extract images from video frames"
+      },
+      "toGif": {
+        "title": "Video to GIF",
+        "description": "Create animated GIF from video"
+      },
+      "changeSpeed": {
+        "title": "Change Speed",
+        "description": "Speed up or slow down video playback"
+      }
+    },
+    "audio": {
+      "convert": {
+        "title": "Convert Audio",
+        "description": "Convert between MP3, WAV, FLAC, OGG formats"
+      },
+      "compress": {
+        "title": "Compress Audio",
+        "description": "Reduce audio file size"
+      },
+      "trim": {
+        "title": "Trim Audio",
+        "description": "Cut and extract audio segments"
+      },
+      "merge": {
+        "title": "Merge Audio",
+        "description": "Combine multiple audio files"
+      },
+      "normalize": {
+        "title": "Normalize Audio",
+        "description": "Normalize volume across multiple files"
+      },
+      "fade": {
+        "title": "Audio Fade",
+        "description": "Add fade in/out effects"
+      },
+      "silenceRemove": {
+        "title": "Remove Silence",
+        "description": "Automatically remove silent parts"
+      },
+      "metadata": {
+        "title": "Audio Metadata",
+        "description": "Edit ID3 tags and metadata"
+      }
+    },
+    "image": {
+      "compress": {
+        "title": "Compress Image",
+        "description": "Reduce image file size"
+      },
+      "convert": {
+        "title": "Convert Image",
+        "description": "Convert between PNG, JPG, WEBP formats"
+      },
+      "resize": {
+        "title": "Resize Image",
+        "description": "Change image dimensions"
+      },
+      "crop": {
+        "title": "Crop Image",
+        "description": "Crop and trim images"
+      },
+      "rotate": {
+        "title": "Rotate Image",
+        "description": "Rotate images by any angle"
+      },
+      "flip": {
+        "title": "Flip Image",
+        "description": "Flip images horizontally or vertically"
+      },
+      "filters": {
+        "title": "Image Filters",
+        "description": "Apply filters (B&W, sepia, vintage)"
+      },
+      "removeBg": {
+        "title": "Remove Background",
+        "description": "Automatically remove image background"
+      },
+      "toIcon": {
+        "title": "Create Icon",
+        "description": "Convert image to .ico format"
+      },
+      "extractColors": {
+        "title": "Extract Colors",
+        "description": "Extract color palette from image"
+      },
+      "adjust": {
+        "title": "Adjust Image",
+        "description": "Adjust brightness, contrast, saturation"
+      },
+      "merge": {
+        "title": "Merge Images",
+        "description": "Combine multiple images"
+      },
+      "addText": {
+        "title": "Add Text",
+        "description": "Add text overlay to images"
+      },
+      "collage": {
+        "title": "Create Collage",
+        "description": "Create image collages"
+      },
+      "watermark": {
+        "title": "Add Watermark",
+        "description": "Add watermark to images"
+      }
+    },
+    "pdf": {
+      "compress": {
+        "title": "Compress PDF",
+        "description": "Reduce PDF file size"
+      },
+      "merge": {
+        "title": "Merge PDF",
+        "description": "Combine multiple PDFs into one"
+      },
+      "split": {
+        "title": "Split PDF",
+        "description": "Extract pages from PDF"
+      },
+      "reorganize": {
+        "title": "Organize PDF",
+        "description": "Rearrange, delete or rotate PDF pages"
+      },
+      "toImages": {
+        "title": "PDF to Images",
+        "description": "Convert PDF pages to PNG/JPG"
+      },
+      "imagesToPdf": {
+        "title": "Images to PDF",
+        "description": "Combine images into PDF"
+      },
+      "extractText": {
+        "title": "Extract Text",
+        "description": "Extract text from PDF"
+      },
+      "watermark": {
+        "title": "Add Watermark",
+        "description": "Add text or image watermark to PDF"
+      },
+      "password": {
+        "title": "Password Protect",
+        "description": "Add or remove PDF password"
+      },
+      "toWord": {
+        "title": "PDF to Word",
+        "description": "Convert PDF to editable Word document"
+      },
+      "wordToPdf": {
+        "title": "Word to PDF",
+        "description": "Convert Word documents to PDF"
+      },
+      "ocr": {
+        "title": "OCR",
+        "description": "Extract text from scanned PDFs"
+      }
+    },
+    "dev": {
+      "regex": {
+        "title": "Regex Tester",
+        "description": "Test and debug regular expressions"
+      },
+      "units": {
+        "title": "Unit Converter",
+        "description": "Convert between thousands of units"
+      },
+      "jsonFormatter": {
+        "title": "JSON Formatter",
+        "description": "Format and minify JSON"
+      },
+      "xmlFormatter": {
+        "title": "XML Formatter",
+        "description": "Format and minify XML"
+      },
+      "hashGenerator": {
+        "title": "Hash Generator",
+        "description": "Generate MD5, SHA1, SHA256 hashes"
+      },
+      "base64": {
+        "title": "Base64 Encoder",
+        "description": "Encode and decode Base64"
+      },
+      "urlEncoder": {
+        "title": "URL Encoder",
+        "description": "Encode and decode URLs"
+      },
+      "uuid": {
+        "title": "UUID Generator",
+        "description": "Generate UUID v4 identifiers"
+      },
+      "passwordGenerator": {
+        "title": "Password Generator",
+        "description": "Generate secure passwords"
+      },
+      "qrGenerator": {
+        "title": "QR Code Generator",
+        "description": "Create QR codes"
+      },
+      "qrReader": {
+        "title": "QR Code Reader",
+        "description": "Decode QR codes from images"
+      },
+      "colorConverter": {
+        "title": "Color Converter",
+        "description": "Convert between HEX, RGB, HSL"
+      },
+      "loremIpsum": {
+        "title": "Lorem Ipsum",
+        "description": "Generate placeholder text"
+      },
+      "codeFormatter": {
+        "title": "Code Formatter",
+        "description": "Format JavaScript, Python, HTML, CSS code"
+      },
+      "cssMinifier": {
+        "title": "CSS Minifier",
+        "description": "Minify CSS files"
+      },
+      "jsMinifier": {
+        "title": "JS Minifier",
+        "description": "Minify JavaScript files"
+      },
+      "htmlValidator": {
+        "title": "HTML Validator",
+        "description": "Validate HTML syntax"
+      },
+      "barcodeGenerator": {
+        "title": "Barcode Generator",
+        "description": "Create barcodes (EAN, UPC, etc.)"
+      },
+      "numberConverter": {
+        "title": "Number Converter",
+        "description": "Convert binary, decimal, hexadecimal"
+      },
+      "fakeDataGenerator": {
+        "title": "Fake Data Generator",
+        "description": "Generate test data (JSON)"
+      }
+    },
+    "data": {
+      "csvToJson": {
+        "title": "CSV to JSON",
+        "description": "Convert CSV files to JSON"
+      },
+      "jsonToCsv": {
+        "title": "JSON to CSV",
+        "description": "Convert JSON to CSV"
+      },
+      "csvEditor": {
+        "title": "CSV Editor",
+        "description": "View and edit CSV files"
+      },
+      "dateCalculator": {
+        "title": "Date Calculator",
+        "description": "Calculate date differences"
+      },
+      "excelToPdf": {
+        "title": "Excel to PDF",
+        "description": "Convert spreadsheets to PDF"
+      },
+      "chartGenerator": {
+        "title": "Chart Generator",
+        "description": "Create charts from data"
+      },
+      "calculator": {
+        "title": "Scientific Calculator",
+        "description": "Advanced scientific calculator"
+      },
+      "currencyConverter": {
+        "title": "Currency Converter",
+        "description": "Convert currencies (fixed rates)"
+      }
+    },
+    "security": {
+      "fileEncryption": {
+        "title": "File Encryption",
+        "description": "Encrypt and decrypt files (AES)"
+      },
+      "fileHash": {
+        "title": "File Hash",
+        "description": "Calculate file checksums"
+      },
+      "passwordChecker": {
+        "title": "Password Checker",
+        "description": "Check password strength"
+      }
+    },
+    "text": {
+      "wordCounter": {
+        "title": "Word Counter",
+        "description": "Count words, characters, paragraphs"
+      },
+      "caseConverter": {
+        "title": "Case Converter",
+        "description": "Convert text case (UPPER, lower, Title)"
+      },
+      "slugGenerator": {
+        "title": "Slug Generator",
+        "description": "Create URL-friendly slugs"
+      },
+      "textDiff": {
+        "title": "Text Diff",
+        "description": "Compare two texts"
+      },
+      "spellChecker": {
+        "title": "Spell Checker",
+        "description": "Check spelling with dictionaries"
+      },
+      "keywordExtractor": {
+        "title": "Keyword Extractor",
+        "description": "Extract keywords from text"
+      },
+      "accentRemover": {
+        "title": "Accent Remover",
+        "description": "Remove accents from text"
+      },
+      "emailExtractor": {
+        "title": "Email Extractor",
+        "description": "Extract email addresses from text"
+      },
+      "urlExtractor": {
+        "title": "URL Extractor",
+        "description": "Extract URLs from text"
+      }
+    },
+    "files": {
+      "zipCompress": {
+        "title": "Create ZIP",
+        "description": "Compress files to ZIP archive"
+      },
+      "zipExtract": {
+        "title": "Extract ZIP",
+        "description": "Extract ZIP archives"
+      },
+      "batchRename": {
+        "title": "Batch Rename",
+        "description": "Rename multiple files at once"
+      },
+      "duplicateFinder": {
+        "title": "Duplicate Finder",
+        "description": "Find duplicate files"
+      },
+      "rarCompress": {
+        "title": "Create RAR",
+        "description": "Compress files to RAR archive"
+      },
+      "rarExtract": {
+        "title": "Extract RAR",
+        "description": "Extract RAR archives"
+      },
+      "7zCompress": {
+        "title": "Create 7Z",
+        "description": "Compress files to 7Z archive"
+      },
+      "7zExtract": {
+        "title": "Extract 7Z",
+        "description": "Extract 7Z archives"
+      },
+      "fileCompare": {
+        "title": "File Compare",
+        "description": "Compare two files (diff)"
+      }
+    },
+    "design": {
+      "favicon": {
+        "title": "Favicon Generator",
+        "description": "Create favicons from images"
+      },
+      "palette": {
+        "title": "Palette Generator",
+        "description": "Extract color palettes"
+      },
+      "gradient": {
+        "title": "Gradient Generator",
+        "description": "Create CSS gradients"
+      },
+      "pattern": {
+        "title": "Pattern Generator",
+        "description": "Create patterns and textures"
+      },
+      "logo": {
+        "title": "Logo Generator",
+        "description": "Create simple logos"
+      },
+      "badge": {
+        "title": "Badge Generator",
+        "description": "Create badges (GitHub style)"
+      },
+      "diagram": {
+        "title": "Diagram Creator",
+        "description": "Create simple flowcharts"
+      }
     }
   }
 }

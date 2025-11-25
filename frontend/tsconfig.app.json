@@ -22,7 +22,20 @@
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+
+    /* Path Aliases */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@/components/*": ["src/components/*"],
+      "@/hooks/*": ["src/hooks/*"],
+      "@/pages/*": ["src/pages/*"],
+      "@/services/*": ["src/services/*"],
+      "@/config/*": ["src/config/*"],
+      "@/types/*": ["src/types/*"],
+      "@/contexts/*": ["src/contexts/*"]
+    }
   },
   "include": ["src"],
   "exclude": ["src/**/*.test.tsx", "src/**/*.test.ts", "src/**/__tests__/*", "src/test-utils.tsx", "src/setupTests.ts"]

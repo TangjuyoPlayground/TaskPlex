@@ -1,8 +1,8 @@
 import React from 'react';
 import { screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
-import { HomeDashboard } from './HomeDashboard';
-import { renderWithProviders } from '../test-utils';
+import { HomeDashboard } from '../../pages/HomeDashboard';
+import { renderWithProviders } from '../../test-utils';
 
 describe('HomeDashboard', () => {
   it('renders the welcome message', () => {
@@ -22,16 +22,17 @@ describe('HomeDashboard', () => {
   it('filters tools when clicking a category', () => {
     renderWithProviders(<HomeDashboard />);
     
-    // Au début, tous les outils sont là (ex: Video Tools et Regex Tester)
-    expect(screen.getByText(/Video Tools/i)).toBeInTheDocument();
+    // At the start, all tools are there (ex: Compress Video from Media and Regex Tester from Developer)
+    expect(screen.getByText(/Compress Video/i)).toBeInTheDocument();
     expect(screen.getByText(/Regex Tester/i)).toBeInTheDocument();
 
-    // Clique sur "Media"
+    // Click on "Media"
     fireEvent.click(screen.getByText(/Media/i));
 
-    // Video Tools doit être là, mais Regex Tester (Developer tool) ne devrait plus être visible
-    expect(screen.getByText(/Video Tools/i)).toBeInTheDocument();
-    // Note: queryByText renvoie null si pas trouvé, getByText lance une erreur
+    // Compress Video (Media tool) should still be there
+    expect(screen.getByText(/Compress Video/i)).toBeInTheDocument();
+    // Regex Tester (Developer tool) should no longer be visible
     expect(screen.queryByText(/Regex Tester/i)).not.toBeInTheDocument();
   });
 });
+

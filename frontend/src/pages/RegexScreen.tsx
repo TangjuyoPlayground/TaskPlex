@@ -48,7 +48,7 @@ export const RegexScreen: React.FC = () => {
 
   const renderHighlightedText = () => {
     if (!result || !result.matches || result.matches.length === 0) {
-      return <div className="text-gray-500 italic p-4">{t('regex.noMatches')}</div>;
+      return <div className="text-gray-500 dark:text-gray-400 italic p-4">{t('regex.noMatches')}</div>;
     }
 
     // Create segments of text (matched vs unmatched)
@@ -62,19 +62,19 @@ export const RegexScreen: React.FC = () => {
       // Text before match
       if (match.start > lastIndex) {
         elements.push(
-          <span key={`text-${i}`}>{text.substring(lastIndex, match.start)}</span>
+          <span key={`text-${i}`} className="text-gray-900 dark:text-gray-100">{text.substring(lastIndex, match.start)}</span>
         );
       }
 
       // The match itself
       elements.push(
-        <span key={`match-${i}`} className="bg-yellow-200 text-yellow-900 px-0.5 rounded font-medium relative group cursor-help border-b-2 border-yellow-400">
+        <span key={`match-${i}`} className="bg-yellow-200 dark:bg-yellow-500/30 text-yellow-900 dark:text-yellow-200 px-0.5 rounded font-medium relative group cursor-help border-b-2 border-yellow-400 dark:border-yellow-500">
           {text.substring(match.start, match.end)}
           {/* Tooltip for groups */}
-          <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block bg-gray-900 text-white text-xs rounded py-1 px-2 z-10 whitespace-nowrap shadow-lg">
+          <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block bg-gray-900 dark:bg-gray-700 text-white text-xs rounded py-1 px-2 z-10 whitespace-nowrap shadow-lg">
             {t('regex.match')} #{i + 1}
             {match.groups.length > 0 && (
-              <div className="mt-1 pt-1 border-t border-gray-700">
+              <div className="mt-1 pt-1 border-t border-gray-700 dark:border-gray-500">
                 {match.groups.map((g, gi) => (
                   <div key={gi}>{t('regex.group')} {gi + 1}: {g}</div>
                 ))}
@@ -90,7 +90,7 @@ export const RegexScreen: React.FC = () => {
     // Remaining text
     if (lastIndex < text.length) {
       elements.push(
-        <span key="text-end">{text.substring(lastIndex)}</span>
+        <span key="text-end" className="text-gray-900 dark:text-gray-100">{text.substring(lastIndex)}</span>
       );
     }
 
@@ -100,32 +100,32 @@ export const RegexScreen: React.FC = () => {
   return (
     <div className="p-8 max-w-6xl mx-auto min-h-screen">
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2 flex items-center justify-center gap-3">
-          <Regex className="text-yellow-600" size={32} />
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2 flex items-center justify-center gap-3">
+          <Regex className="text-yellow-600 dark:text-yellow-400" size={32} />
           {t('regex.title')}
         </h1>
-        <p className="text-gray-600">{t('regex.textPlaceholder')}</p>
+        <p className="text-gray-600 dark:text-gray-400">{t('regex.textPlaceholder')}</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Left Column: Inputs */}
         <div className="lg:col-span-1 flex flex-col gap-6">
           {/* Pattern Input */}
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
-            <label className="block text-sm font-medium text-gray-700 mb-2">{t('regex.pattern')}</label>
-            <div className={`flex items-center bg-gray-50 border rounded-lg overflow-hidden ${error ? 'border-red-300 bg-red-50' : 'border-gray-300 focus-within:border-purple-500 focus-within:ring-1 focus-within:ring-purple-500'}`}>
-              <span className="pl-3 text-gray-400 font-mono">/</span>
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{t('regex.pattern')}</label>
+            <div className={`flex items-center bg-gray-50 dark:bg-gray-700 border rounded-lg overflow-hidden ${error ? 'border-red-300 dark:border-red-600 bg-red-50 dark:bg-red-900/30' : 'border-gray-300 dark:border-gray-600 focus-within:border-purple-500 dark:focus-within:border-purple-400 focus-within:ring-1 focus-within:ring-purple-500'}`}>
+              <span className="pl-3 text-gray-400 dark:text-gray-500 font-mono">/</span>
               <input
                 type="text"
                 value={pattern}
                 onChange={(e) => setPattern(e.target.value)}
                 placeholder={t('regex.patternPlaceholder')}
-                className="flex-1 bg-transparent border-none focus:ring-0 py-2.5 px-1 font-mono text-gray-900 placeholder-gray-400"
+                className="flex-1 bg-transparent border-none focus:ring-0 py-2.5 px-1 font-mono text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
               />
-              <span className="pr-3 text-gray-400 font-mono">/</span>
+              <span className="pr-3 text-gray-400 dark:text-gray-500 font-mono">/</span>
             </div>
             {error && (
-              <div className="mt-2 text-sm text-red-600 flex items-start gap-1.5">
+              <div className="mt-2 text-sm text-red-600 dark:text-red-400 flex items-start gap-1.5">
                 <AlertCircle size={14} className="mt-0.5 flex-shrink-0" />
                 {error}
               </div>
@@ -133,8 +133,8 @@ export const RegexScreen: React.FC = () => {
           </div>
 
           {/* Flags */}
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
-            <label className="block text-sm font-medium text-gray-700 mb-4">{t('regex.flags')}</label>
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-4">{t('regex.flags')}</label>
             <div className="space-y-3">
               {availableFlags.map(flag => (
                 <label key={flag.id} className="flex items-start gap-3 cursor-pointer group">
@@ -143,14 +143,14 @@ export const RegexScreen: React.FC = () => {
                       type="checkbox"
                       checked={flags.includes(flag.id)}
                       onChange={() => toggleFlag(flag.id)}
-                      className="w-4 h-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500 mt-1"
+                      className="w-4 h-4 text-purple-600 border-gray-300 dark:border-gray-600 rounded focus:ring-purple-500 mt-1 bg-white dark:bg-gray-700"
                     />
                   </div>
                   <div>
-                    <div className="font-mono text-sm font-medium text-gray-900 group-hover:text-purple-700 transition-colors">
+                    <div className="font-mono text-sm font-medium text-gray-900 dark:text-white group-hover:text-purple-700 dark:group-hover:text-purple-400 transition-colors">
                       {flag.id} - {flag.label}
                     </div>
-                    <div className="text-xs text-gray-500">{flag.desc}</div>
+                    <div className="text-xs text-gray-500 dark:text-gray-400">{flag.desc}</div>
                   </div>
                 </label>
               ))}
@@ -161,34 +161,34 @@ export const RegexScreen: React.FC = () => {
         {/* Right Column: Test String & Results */}
         <div className="lg:col-span-2 flex flex-col gap-6">
           {/* Test String */}
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 flex-1 flex flex-col">
-            <label className="block text-sm font-medium text-gray-700 mb-2">{t('regex.text')}</label>
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 flex-1 flex flex-col">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{t('regex.text')}</label>
             <textarea
               value={text}
               onChange={(e) => setText(e.target.value)}
               placeholder={t('regex.textPlaceholder')}
-              className="flex-1 w-full h-40 p-4 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent font-mono text-sm resize-none"
+              className="flex-1 w-full h-40 p-4 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-400 focus:border-transparent font-mono text-sm text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 resize-none"
             />
           </div>
 
           {/* Results */}
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 min-h-[200px] flex flex-col">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 min-h-[200px] flex flex-col">
             <div className="flex items-center justify-between mb-4">
-              <label className="block text-sm font-medium text-gray-700">{t('regex.match')}</label>
-              {loading && <div className="flex items-center gap-2 text-purple-600"><Loader2 size={16} className="animate-spin" /><span className="text-xs font-medium">{t('common.loading')}</span></div>}
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">{t('regex.match')}</label>
+              {loading && <div className="flex items-center gap-2 text-purple-600 dark:text-purple-400"><Loader2 size={16} className="animate-spin" /><span className="text-xs font-medium">{t('common.loading')}</span></div>}
               {result && !loading && (
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300">
                   <CheckCircle2 size={12} />
                   {result.count} {t('regex.matches')}
                 </span>
               )}
             </div>
             
-            <div className="flex-1 bg-gray-50 border border-gray-200 rounded-lg p-4 overflow-auto max-h-[400px]">
+            <div className="flex-1 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg p-4 overflow-auto max-h-[400px]">
               {pattern && text ? (
                 renderHighlightedText()
               ) : (
-                <div className="text-gray-400 text-center py-8">
+                <div className="text-gray-400 dark:text-gray-500 text-center py-8">
                   {t('regex.enterPattern')}
                 </div>
               )}

@@ -1,11 +1,11 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { PDFCompress } from './PDFCompress';
-import { renderWithProviders } from '../../test-utils';
+import { PDFCompress } from '../../../pages/pdf/PDFCompress';
+import { renderWithProviders } from '../../../test-utils';
 
 // Mock ApiService
-vi.mock('../../services/api', () => ({
+vi.mock('../../../services/api', () => ({
   ApiService: {
     compressPDF: vi.fn(),
     getDownloadUrl: vi.fn((path) => path),
@@ -23,3 +23,4 @@ describe('PDFCompress', () => {
     expect(screen.getByText(/Select PDF file/i)).toBeInTheDocument();
   });
 });
+

@@ -1,6 +1,27 @@
 import axios from 'axios';
+import type {
+  VideoProcessingResponse,
+  PDFProcessingResponse,
+  ImageProcessingResponse,
+  RegexResponse,
+  UnitConversionResponse,
+} from '../types/api';
 
-const API_URL = 'http://localhost:8000/api/v1';
+// Re-export types for backwards compatibility
+export type {
+  VideoProcessingResponse,
+  PDFProcessingResponse,
+  ImageProcessingResponse,
+  RegexMatch,
+  RegexResponse,
+  UnitConversionResponse,
+} from '../types/api';
+
+// API URL from environment variable with fallback
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/v1';
+
+// Base URL for downloads (without /api/v1)
+const BASE_URL = API_URL.replace('/api/v1', '');
 
 const api = axios.create({
   baseURL: API_URL,
@@ -8,66 +29,6 @@ const api = axios.create({
   // Don't set Content-Type header here - let axios set it automatically
   // This is important for multipart/form-data (file uploads)
 });
-
-// API Types
-export interface VideoProcessingResponse {
-  success: boolean;
-  message: string;
-  filename: string;
-  download_url?: string;
-  original_size?: number;
-  processed_size?: number;
-  compression_ratio?: number;
-}
-
-export interface PDFProcessingResponse {
-  success: boolean;
-  message: string;
-  filename?: string;
-  download_url?: string;
-  filenames?: string[];
-  download_urls?: string[];
-  total_pages?: number;
-  original_size?: number;
-  processed_size?: number;
-}
-
-export interface ImageProcessingResponse {
-  success: boolean;
-  message: string;
-  filename: string;
-  download_url?: string;
-  original_size?: number;
-  processed_size?: number;
-  compression_ratio?: number;
-  dimensions?: { width: number; height: number };
-}
-
-export interface RegexMatch {
-  match: string;
-  start: number;
-  end: number;
-  groups: string[];
-  named_groups: Record<string, string>;
-}
-
-export interface RegexResponse {
-  success: boolean;
-  matches: RegexMatch[];
-  count: number;
-  error?: string;
-}
-
-export interface UnitConversionResponse {
-  success: boolean;
-  converted_value: number;
-  converted_unit: string;
-  original_value?: number;
-  original_unit?: string;
-  conversion_formula?: string;
-  message?: string;
-  error?: string;
-}
 
 export const ApiService = {
   // Video
@@ -159,5 +120,5 @@ export const ApiService = {
   },
   
   // Helper for download URL
-  getDownloadUrl: (path: string) => `http://localhost:8000${path}`
+  getDownloadUrl: (path: string) => `${BASE_URL}${path}`
 };

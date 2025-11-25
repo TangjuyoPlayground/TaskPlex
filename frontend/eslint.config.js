@@ -3,6 +3,7 @@ import globals from 'globals'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 import tseslint from 'typescript-eslint'
+import eslintConfigPrettier from 'eslint-config-prettier'
 
 export default tseslint.config(
   { ignores: ['dist', 'src-tauri/**'] },
@@ -25,4 +26,6 @@ export default tseslint.config(
       ],
     },
   },
+  // Prettier config must be last to override other formatting rules
+  eslintConfigPrettier,
 )

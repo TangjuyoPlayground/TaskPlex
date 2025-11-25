@@ -6,6 +6,8 @@ import { Layout } from './components/Layout';
 import { LoadingFallback } from './components/LoadingFallback';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { FavoritesProvider } from './contexts/FavoritesContext';
+import { ThemeProvider } from './contexts/ThemeContext';
+import { getAllModules } from './config/modules';
 
 // Helper function to create lazy components with better error handling
 const createLazyComponent = <T extends React.ComponentType<Record<string, unknown>>>(
@@ -34,13 +36,34 @@ const ImageScreen = createLazyComponent(() => import('./pages/ImageScreen'), 'Im
 const RegexScreen = createLazyComponent(() => import('./pages/RegexScreen'), 'RegexScreen');
 const UnitsScreen = createLazyComponent(() => import('./pages/UnitsScreen'), 'UnitsScreen');
 const SettingsScreen = createLazyComponent(() => import('./pages/SettingsScreen'), 'SettingsScreen');
+const PlaceholderScreen = createLazyComponent(() => import('./pages/PlaceholderScreen'), 'PlaceholderScreen');
 
 // PDF Module - lazy loaded (heavy dependencies like react-pdf)
-const PDFDashboard = createLazyComponent(() => import('./pages/pdf/PDFDashboard'), 'PDFDashboard');
 const PDFCompress = createLazyComponent(() => import('./pages/pdf/PDFCompress'), 'PDFCompress');
 const PDFMerge = createLazyComponent(() => import('./pages/pdf/PDFMerge'), 'PDFMerge');
 const PDFSplit = createLazyComponent(() => import('./pages/pdf/PDFSplit'), 'PDFSplit');
 const PDFReorganize = createLazyComponent(() => import('./pages/pdf/PDFReorganize'), 'PDFReorganize');
+
+// Map module IDs to their corresponding React components
+const componentMap: Record<string, React.LazyExoticComponent<React.ComponentType<Record<string, unknown>>>> = {
+  // Video
+  'video-compress': VideoScreen,
+  'video-convert': VideoScreen,
+  
+  // Image
+  'image-compress': ImageScreen,
+  'image-convert': ImageScreen,
+  
+  // PDF
+  'pdf-compress': PDFCompress,
+  'pdf-merge': PDFMerge,
+  'pdf-split': PDFSplit,
+  'pdf-reorganize': PDFReorganize,
+  
+  // Developer
+  'regex': RegexScreen,
+  'units': UnitsScreen,
+};
 
 // Create a client
 const queryClient = new QueryClient({
@@ -57,35 +80,41 @@ const queryClient = new QueryClient({
 });
 
 function App() {
+  // Get all modules and generate routes dynamically
+  const allModules = getAllModules();
+
   return (
     <ErrorBoundary>
       <QueryClientProvider client={queryClient}>
-        <FavoritesProvider>
-          <BrowserRouter>
-            <Suspense fallback={<LoadingFallback />}>
-              <Routes>
-                <Route path="/" element={<Layout />}>
-                  <Route index element={<HomeDashboard />} />
-                  <Route path="video" element={<VideoScreen />} />
-                  <Route path="image" element={<ImageScreen />} />
-                  
-                  {/* PDF Module Routes - Heavy dependencies loaded on demand */}
-                  <Route path="pdf">
-                    <Route index element={<PDFDashboard />} />
-                    <Route path="compress" element={<PDFCompress />} />
-                    <Route path="merge" element={<PDFMerge />} />
-                    <Route path="split" element={<PDFSplit />} />
-                    <Route path="reorganize" element={<PDFReorganize />} />
-                  </Route>
+        <ThemeProvider>
+          <FavoritesProvider>
+            <BrowserRouter>
+              <Suspense fallback={<LoadingFallback />}>
+                <Routes>
+                  <Route path="/" element={<Layout />}>
+                    <Route index element={<HomeDashboard />} />
+                    
+                    {/* Dynamically generate routes from module registry */}
+                    {allModules.map((module) => {
+                      // Get the component for this module (either implemented or placeholder)
+                      const Component = componentMap[module.id] || PlaceholderScreen;
+                      
+                      return (
+                        <Route 
+                          key={module.id} 
+                          path={module.path} 
+                          element={<Component />} 
+                        />
+                      );
+                    })}
 
-                  <Route path="regex" element={<RegexScreen />} />
-                  <Route path="units" element={<UnitsScreen />} />
-                  <Route path="settings" element={<SettingsScreen />} />
-                </Route>
-              </Routes>
-            </Suspense>
-          </BrowserRouter>
-        </FavoritesProvider>
+                    <Route path="settings" element={<SettingsScreen />} />
+                  </Route>
+                </Routes>
+              </Suspense>
+            </BrowserRouter>
+          </FavoritesProvider>
+        </ThemeProvider>
         {/* Devtools only in development */}
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>

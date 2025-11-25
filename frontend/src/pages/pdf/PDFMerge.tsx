@@ -32,16 +32,16 @@ export const PDFMerge: React.FC = () => {
   return (
     <div className="p-8 max-w-4xl mx-auto">
       <div className="text-center mb-10">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2 flex items-center justify-center gap-3">
-          <Merge className="text-red-600" size={32} />
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2 flex items-center justify-center gap-3">
+          <Merge className="text-red-600 dark:text-red-400" size={32} />
           {t('pdf.merge.title')}
         </h1>
-        <p className="text-gray-600">{t('pdf.merge.description')}</p>
+        <p className="text-gray-600 dark:text-gray-400">{t('pdf.merge.description')}</p>
       </div>
 
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
+      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-8">
         {files.length === 0 ? (
-          <div className="border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:bg-gray-50 transition-colors relative group cursor-pointer">
+          <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl p-12 text-center hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors relative group cursor-pointer">
             <input 
               type="file" 
               accept=".pdf" 
@@ -49,34 +49,34 @@ export const PDFMerge: React.FC = () => {
               onChange={handleFileChange} 
               className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" 
             />
-            <div className="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-200">
-              <Upload className="w-10 h-10 text-red-600" />
+            <div className="w-20 h-20 bg-red-50 dark:bg-red-900/30 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-200">
+              <Upload className="w-10 h-10 text-red-600 dark:text-red-400" />
             </div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">{t('pdf.merge.selectFiles')}</h3>
-            <p className="text-gray-500">{t('pdf.merge.dropFiles')}</p>
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{t('pdf.merge.selectFiles')}</h3>
+            <p className="text-gray-500 dark:text-gray-400">{t('pdf.merge.dropFiles')}</p>
           </div>
         ) : (
           <div className="space-y-8">
             <div className="grid gap-3">
               {files.map((file, index) => (
-                <div key={index} className="flex items-center gap-4 p-3 bg-gray-50 rounded-xl border border-gray-200 animate-in fade-in slide-in-from-left-4" style={{ animationDelay: `${index * 50}ms` }}>
-                  <div className="p-2 bg-white rounded-lg border border-gray-100 shadow-sm">
-                    <FileText className="w-6 h-6 text-red-600" />
+                <div key={index} className="flex items-center gap-4 p-3 bg-gray-50 dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600 animate-in fade-in slide-in-from-left-4" style={{ animationDelay: `${index * 50}ms` }}>
+                  <div className="p-2 bg-white dark:bg-gray-600 rounded-lg border border-gray-100 dark:border-gray-500 shadow-sm">
+                    <FileText className="w-6 h-6 text-red-600 dark:text-red-400" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="font-medium text-gray-900 truncate">{file.name}</p>
-                    <p className="text-xs text-gray-500">{(file.size / 1024).toFixed(0)} KB</p>
+                    <p className="font-medium text-gray-900 dark:text-white truncate">{file.name}</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">{(file.size / 1024).toFixed(0)} KB</p>
                   </div>
                   <button 
                     onClick={() => removeFile(index)}
-                    className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                    className="p-2 text-gray-400 dark:text-gray-500 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-lg transition-colors"
                   >
                     <X size={20} />
                   </button>
                 </div>
               ))}
               
-              <div className="relative border-2 border-dashed border-gray-300 rounded-xl p-4 text-center hover:bg-gray-50 transition-colors cursor-pointer flex items-center justify-center gap-2 text-gray-500 hover:text-red-600 hover:border-red-200">
+              <div className="relative border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl p-4 text-center hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors cursor-pointer flex items-center justify-center gap-2 text-gray-500 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 hover:border-red-200 dark:hover:border-red-800">
                 <input 
                   type="file" 
                   accept=".pdf" 
@@ -90,7 +90,7 @@ export const PDFMerge: React.FC = () => {
             </div>
 
             {errorMessage && (
-              <div className="p-4 bg-red-50 text-red-700 rounded-lg border border-red-100">
+              <div className="p-4 bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-lg border border-red-100 dark:border-red-800">
                 {errorMessage}
               </div>
             )}
@@ -99,17 +99,17 @@ export const PDFMerge: React.FC = () => {
               <button
                 onClick={handleMerge}
                 disabled={loading || files.length < 2}
-                className="w-full py-4 bg-red-600 text-white rounded-xl font-bold text-lg hover:bg-red-700 transition-all shadow-lg hover:shadow-red-200 disabled:bg-gray-300 disabled:cursor-not-allowed disabled:shadow-none flex items-center justify-center gap-2"
+                className="w-full py-4 bg-red-600 text-white rounded-xl font-bold text-lg hover:bg-red-700 transition-all shadow-lg hover:shadow-red-200 dark:hover:shadow-red-900/30 disabled:bg-gray-300 dark:disabled:bg-gray-600 disabled:cursor-not-allowed disabled:shadow-none flex items-center justify-center gap-2"
               >
                 {loading ? t('pdf.merge.merging') : t('pdf.merge.mergeBtn')}
               </button>
             ) : (
-              <div className="bg-red-50 border border-red-100 rounded-xl p-6 text-center animate-in fade-in slide-in-from-bottom-4">
-                <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Download className="w-8 h-8 text-red-600" />
+              <div className="bg-red-50 dark:bg-red-900/30 border border-red-100 dark:border-red-800 rounded-xl p-6 text-center animate-in fade-in slide-in-from-bottom-4">
+                <div className="w-16 h-16 bg-red-100 dark:bg-red-800/50 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Download className="w-8 h-8 text-red-600 dark:text-red-400" />
                 </div>
-                <h3 className="text-xl font-bold text-red-900 mb-2">PDFs Merged!</h3>
-                <p className="text-red-700 mb-6">Your files have been combined into one document.</p>
+                <h3 className="text-xl font-bold text-red-900 dark:text-red-200 mb-2">PDFs Merged!</h3>
+                <p className="text-red-700 dark:text-red-300 mb-6">Your files have been combined into one document.</p>
                 
                 {result.download_url && (
                   <a

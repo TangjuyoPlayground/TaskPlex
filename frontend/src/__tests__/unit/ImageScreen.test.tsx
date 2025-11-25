@@ -1,11 +1,11 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { ImageScreen } from './ImageScreen';
-import { renderWithProviders } from '../test-utils';
+import { ImageScreen } from '../../pages/ImageScreen';
+import { renderWithProviders } from '../../test-utils';
 
 // Mock ApiService
-vi.mock('../services/api', () => ({
+vi.mock('../../services/api', () => ({
   ApiService: {
     compressImage: vi.fn(),
     convertImage: vi.fn(),
@@ -29,3 +29,4 @@ describe('ImageScreen', () => {
     expect(screen.getByText(/Operation/i)).toBeInTheDocument();
   });
 });
+

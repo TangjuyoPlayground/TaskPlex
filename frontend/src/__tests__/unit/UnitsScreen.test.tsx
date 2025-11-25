@@ -1,12 +1,12 @@
 import React from 'react';
 import { screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { UnitsScreen } from './UnitsScreen';
-import { ApiService } from '../services/api';
-import { renderWithProviders } from '../test-utils';
+import { UnitsScreen } from '../../pages/UnitsScreen';
+import { ApiService } from '../../services/api';
+import { renderWithProviders } from '../../test-utils';
 
 // Mock ApiService
-vi.mock('../services/api', () => ({
+vi.mock('../../services/api', () => ({
   ApiService: {
     convertUnits: vi.fn(),
   },
@@ -69,3 +69,4 @@ describe('UnitsScreen', () => {
     expect(selects[1]).toHaveValue('meter');
   });
 });
+
