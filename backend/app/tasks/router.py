@@ -2,11 +2,11 @@
 Task API endpoints for SSE streaming and task management
 """
 import json
+
 from fastapi import APIRouter, HTTPException
 from sse_starlette.sse import EventSourceResponse
 
 from .store import task_store
-
 
 router = APIRouter(prefix="/tasks", tags=["Tasks"])
 

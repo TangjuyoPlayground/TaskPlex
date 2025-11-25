@@ -4,10 +4,10 @@ In production, this could be replaced with Redis or a database
 """
 import asyncio
 from datetime import datetime, timedelta
-from typing import AsyncGenerator, Dict, Optional
 import threading
+from typing import AsyncGenerator, Dict, Optional
 
-from .models import Task, TaskStatus, TaskProgress, TaskResult
+from .models import Task, TaskProgress, TaskResult, TaskStatus
 
 
 class TaskStore:

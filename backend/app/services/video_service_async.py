@@ -3,11 +3,9 @@ Async video processing service with progress tracking
 Uses FFmpeg with progress parsing for real-time updates
 """
 import asyncio
-import os
-import re
-import subprocess
 from pathlib import Path
-from typing import Callable, Optional
+import subprocess
+from typing import Optional
 
 from app.config import VIDEO_COMPRESSION_PRESETS
 from app.tasks.models import TaskResult

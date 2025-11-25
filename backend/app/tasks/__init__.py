@@ -1,9 +1,9 @@
 """
 Task management module for long-running background operations
 """
-from .store import TaskStore, task_store
-from .models import Task, TaskStatus, TaskProgress, TaskResult
+from .models import Task, TaskProgress, TaskResult, TaskStatus
 from .router import router as tasks_router
+from .store import TaskStore, task_store
 
 __all__ = [
     "TaskStore",
