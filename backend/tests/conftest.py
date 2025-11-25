@@ -1,40 +1,30 @@
 from pathlib import Path
-import shutil
 import sys
 
 from fastapi.testclient import TestClient
 import pytest
 
-# Ajouter le dossier backend au path pour les imports
+# Add backend folder to path for imports
 sys.path.append(str(Path(__file__).parent.parent))
 
 from app.config import TEMP_DIR
 from app.main import app
 
-# Créer un dossier temporaire pour les tests
+# Assets directory for test fixtures
 TEST_ASSETS_DIR = Path(__file__).parent / "assets"
-TEST_TEMP_DIR = Path(__file__).parent / "temp"
 
 
 @pytest.fixture(scope="session", autouse=True)
 def setup_test_env():
-    """Setup test environment: create temp dirs"""
+    """Setup test environment: create necessary directories"""
     TEST_ASSETS_DIR.mkdir(exist_ok=True)
-    TEST_TEMP_DIR.mkdir(exist_ok=True)
 
-    # S'assurer que le TEMP_DIR de l'app existe aussi
+    # Ensure the app's TEMP_DIR exists
     TEMP_DIR.mkdir(exist_ok=True, parents=True)
 
     yield
 
-    # Cleanup après tous les tests
-    # Vérifier que le répertoire existe avant de le supprimer (peut être supprimé par les tests en parallèle)
-    try:
-        if TEST_TEMP_DIR.exists():
-            shutil.rmtree(TEST_TEMP_DIR)
-    except (FileNotFoundError, OSError):
-        # Le répertoire peut avoir été supprimé par un autre worker en parallèle
-        pass
+    # No cleanup needed - pytest's tmp_path handles temporary files automatically
 
 
 @pytest.fixture
@@ -44,33 +34,29 @@ def client():
 
 
 @pytest.fixture
-def sample_image():
-    """Create a dummy image for testing"""
+def sample_image(tmp_path):
+    """Create a dummy image for testing
+
+    Uses pytest's tmp_path fixture for isolation in parallel tests.
+    """
     from PIL import Image
 
-    img_path = TEST_TEMP_DIR / "test_image.png"
+    img_path = tmp_path / "test_image.png"
     img = Image.new("RGB", (100, 100), color="red")
     img.save(img_path)
     return img_path
 
 
 @pytest.fixture
-def sample_pdf():
-    """Create a dummy PDF for testing"""
-    import os
+def sample_pdf(tmp_path):
+    """Create a dummy PDF for testing
 
+    Uses pytest's tmp_path fixture which provides a unique temporary directory
+    per test, avoiding race conditions in parallel test execution.
+    """
     from reportlab.pdfgen import canvas
 
-    # Ensure temp directory exists
-    TEST_TEMP_DIR.mkdir(exist_ok=True, parents=True)
-
-    # Use unique filename for parallel execution (include process ID)
-    pid = os.getpid()
-    pdf_path = TEST_TEMP_DIR / f"test_file_{pid}.pdf"
-
-    # Remove existing file if it exists (for parallel test execution)
-    if pdf_path.exists():
-        pdf_path.unlink()
+    pdf_path = tmp_path / "test_file.pdf"
 
     c = canvas.Canvas(str(pdf_path))
     c.drawString(100, 750, "Hello World")
