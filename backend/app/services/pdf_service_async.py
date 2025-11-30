@@ -10,6 +10,7 @@ from typing import Optional
 try:
     from pdf2image import convert_from_path
     import pytesseract
+
     OCR_AVAILABLE = True
 except ImportError:
     OCR_AVAILABLE = False
@@ -31,7 +32,9 @@ async def extract_text_with_ocr_async(
     Progress is tracked by processing pages one by one
     """
     if not OCR_AVAILABLE:
-        task_store.fail_task(task_id, "OCR dependencies not available. Please install pytesseract and pdf2image.")
+        task_store.fail_task(
+            task_id, "OCR dependencies not available. Please install pytesseract and pdf2image."
+        )
         return TaskResult(
             success=False,
             error="OCR dependencies not available. Please install: pip install pytesseract pdf2image",
@@ -42,7 +45,9 @@ async def extract_text_with_ocr_async(
         try:
             pytesseract.get_tesseract_version()
         except Exception as e:
-            error_msg = f"Tesseract OCR not found. Please install Tesseract on your system. Error: {str(e)}"
+            error_msg = (
+                f"Tesseract OCR not found. Please install Tesseract on your system. Error: {str(e)}"
+            )
             task_store.fail_task(task_id, error_msg)
             return TaskResult(success=False, error=error_msg)
 
@@ -65,7 +70,9 @@ async def extract_text_with_ocr_async(
             return TaskResult(success=False, error=error_msg)
 
         total_pages = len(images)
-        task_store.update_progress(task_id, 10, f"Processing {total_pages} page(s)...", "processing")
+        task_store.update_progress(
+            task_id, 10, f"Processing {total_pages} page(s)...", "processing"
+        )
 
         # Extract text from each page using OCR
         extracted_text = []
@@ -85,7 +92,7 @@ async def extract_text_with_ocr_async(
                 text = await loop.run_in_executor(
                     None, pytesseract.image_to_string, image, language
                 )
-                
+
                 if text.strip():
                     extracted_text.append(f"--- Page {i + 1} ---\n{text}\n")
             except Exception as e:
@@ -135,4 +142,3 @@ async def extract_text_with_ocr_async(
         error_msg = f"Error performing OCR: {str(e)}"
         task_store.fail_task(task_id, error_msg)
         return TaskResult(success=False, error=error_msg)
-

@@ -135,20 +135,20 @@ def test_split_pdf_invalid_pages(client, sample_pdf):
 def test_ocr_pdf(client, sample_pdf):
     """Test OCR text extraction from PDF"""
     import pytest
-    
+
     # Check if OCR dependencies are available
     try:
-        import pytesseract
         from pdf2image import convert_from_path
+        import pytesseract
     except ImportError:
         pytest.skip("OCR dependencies (pytesseract, pdf2image) not installed")
-    
+
     # Check if Tesseract is installed
     try:
         pytesseract.get_tesseract_version()
     except Exception:
         pytest.skip("Tesseract OCR not installed on system")
-    
+
     with open(sample_pdf, "rb") as f:
         response = client.post(
             "/api/v1/pdf/ocr",
@@ -159,7 +159,7 @@ def test_ocr_pdf(client, sample_pdf):
     # OCR might succeed or fail depending on PDF content and Tesseract installation
     # Accept both success and failure (500 if dependencies missing)
     assert response.status_code in [200, 500]
-    
+
     if response.status_code == 200:
         data = response.json()
         assert data["success"] is True

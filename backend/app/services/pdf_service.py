@@ -11,6 +11,7 @@ from pypdf import PdfReader, PdfWriter
 try:
     from pdf2image import convert_from_path
     import pytesseract
+
     OCR_AVAILABLE = True
 except ImportError:
     OCR_AVAILABLE = False
@@ -304,7 +305,7 @@ def extract_text_with_ocr(
             success=False,
             message="OCR dependencies not available. Please install: pip install pytesseract pdf2image",
         )
-    
+
     try:
         # Check if Tesseract is installed
         try:
@@ -314,7 +315,7 @@ def extract_text_with_ocr(
                 success=False,
                 message=f"Tesseract OCR not found. Please install Tesseract on your system. Error: {str(e)}",
             )
-        
+
         # Convert PDF pages to images
         try:
             images = convert_from_path(str(input_path), dpi=300)
