@@ -69,6 +69,12 @@ export interface UnitConversionResponse extends ApiResponse {
   error?: string;
 }
 
+// QR Code
+export interface QRCodeResponse extends ApiResponse {
+  qr_code_url?: string;
+  filename?: string;
+}
+
 // Generic file processing result (useful for UI components)
 export interface ProcessingResult {
   success: boolean;

@@ -11,7 +11,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 import uvicorn
 
-from app.api import image, pdf, regex, units, video
+from app.api import image, pdf, qrcode, regex, units, video
 from app.config import (
     API_DESCRIPTION,
     API_TITLE,
@@ -115,6 +115,7 @@ async def health_check():
             "pdf": "/api/v1/pdf",
             "regex": "/api/v1/regex",
             "units": "/api/v1/units",
+            "qrcode": "/api/v1/qrcode",
         },
     }
 
@@ -125,6 +126,7 @@ app.include_router(image.router, prefix="/api/v1")
 app.include_router(pdf.router, prefix="/api/v1")
 app.include_router(regex.router, prefix="/api/v1")
 app.include_router(units.router, prefix="/api/v1")
+app.include_router(qrcode.router, prefix="/api/v1")
 app.include_router(tasks_router, prefix="/api/v1")
 
 

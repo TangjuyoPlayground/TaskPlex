@@ -355,6 +355,36 @@ export const unitsHandlers = [
 ];
 
 // ============================================
+// QR CODE HANDLERS
+// ============================================
+export const qrcodeHandlers = [
+  http.post(`${API_PATTERN}/qrcode/generate`, async ({ request }) => {
+    await delay(100);
+    
+    const body = await request.json() as { data: string; size?: number; border?: number; error_correction?: string };
+    const { data } = body;
+
+    if (!data || data.trim().length === 0) {
+      return errorResponse('Data is required');
+    }
+
+    if (data.length > 2953) {
+      return errorResponse('Data too long (max 2953 characters)');
+    }
+
+    // Generate a mock filename
+    const filename = `qrcode_${Date.now()}.png`;
+
+    return HttpResponse.json({
+      success: true,
+      message: 'QR code generated successfully',
+      qr_code_url: `/api/v1/download/${filename}`,
+      filename,
+    });
+  }),
+];
+
+// ============================================
 // DOWNLOAD HANDLER
 // ============================================
 export const downloadHandlers = [
@@ -409,6 +439,7 @@ export const handlers = [
   ...pdfHandlers,
   ...regexHandlers,
   ...unitsHandlers,
+  ...qrcodeHandlers,
   ...downloadHandlers,
 ];
 
