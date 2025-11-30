@@ -47,9 +47,10 @@ class TaskResult:
     compression_ratio: Optional[float] = None
     message: Optional[str] = None
     error: Optional[str] = None
+    total_pages: Optional[int] = None  # For PDF operations
 
     def to_dict(self) -> dict:
-        return {
+        result = {
             "success": self.success,
             "download_url": self.download_url,
             "filename": self.filename,
@@ -59,6 +60,10 @@ class TaskResult:
             "message": self.message,
             "error": self.error,
         }
+        # Add optional fields if they exist
+        if self.total_pages is not None:
+            result["total_pages"] = self.total_pages
+        return result
 
 
 @dataclass

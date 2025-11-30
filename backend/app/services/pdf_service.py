@@ -8,6 +8,14 @@ from typing import List, Optional
 import fitz  # PyMuPDF
 from pypdf import PdfReader, PdfWriter
 
+try:
+    from pdf2image import convert_from_path
+    import pytesseract
+
+    OCR_AVAILABLE = True
+except ImportError:
+    OCR_AVAILABLE = False
+
 from app.models.pdf import PDFInfoResponse, PDFProcessingResponse
 from app.utils.file_handler import get_file_size
 
@@ -273,5 +281,96 @@ def reorganize_pdf(
         return PDFProcessingResponse(
             success=False,
             message=f"Error reorganizing PDF: {str(e)}",
+            filename=output_path.name if output_path else None,
+        )
+
+
+def extract_text_with_ocr(
+    input_path: Path, output_path: Path, language: str = "eng"
+) -> PDFProcessingResponse:
+    """
+    Extract text from PDF using OCR (Optical Character Recognition)
+    Useful for scanned PDFs or PDFs with images
+
+    Args:
+        input_path: Path to input PDF
+        output_path: Path to save text file
+        language: Tesseract language code (default: "eng" for English)
+
+    Returns:
+        PDFProcessingResponse with OCR results
+    """
+    if not OCR_AVAILABLE:
+        return PDFProcessingResponse(
+            success=False,
+            message="OCR dependencies not available. Please install: pip install pytesseract pdf2image",
+        )
+
+    try:
+        # Check if Tesseract is installed
+        try:
+            pytesseract.get_tesseract_version()
+        except Exception as e:
+            return PDFProcessingResponse(
+                success=False,
+                message=f"Tesseract OCR not found. Please install Tesseract on your system. Error: {str(e)}",
+            )
+
+        # Convert PDF pages to images
+        try:
+            images = convert_from_path(str(input_path), dpi=300)
+        except Exception as e:
+            error_msg = str(e)
+            if "poppler" in error_msg.lower() or "pdftoppm" in error_msg.lower():
+                return PDFProcessingResponse(
+                    success=False,
+                    message="Poppler not installed. Please install poppler-utils (Linux) or poppler (macOS/Windows).",
+                )
+            raise
+
+        if not images:
+            return PDFProcessingResponse(
+                success=False,
+                message="Could not convert PDF pages to images",
+            )
+
+        # Extract text from each page using OCR
+        extracted_text = []
+        for i, image in enumerate(images):
+            try:
+                text = pytesseract.image_to_string(image, lang=language)
+                if text.strip():
+                    extracted_text.append(f"--- Page {i + 1} ---\n{text}\n")
+            except Exception as e:
+                # If OCR fails for a page, continue with other pages
+                extracted_text.append(f"--- Page {i + 1} ---\n[OCR Error: {str(e)}]\n")
+
+        if not extracted_text:
+            return PDFProcessingResponse(
+                success=False,
+                message="No text could be extracted from the PDF",
+            )
+
+        # Write extracted text to file
+        full_text = "\n".join(extracted_text)
+        with open(output_path, "w", encoding="utf-8") as f:
+            f.write(full_text)
+
+        # Get file size
+        processed_size = get_file_size(output_path)
+
+        return PDFProcessingResponse(
+            success=True,
+            message=f"Text extracted from {len(images)} pages",
+            filename=output_path.name,
+            download_url=f"/api/v1/download/{output_path.name}",
+            total_pages=len(images),
+            processed_size=processed_size,
+        )
+
+    except Exception as e:
+        return PDFProcessingResponse(
+            success=False,
+            message=f"Error performing OCR: {str(e)}",
             filename=output_path.name if output_path else None,
         )

@@ -492,8 +492,8 @@ export const MODULES: ModuleDefinition[] = [
     labelKey: 'modules.pdf.ocr.title',
     descriptionKey: 'modules.pdf.ocr.description',
     category: 'document',
-    status: 'placeholder',
-    color: 'text-red-500',
+    status: 'implemented',
+    color: 'text-red-600',
   },
 
   // ============================================

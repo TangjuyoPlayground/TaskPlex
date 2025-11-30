@@ -34,3 +34,11 @@ export const useReorganizePDF = () => {
   });
 };
 
+export const useOCRPDF = () => {
+  return useMutation<PDFProcessingResponse, Error, { file: File; language?: string }>({
+    mutationFn: async ({ file, language = 'eng' }) => {
+      return ApiService.extractTextOCR(file, language);
+    },
+  });
+};
+

@@ -1,7 +1,8 @@
-import uvicorn
+import multiprocessing
 import os
 import sys
-import multiprocessing
+
+import uvicorn
 
 # Ajout du répertoire courant au path pour que les imports 'app' fonctionnent
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))

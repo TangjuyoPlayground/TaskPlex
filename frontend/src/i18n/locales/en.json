@@ -187,6 +187,19 @@
       "organizeBtn": "Organize PDF",
       "downloadResult": "Download Result"
     },
+    "ocr": {
+      "title": "OCR",
+      "description": "Extract text from scanned PDFs",
+      "selectFile": "Select PDF file",
+      "dropFile": "or drop PDF here",
+      "change": "Change",
+      "language": "Language",
+      "languageHint": "Select the language of the text in your PDF for better OCR accuracy",
+      "extracting": "Extracting text...",
+      "extractBtn": "Extract Text",
+      "extractedFrom": "Text extracted from {{count}} page(s)",
+      "downloadResult": "Download Text File"
+    },
     "tools": {
       "compress": "Compress PDF",
       "compressDesc": "Reduce file size while optimizing for maximal PDF quality.",
@@ -490,7 +503,7 @@
       },
       "ocr": {
         "title": "OCR",
-        "description": "Extract text from scanned PDFs"
+        "description": "Extract text from scanned PDFs using OCR"
       }
     },
     "dev": {

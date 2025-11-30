@@ -104,6 +104,22 @@ export const ApiService = {
     return response.data;
   },
 
+  extractTextOCR: async (file: File, language: string = 'eng') => {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('language', language);
+    const response = await api.post<PDFProcessingResponse>('/pdf/ocr', formData);
+    return response.data;
+  },
+
+  extractTextOCRAsync: async (file: File, language: string = 'eng', signal?: AbortSignal) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('language', language);
+    const response = await api.post<TaskResponse>('/pdf/ocr/async', formData, { signal });
+    return response.data;
+  },
+
   // Image
   compressImage: async (file: File, quality: string) => {
     const formData = new FormData();

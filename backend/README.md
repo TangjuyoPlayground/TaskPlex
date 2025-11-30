@@ -6,7 +6,7 @@ A comprehensive REST API for file processing and utility operations. Built with 
 
 - 🎥 **Video Processing**: Compress and convert videos between formats (MP4, AVI, MOV, MKV, FLV, WMV)
 - 🖼️ **Image Processing**: Compress and convert images between formats (JPG, PNG, WEBP, GIF, BMP)
-- 📄 **PDF Operations**: Merge, compress, split, and reorganize PDF files
+- 📄 **PDF Operations**: Merge, compress, split, reorganize, and OCR (text extraction from scanned PDFs)
 - 🔍 **Regex Validation**: Test regex patterns against multiple strings
 - 📏 **Unit Conversion**: Convert between various scientific units (length, mass, temperature, etc.)
 
@@ -49,8 +49,10 @@ AnyTools/
 
 ### Prerequisites
 
-- Python 3.9+
+- Python 3.12+
 - FFmpeg (for video processing)
+- Tesseract OCR (for PDF OCR feature)
+- Poppler (for PDF to image conversion)
 
 #### Installing FFmpeg
 
@@ -67,6 +69,39 @@ brew install ffmpeg
 
 **Windows:**
 Download from [ffmpeg.org](https://ffmpeg.org/download.html) and add to PATH.
+
+#### Installing Tesseract OCR (for PDF OCR)
+
+**Linux (Ubuntu/Debian):**
+```bash
+sudo apt update
+sudo apt install tesseract-ocr tesseract-ocr-eng tesseract-ocr-fra tesseract-ocr-spa
+# For additional languages, install: tesseract-ocr-<lang-code>
+```
+
+**macOS:**
+```bash
+brew install tesseract
+brew install tesseract-lang  # For additional languages
+```
+
+**Windows:**
+Download installer from [GitHub](https://github.com/UB-Mannheim/tesseract/wiki) and add to PATH.
+
+#### Installing Poppler (for PDF to image conversion)
+
+**Linux (Ubuntu/Debian):**
+```bash
+sudo apt install poppler-utils
+```
+
+**macOS:**
+```bash
+brew install poppler
+```
+
+**Windows:**
+Download from [poppler-windows](https://github.com/oschwartz10612/poppler-windows/releases) and add to PATH.
 
 ### Setup
 
@@ -200,6 +235,19 @@ Content-Type: multipart/form-data
 file: <pdf_file>
 page_order: 3,1,2,4 (new page order)
 ```
+
+#### Extract Text with OCR
+```http
+POST /api/v1/pdf/ocr
+Content-Type: multipart/form-data
+
+file: <pdf_file>
+language: eng (optional, default: "eng")
+```
+
+**Supported languages:** eng, fra, spa, deu, ita, por, rus, chi_sim, chi_tra, jpn, kor, ara, and more.
+
+**Note:** Requires Tesseract OCR and Poppler to be installed on the system.
 
 ### Regex Validation
 
