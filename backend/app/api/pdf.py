@@ -4,6 +4,7 @@ PDF processing API endpoints
 
 import asyncio
 import shutil
+from pathlib import Path
 from typing import List, Optional
 
 from fastapi import APIRouter, BackgroundTasks, File, Form, HTTPException, UploadFile

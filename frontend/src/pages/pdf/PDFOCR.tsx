@@ -163,7 +163,7 @@ export const PDFOCR: React.FC = () => {
             {/* Error Message */}
             {isError && error && (
               <div className="p-4 bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-lg border border-red-100 dark:border-red-800">
-                {error instanceof Error ? error.message : String(error)}
+                {error}
               </div>
             )}
 
