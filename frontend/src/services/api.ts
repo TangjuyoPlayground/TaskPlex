@@ -5,6 +5,7 @@ import type {
   ImageProcessingResponse,
   RegexResponse,
   UnitConversionResponse,
+  QRCodeResponse,
 } from '../types/api';
 
 // Re-export types for backwards compatibility
@@ -15,6 +16,7 @@ export type {
   RegexMatch,
   RegexResponse,
   UnitConversionResponse,
+  QRCodeResponse,
 } from '../types/api';
 
 // API URL from environment variable with fallback
@@ -154,6 +156,17 @@ export const ApiService = {
       value,
       from_unit: fromUnit,
       to_unit: toUnit
+    });
+    return response.data;
+  },
+
+  // QR Code
+  generateQRCode: async (data: string, size?: number, border?: number, errorCorrection?: string) => {
+    const response = await api.post<QRCodeResponse>('/qrcode/generate', {
+      data,
+      size,
+      border,
+      error_correction: errorCorrection
     });
     return response.data;
   },

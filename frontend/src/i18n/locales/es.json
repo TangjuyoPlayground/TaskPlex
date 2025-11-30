@@ -282,6 +282,31 @@
       "knot": "nudo"
     }
   },
+  "qrcode": {
+    "title": "Generador de Código QR",
+    "description": "Generar códigos QR a partir de texto, URL o cualquier dato",
+    "data": "Datos a codificar",
+    "dataPlaceholder": "Ingrese texto, URL o cualquier dato para codificar...",
+    "size": "Tamaño de caja",
+    "border": "Borde",
+    "errorCorrection": {
+      "title": "Nivel de corrección de errores",
+      "low": "Bajo (L)",
+      "lowDesc": "~7% de corrección de errores",
+      "medium": "Medio (M)",
+      "mediumDesc": "~15% de corrección de errores (recomendado)",
+      "quartile": "Cuartil (Q)",
+      "quartileDesc": "~25% de corrección de errores",
+      "high": "Alto (H)",
+      "highDesc": "~30% de corrección de errores"
+    },
+    "generate": "Generar código QR",
+    "generating": "Generando...",
+    "download": "Descargar código QR",
+    "preview": "Vista previa",
+    "noPreview": "Ingrese datos y haga clic en Generar para ver el código QR",
+    "characters": "caracteres"
+  },
   "categories": {
     "all": "Todas las herramientas",
     "media": "Medios",

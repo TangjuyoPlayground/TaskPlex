@@ -26,11 +26,9 @@ echo "⬆️  Upgrading pip, setuptools, and wheel..."
 python -m pip install --upgrade pip setuptools wheel --quiet
 
 # Check if dependencies are installed
-if ! python -c "import fastapi" 2>/dev/null; then
-    echo "📦 Installing dependencies..."
-    pip install -r requirements.txt
-    echo "✅ Dependencies installed"
-fi
+echo "📦 Installing dependencies..."
+pip install -r requirements.txt
+echo "✅ Dependencies installed"
 
 # Check if FFmpeg is installed
 if ! command -v ffmpeg &> /dev/null; then

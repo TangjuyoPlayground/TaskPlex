@@ -37,6 +37,7 @@ const VideoScreen = createLazyComponent(() => import('./pages/VideoScreen'), 'Vi
 const ImageScreen = createLazyComponent(() => import('./pages/ImageScreen'), 'ImageScreen');
 const RegexScreen = createLazyComponent(() => import('./pages/RegexScreen'), 'RegexScreen');
 const UnitsScreen = createLazyComponent(() => import('./pages/UnitsScreen'), 'UnitsScreen');
+const QRCodeScreen = createLazyComponent(() => import('./pages/QRCodeScreen'), 'QRCodeScreen');
 const SettingsScreen = createLazyComponent(() => import('./pages/SettingsScreen'), 'SettingsScreen');
 const PlaceholderScreen = createLazyComponent(() => import('./pages/PlaceholderScreen'), 'PlaceholderScreen');
 
@@ -67,6 +68,7 @@ const componentMap: Record<string, React.LazyExoticComponent<React.ComponentType
   // Developer
   'regex': RegexScreen,
   'units': UnitsScreen,
+  'qr-generator': QRCodeScreen,
 };
 
 // Create a client

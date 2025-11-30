@@ -282,6 +282,31 @@
       "knot": "knot"
     }
   },
+  "qrcode": {
+    "title": "QR Code Generator",
+    "description": "Generate QR codes from text, URLs, or any data",
+    "data": "Data to Encode",
+    "dataPlaceholder": "Enter text, URL, or any data to encode...",
+    "size": "Box Size",
+    "border": "Border",
+    "errorCorrection": {
+      "title": "Error Correction Level",
+      "low": "Low (L)",
+      "lowDesc": "~7% error correction",
+      "medium": "Medium (M)",
+      "mediumDesc": "~15% error correction (recommended)",
+      "quartile": "Quartile (Q)",
+      "quartileDesc": "~25% error correction",
+      "high": "High (H)",
+      "highDesc": "~30% error correction"
+    },
+    "generate": "Generate QR Code",
+    "generating": "Generating...",
+    "download": "Download QR Code",
+    "preview": "Preview",
+    "noPreview": "Enter data and click Generate to see QR code",
+    "characters": "characters"
+  },
   "categories": {
     "all": "All Tools",
     "media": "Media",

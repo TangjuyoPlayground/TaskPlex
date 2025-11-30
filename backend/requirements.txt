@@ -19,6 +19,9 @@ ffmpeg-python>=0.2.0
 # Unit conversion
 pint>=0.23
 
+# QR Code generation
+qrcode[pil]>=8.0
+
 # Environment variables
 python-dotenv>=1.0.0
 
