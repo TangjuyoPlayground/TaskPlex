@@ -187,6 +187,19 @@
       "organizeBtn": "Organizar PDF",
       "downloadResult": "Descargar resultado"
     },
+    "ocr": {
+      "title": "OCR",
+      "description": "Extraer texto de PDF escaneados",
+      "selectFile": "Seleccionar archivo PDF",
+      "dropFile": "o arrastra el PDF aquí",
+      "change": "Cambiar",
+      "language": "Idioma",
+      "languageHint": "Selecciona el idioma del texto en tu PDF para una mejor precisión OCR",
+      "extracting": "Extrayendo texto...",
+      "extractBtn": "Extraer texto",
+      "extractedFrom": "Texto extraído de {{count}} página(s)",
+      "downloadResult": "Descargar archivo de texto"
+    },
     "tools": {
       "compress": "Comprimir PDF",
       "compressDesc": "Reduce el tamaño del archivo optimizando para máxima calidad PDF.",
@@ -490,7 +503,7 @@
       },
       "ocr": {
         "title": "OCR",
-        "description": "Extraer texto de PDF escaneados"
+        "description": "Extraer texto de PDF escaneados usando OCR"
       }
     },
     "dev": {

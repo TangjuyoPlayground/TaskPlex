@@ -2,20 +2,24 @@
 PDF processing API endpoints
 """
 
+import asyncio
 import shutil
 from typing import List, Optional
 
-from fastapi import APIRouter, File, Form, HTTPException, UploadFile
+from fastapi import APIRouter, BackgroundTasks, File, Form, HTTPException, UploadFile
 
 from app.config import TEMP_DIR
 from app.models.pdf import PDFInfoResponse, PDFProcessingResponse
 from app.services.pdf_service import (
     compress_pdf,
+    extract_text_with_ocr,
     get_pdf_info,
     merge_pdfs,
     reorganize_pdf,
     split_pdf,
 )
+from app.services.pdf_service_async import extract_text_with_ocr_async
+from app.tasks import task_store
 from app.utils.file_handler import (
     delete_file,
     generate_unique_filename,
@@ -217,3 +221,95 @@ async def reorganize_pdf_pages(
     finally:
         if input_path:
             delete_file(input_path)
+
+
+@router.post("/ocr", response_model=PDFProcessingResponse)
+async def extract_text_from_pdf_ocr(
+    file: UploadFile = File(..., description="PDF file to extract text from (scanned PDF)"),
+    language: str = Form("eng", description="Tesseract language code (e.g., 'eng', 'fra', 'spa')"),
+):
+    """
+    Extract text from PDF using OCR (Optical Character Recognition)
+    Useful for scanned PDFs or PDFs with images
+    """
+    if not validate_pdf_format(file.filename):
+        raise HTTPException(status_code=400, detail="File is not a valid PDF")
+
+    input_path = None
+    output_path = None
+
+    try:
+        input_path = await save_upload_file(file)
+        output_filename = generate_unique_filename(f"extracted_text_{file.filename}.txt")
+        output_path = TEMP_DIR / output_filename
+        result = extract_text_with_ocr(input_path, output_path, language)
+
+        if not result.success:
+            # Log the error for debugging
+            print(f"OCR Error: {result.message}")
+            raise HTTPException(status_code=500, detail=result.message)
+
+        return result
+    except HTTPException:
+        raise
+    except Exception as e:
+        error_msg = f"Unexpected error during OCR: {str(e)}"
+        print(f"OCR Exception: {error_msg}")
+        raise HTTPException(status_code=500, detail=error_msg)
+    finally:
+        if input_path:
+            delete_file(input_path)
+
+
+# ============================================
+# ASYNC ENDPOINT WITH SSE PROGRESS TRACKING
+# ============================================
+
+
+async def run_ocr_task(task_id: str, input_path: Path, output_path: Path, language: str):
+    """Background task for PDF OCR with progress"""
+    try:
+        await extract_text_with_ocr_async(task_id, input_path, output_path, language)
+    finally:
+        # Clean up input file after processing
+        delete_file(input_path)
+
+
+@router.post("/ocr/async")
+async def extract_text_from_pdf_ocr_async(
+    background_tasks: BackgroundTasks,
+    file: UploadFile = File(..., description="PDF file to extract text from (scanned PDF)"),
+    language: str = Form("eng", description="Tesseract language code (e.g., 'eng', 'fra', 'spa')"),
+):
+    """
+    Start async PDF OCR with progress tracking
+
+    Returns a task_id that can be used to:
+    - Poll status: GET /api/v1/tasks/{task_id}/status
+    - Stream progress: GET /api/v1/tasks/{task_id}/stream (SSE)
+
+    Progress events include: converting, processing, finalizing stages
+    """
+    if not validate_pdf_format(file.filename):
+        raise HTTPException(status_code=400, detail="File is not a valid PDF")
+
+    # Save uploaded file
+    input_path = await save_upload_file(file)
+
+    # Create output path
+    output_filename = generate_unique_filename(f"extracted_text_{file.filename}.txt")
+    output_path = TEMP_DIR / output_filename
+
+    # Create task
+    task = task_store.create_task(
+        task_type="pdf_ocr",
+        metadata={
+            "filename": file.filename,
+            "language": language,
+        },
+    )
+
+    # Start background processing
+    asyncio.create_task(run_ocr_task(task.id, input_path, output_path, language))
+
+    return {"task_id": task.id}
