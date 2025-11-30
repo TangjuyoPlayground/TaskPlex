@@ -3,8 +3,8 @@ PDF processing API endpoints
 """
 
 import asyncio
-import shutil
 from pathlib import Path
+import shutil
 from typing import List, Optional
 
 from fastapi import APIRouter, BackgroundTasks, File, Form, HTTPException, UploadFile
