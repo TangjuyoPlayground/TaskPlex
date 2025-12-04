@@ -189,6 +189,27 @@ export const ApiService = {
     return response.data;
   },
 
+  resizeImage: async (
+    file: File,
+    width?: number,
+    height?: number,
+    maintainAspectRatio: boolean = true,
+    resample: string = 'lanczos'
+  ) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    if (width !== undefined && width !== null) {
+      formData.append('width', width.toString());
+    }
+    if (height !== undefined && height !== null) {
+      formData.append('height', height.toString());
+    }
+    formData.append('maintain_aspect_ratio', maintainAspectRatio.toString());
+    formData.append('resample', resample);
+    const response = await api.post<ImageProcessingResponse>('/image/resize', formData);
+    return response.data;
+  },
+
   // Regex
   testRegex: async (pattern: string, text: string, flags: string) => {
     const response = await api.post<RegexResponse>('/regex/validate', {

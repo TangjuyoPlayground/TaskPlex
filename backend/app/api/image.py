@@ -8,7 +8,7 @@ from fastapi import APIRouter, File, Form, HTTPException, UploadFile
 
 from app.config import TEMP_DIR
 from app.models.image import ImageProcessingResponse
-from app.services.image_service import compress_image, convert_image, rotate_image
+from app.services.image_service import compress_image, convert_image, resize_image, rotate_image
 from app.utils.file_handler import (
     delete_file,
     generate_unique_filename,
@@ -135,6 +135,78 @@ async def rotate_image_endpoint(
 
         # Rotate image
         result = rotate_image(input_path, output_path, angle)
+
+        if not result.success:
+            raise HTTPException(status_code=500, detail=result.message)
+
+        return result
+
+    finally:
+        # Clean up input file
+        if input_path:
+            delete_file(input_path)
+
+
+@router.post("/resize", response_model=ImageProcessingResponse)
+async def resize_image_endpoint(
+    file: UploadFile = File(..., description="Image file to resize"),
+    width: int | None = Form(None, description="Target width in pixels (optional)"),
+    height: int | None = Form(None, description="Target height in pixels (optional)"),
+    maintain_aspect_ratio: bool = Form(True, description="Maintain aspect ratio when resizing"),
+    resample: str = Form(
+        "lanczos", description="Resampling algorithm (nearest, bilinear, bicubic, lanczos)"
+    ),
+):
+    """
+    Resize an image to specified dimensions
+
+    Supported formats: JPG, JPEG, PNG, GIF, BMP, WEBP
+    At least one dimension (width or height) must be specified
+    """
+    # Validate file format
+    if not validate_image_format(file.filename):
+        raise HTTPException(status_code=400, detail="Unsupported image format")
+
+    # Validate that at least one dimension is provided
+    if width is None and height is None:
+        raise HTTPException(
+            status_code=400, detail="At least one dimension (width or height) must be specified"
+        )
+
+    # Validate dimensions are positive
+    if width is not None and width <= 0:
+        raise HTTPException(status_code=400, detail="Width must be a positive integer")
+    if height is not None and height <= 0:
+        raise HTTPException(status_code=400, detail="Height must be a positive integer")
+
+    # Validate resample algorithm
+    valid_resamples = ["nearest", "bilinear", "bicubic", "lanczos"]
+    if resample.lower() not in valid_resamples:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Invalid resample algorithm. Supported: {', '.join(valid_resamples)}",
+        )
+
+    input_path = None
+    output_path = None
+
+    try:
+        # Save uploaded file
+        input_path = await save_upload_file(file)
+
+        # Create output path
+        output_filename = generate_unique_filename(f"resized_{file.filename}")
+        output_path = TEMP_DIR / output_filename
+
+        # Resize image
+        result = resize_image(
+            input_path,
+            output_path,
+            width=width,
+            height=height,
+            maintain_aspect_ratio=maintain_aspect_ratio,
+            resample=resample.lower(),
+        )
 
         if not result.success:
             raise HTTPException(status_code=500, detail=result.message)

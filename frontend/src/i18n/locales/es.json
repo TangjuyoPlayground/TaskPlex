@@ -148,6 +148,21 @@
     "original": "Original",
     "downloadResult": "Descargar resultado"
   },
+  "resizeImage": {
+    "title": "Redimensionar imagen",
+    "imageFile": "Archivo de imagen",
+    "dragDrop": "Arrastra y suelta o haz clic para seleccionar",
+    "width": "Ancho",
+    "height": "Alto",
+    "maintainAspectRatio": "Mantener proporción",
+    "resample": "Algoritmo de remuestreo",
+    "resizeImage": "Redimensionar imagen",
+    "processing": "Procesando...",
+    "result": "Resultado",
+    "preview": "La vista previa aparecerá aquí",
+    "original": "Original",
+    "downloadResult": "Descargar resultado"
+  },
   "rotateVideo": {
     "title": "Rotar video",
     "videoFile": "Archivo de video",

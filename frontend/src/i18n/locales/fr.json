@@ -148,6 +148,21 @@
     "original": "Original",
     "downloadResult": "Télécharger le résultat"
   },
+  "resizeImage": {
+    "title": "Redimensionner l'image",
+    "imageFile": "Fichier image",
+    "dragDrop": "Glissez-déposez ou cliquez pour sélectionner",
+    "width": "Largeur",
+    "height": "Hauteur",
+    "maintainAspectRatio": "Conserver les proportions",
+    "resample": "Algorithme de rééchantillonnage",
+    "resizeImage": "Redimensionner l'image",
+    "processing": "Traitement en cours...",
+    "result": "Résultat",
+    "preview": "L'aperçu apparaîtra ici",
+    "original": "Original",
+    "downloadResult": "Télécharger le résultat"
+  },
   "rotateVideo": {
     "title": "Rotation de vidéo",
     "videoFile": "Fichier vidéo",
