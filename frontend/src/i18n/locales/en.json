@@ -148,6 +148,21 @@
     "original": "Original",
     "downloadResult": "Download Result"
   },
+  "resizeImage": {
+    "title": "Resize Image",
+    "imageFile": "Image File",
+    "dragDrop": "Drag and drop or click to select",
+    "width": "Width",
+    "height": "Height",
+    "maintainAspectRatio": "Maintain Aspect Ratio",
+    "resample": "Resampling Algorithm",
+    "resizeImage": "Resize Image",
+    "processing": "Processing...",
+    "result": "Result",
+    "preview": "Preview will appear here",
+    "original": "Original",
+    "downloadResult": "Download Result"
+  },
   "rotateVideo": {
     "title": "Rotate Video",
     "videoFile": "Video File",

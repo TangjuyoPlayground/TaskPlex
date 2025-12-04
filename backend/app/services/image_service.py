@@ -207,3 +207,125 @@ def rotate_image(input_path: Path, output_path: Path, angle: int) -> ImageProces
             message=f"Error rotating image: {str(e)}",
             filename=output_path.name if output_path else None,
         )
+
+
+def resize_image(
+    input_path: Path,
+    output_path: Path,
+    width: int | None = None,
+    height: int | None = None,
+    maintain_aspect_ratio: bool = True,
+    resample: str = "lanczos",
+) -> ImageProcessingResponse:
+    """
+    Resize an image to specified dimensions
+
+    Args:
+        input_path: Path to input image
+        output_path: Path to save resized image
+        width: Target width in pixels (optional)
+        height: Target height in pixels (optional)
+        maintain_aspect_ratio: Whether to maintain aspect ratio
+        resample: Resampling algorithm (nearest, bilinear, bicubic, lanczos)
+
+    Returns:
+        ImageProcessingResponse with resize results
+    """
+    try:
+        # Validate that at least one dimension is provided
+        if width is None and height is None:
+            return ImageProcessingResponse(
+                success=False,
+                message="At least one dimension (width or height) must be specified",
+                filename=output_path.name if output_path else None,
+            )
+
+        # Get original file size
+        original_size = get_file_size(input_path)
+
+        # Map resample string to Pillow constant
+        resample_map = {
+            "nearest": Image.NEAREST,
+            "bilinear": Image.BILINEAR,
+            "bicubic": Image.BICUBIC,
+            "lanczos": Image.LANCZOS,
+        }
+        resample_filter = resample_map.get(resample.lower(), Image.LANCZOS)
+
+        # Open and resize image
+        with Image.open(input_path) as img:
+            # Get original dimensions
+            original_dimensions = {"width": img.width, "height": img.height}
+            original_width, original_height = img.size
+
+            # Calculate target dimensions
+            if maintain_aspect_ratio:
+                if width is not None and height is not None:
+                    # Both dimensions specified - maintain aspect ratio
+                    aspect_ratio = original_width / original_height
+                    if width / height > aspect_ratio:
+                        # Height is the limiting factor
+                        target_width = int(height * aspect_ratio)
+                        target_height = height
+                    else:
+                        # Width is the limiting factor
+                        target_width = width
+                        target_height = int(width / aspect_ratio)
+                elif width is not None:
+                    # Only width specified
+                    aspect_ratio = original_width / original_height
+                    target_width = width
+                    target_height = int(width / aspect_ratio)
+                else:
+                    # Only height specified
+                    aspect_ratio = original_width / original_height
+                    target_width = int(height * aspect_ratio)
+                    target_height = height
+            else:
+                # Don't maintain aspect ratio - use exact dimensions
+                target_width = width if width is not None else original_width
+                target_height = height if height is not None else original_height
+
+            # Resize image
+            resized_img = img.resize((target_width, target_height), resample=resample_filter)
+
+            # Get new dimensions
+            new_dimensions = {"width": target_width, "height": target_height}
+
+            # Preserve original format
+            output_format = img.format or "PNG"
+            if output_format == "JPEG":
+                # Convert RGBA to RGB if saving as JPEG
+                if resized_img.mode == "RGBA":
+                    rgb_img = Image.new("RGB", resized_img.size, (255, 255, 255))
+                    rgb_img.paste(
+                        resized_img,
+                        mask=resized_img.split()[3] if len(resized_img.split()) == 4 else None,
+                    )
+                    resized_img = rgb_img
+
+            # Save resized image
+            if output_format in ["JPEG", "JPG"]:
+                resized_img.save(output_path, format=output_format, quality=95, optimize=True)
+            else:
+                resized_img.save(output_path, format=output_format, optimize=True)
+
+        # Get resized file size
+        resized_size = get_file_size(output_path)
+
+        return ImageProcessingResponse(
+            success=True,
+            message=f"Image resized to {target_width}x{target_height} successfully",
+            filename=output_path.name,
+            download_url=f"/api/v1/download/{output_path.name}",
+            original_size=original_size,
+            processed_size=resized_size,
+            dimensions=new_dimensions,
+        )
+
+    except Exception as e:
+        return ImageProcessingResponse(
+            success=False,
+            message=f"Error resizing image: {str(e)}",
+            filename=output_path.name if output_path else None,
+        )

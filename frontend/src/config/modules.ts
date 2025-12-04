@@ -248,8 +248,8 @@ export const MODULES: ModuleDefinition[] = [
     labelKey: 'modules.image.resize.title',
     descriptionKey: 'modules.image.resize.description',
     category: 'media',
-    status: 'placeholder',
-    color: 'text-blue-500',
+    status: 'implemented',
+    color: 'text-blue-600',
   },
   {
     id: 'image-crop',

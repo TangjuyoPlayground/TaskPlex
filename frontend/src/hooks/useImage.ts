@@ -26,3 +26,15 @@ export const useRotateImage = () => {
   });
 };
 
+export const useResizeImage = () => {
+  return useMutation<
+    ImageProcessingResponse,
+    Error,
+    { file: File; width?: number; height?: number; maintainAspectRatio: boolean; resample: string }
+  >({
+    mutationFn: async ({ file, width, height, maintainAspectRatio, resample }) => {
+      return ApiService.resizeImage(file, width, height, maintainAspectRatio, resample);
+    },
+  });
+};
+

@@ -37,6 +37,7 @@ const VideoScreen = createLazyComponent(() => import('./pages/VideoScreen'), 'Vi
 const RotateVideoScreen = createLazyComponent(() => import('./pages/RotateVideoScreen'), 'RotateVideoScreen');
 const ImageScreen = createLazyComponent(() => import('./pages/ImageScreen'), 'ImageScreen');
 const RotateImageScreen = createLazyComponent(() => import('./pages/RotateImageScreen'), 'RotateImageScreen');
+const ResizeImageScreen = createLazyComponent(() => import('./pages/ResizeImageScreen'), 'ResizeImageScreen');
 const RegexScreen = createLazyComponent(() => import('./pages/RegexScreen'), 'RegexScreen');
 const UnitsScreen = createLazyComponent(() => import('./pages/UnitsScreen'), 'UnitsScreen');
 const QRCodeScreen = createLazyComponent(() => import('./pages/QRCodeScreen'), 'QRCodeScreen');
@@ -74,6 +75,7 @@ const componentMap: Record<string, React.LazyExoticComponent<React.ComponentType
   'image-compress': ImageScreen,
   'image-convert': ImageScreen,
   'image-rotate': RotateImageScreen,
+  'image-resize': ResizeImageScreen,
   
   // PDF
   'pdf-compress': PDFCompress,
