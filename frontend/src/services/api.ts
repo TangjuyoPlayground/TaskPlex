@@ -3,6 +3,7 @@ import type {
   VideoProcessingResponse,
   PDFProcessingResponse,
   ImageProcessingResponse,
+  ColorExtractionResponse,
   RegexResponse,
   UnitConversionResponse,
   QRCodeResponse,
@@ -18,6 +19,7 @@ import type {
   CSSFormatterResponse,
   JSFormatterResponse,
   XMLMinifierResponse,
+  ColorExtractionResponse,
 } from '../types/api';
 
 // Re-export types for backwards compatibility
@@ -41,6 +43,7 @@ export type {
   CSSFormatterResponse,
   JSFormatterResponse,
   XMLMinifierResponse,
+  ColorExtractionResponse,
 } from '../types/api';
 
 // API URL from environment variable with fallback
@@ -186,6 +189,14 @@ export const ApiService = {
     formData.append('file', file);
     formData.append('angle', angle.toString());
     const response = await api.post<ImageProcessingResponse>('/image/rotate', formData);
+    return response.data;
+  },
+
+  extractColors: async (file: File, maxColors: number = 6) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('max_colors', maxColors.toString());
+    const response = await api.post<ColorExtractionResponse>('/image/extract-colors', formData);
     return response.data;
   },
 

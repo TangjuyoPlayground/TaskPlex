@@ -318,8 +318,8 @@ export const MODULES: ModuleDefinition[] = [
     labelKey: 'modules.image.extractColors.title',
     descriptionKey: 'modules.image.extractColors.description',
     category: 'media',
-    status: 'placeholder',
-    color: 'text-blue-500',
+    status: 'implemented',
+    color: 'text-blue-600',
   },
   {
     id: 'image-adjust',

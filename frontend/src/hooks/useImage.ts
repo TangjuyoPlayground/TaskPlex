@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { ApiService } from '../services/api';
-import type { ImageProcessingResponse } from '../services/api';
+import type { ColorExtractionResponse, ImageProcessingResponse } from '../services/api';
 
 export const useCompressImage = () => {
   return useMutation<ImageProcessingResponse, Error, { file: File; quality: string }>({
@@ -22,6 +22,14 @@ export const useRotateImage = () => {
   return useMutation<ImageProcessingResponse, Error, { file: File; angle: number }>({
     mutationFn: async ({ file, angle }) => {
       return ApiService.rotateImage(file, angle);
+    },
+  });
+};
+
+export const useExtractColors = () => {
+  return useMutation<ColorExtractionResponse, Error, { file: File; maxColors?: number }>({
+    mutationFn: async ({ file, maxColors = 6 }) => {
+      return ApiService.extractColors(file, maxColors);
     },
   });
 };
