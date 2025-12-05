@@ -35,3 +35,19 @@ class ImageProcessingResponse(BaseModel):
     processed_size: Optional[int] = None
     compression_ratio: Optional[float] = None
     dimensions: Optional[dict] = None
+
+
+class ColorInfo(BaseModel):
+    """Color information with hex value and ratio in the image"""
+
+    hex: str = Field(..., description="Hexadecimal color value")
+    ratio: float = Field(..., description="Proportion of this color in the image (0-1)")
+
+
+class ColorExtractionResponse(BaseModel):
+    """Response model for color extraction"""
+
+    success: bool
+    message: str
+    filename: str
+    colors: list[ColorInfo]

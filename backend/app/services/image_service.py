@@ -7,7 +7,7 @@ from pathlib import Path
 from PIL import Image
 
 from app.config import IMAGE_COMPRESSION_QUALITY
-from app.models.image import ImageProcessingResponse
+from app.models.image import ColorExtractionResponse, ColorInfo, ImageProcessingResponse
 from app.utils.file_handler import calculate_compression_ratio, get_file_size
 
 
@@ -206,6 +206,54 @@ def rotate_image(input_path: Path, output_path: Path, angle: int) -> ImageProces
             success=False,
             message=f"Error rotating image: {str(e)}",
             filename=output_path.name if output_path else None,
+        )
+
+
+def extract_colors(
+    input_path: Path,
+    max_colors: int = 6,
+    sample_size: int = 200,
+) -> ColorExtractionResponse:
+    """
+    Extract dominant colors from an image.
+
+    Args:
+        input_path: Path to input image.
+        max_colors: Number of top colors to return.
+        sample_size: Image is resized to max(sample_size, sample_size) to speed up extraction.
+    """
+    try:
+        with Image.open(input_path) as img:
+            img = img.convert("RGB")
+            # Downscale for performance
+            img.thumbnail((sample_size, sample_size), Image.LANCZOS)
+            pixels = list(img.getdata())
+
+        total = len(pixels)
+        # Count colors
+        from collections import Counter
+
+        counts = Counter(pixels)
+        most_common = counts.most_common(max_colors)
+
+        colors = []
+        for (r, g, b), count in most_common:
+            ratio = count / total if total else 0
+            hex_value = f"#{r:02x}{g:02x}{b:02x}"
+            colors.append(ColorInfo(hex=hex_value, ratio=ratio))
+
+        return ColorExtractionResponse(
+            success=True,
+            message="Colors extracted successfully",
+            filename=input_path.name,
+            colors=colors,
+        )
+    except Exception as e:
+        return ColorExtractionResponse(
+            success=False,
+            message=f"Error extracting colors: {str(e)}",
+            filename=input_path.name,
+            colors=[],
         )
 
 

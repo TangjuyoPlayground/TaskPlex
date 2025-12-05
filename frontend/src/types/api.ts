@@ -44,6 +44,16 @@ export interface ImageDimensions {
   height: number;
 }
 
+export interface ColorInfo {
+  hex: string;
+  ratio: number;
+}
+
+export interface ColorExtractionResponse extends ApiResponse {
+  filename: string;
+  colors: ColorInfo[];
+}
+
 // Regex
 export interface RegexMatch {
   match: string;

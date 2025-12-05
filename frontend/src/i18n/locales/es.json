@@ -148,6 +148,19 @@
     "original": "Original",
     "downloadResult": "Descargar resultado"
   },
+  "extractColors": {
+    "title": "Extraer colores",
+    "imageFile": "Archivo de imagen",
+    "dragDrop": "Arrastra y suelta o haz clic para seleccionar",
+    "maxColors": "Número de colores",
+    "maxColorsHint": "Entre 1 y 12 colores dominantes",
+    "extractButton": "Extraer colores",
+    "processing": "Procesando...",
+    "original": "Original",
+    "palette": "Paleta",
+    "palettePlaceholder": "Sube una imagen y extrae para ver la paleta",
+    "copied": "¡Copiado!"
+  },
   "resizeImage": {
     "title": "Redimensionar imagen",
     "imageFile": "Archivo de imagen",

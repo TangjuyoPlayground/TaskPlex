@@ -148,6 +148,19 @@
     "original": "Original",
     "downloadResult": "Download Result"
   },
+  "extractColors": {
+    "title": "Extract Colors",
+    "imageFile": "Image File",
+    "dragDrop": "Drag and drop or click to select",
+    "maxColors": "Number of colors",
+    "maxColorsHint": "Between 1 and 12 dominant colors",
+    "extractButton": "Extract Colors",
+    "processing": "Processing...",
+    "original": "Original",
+    "palette": "Palette",
+    "palettePlaceholder": "Upload an image and extract to see the palette",
+    "copied": "Copied!"
+  },
   "resizeImage": {
     "title": "Resize Image",
     "imageFile": "Image File",

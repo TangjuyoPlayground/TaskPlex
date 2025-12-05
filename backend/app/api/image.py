@@ -7,8 +7,14 @@ from pathlib import Path
 from fastapi import APIRouter, File, Form, HTTPException, UploadFile
 
 from app.config import TEMP_DIR
-from app.models.image import ImageProcessingResponse
-from app.services.image_service import compress_image, convert_image, resize_image, rotate_image
+from app.models.image import ColorExtractionResponse, ImageProcessingResponse
+from app.services.image_service import (
+    compress_image,
+    convert_image,
+    extract_colors,
+    resize_image,
+    rotate_image,
+)
 from app.utils.file_handler import (
     delete_file,
     generate_unique_filename,
@@ -91,6 +97,43 @@ async def convert_image_endpoint(
 
         # Convert image
         result = convert_image(input_path, output_path, output_format, quality)
+
+        if not result.success:
+            raise HTTPException(status_code=500, detail=result.message)
+
+        return result
+
+    finally:
+        # Clean up input file
+        if input_path:
+            delete_file(input_path)
+
+
+@router.post("/extract-colors", response_model=ColorExtractionResponse)
+async def extract_colors_endpoint(
+    file: UploadFile = File(..., description="Image file to analyze"),
+    max_colors: int = Form(6, description="Number of dominant colors to return"),
+):
+    """
+    Extract dominant colors from an image.
+
+    Supported formats: JPG, JPEG, PNG, GIF, BMP, WEBP
+    """
+    # Validate file format
+    if not validate_image_format(file.filename):
+        raise HTTPException(status_code=400, detail="Unsupported image format")
+
+    if max_colors <= 0 or max_colors > 12:
+        raise HTTPException(status_code=400, detail="max_colors must be between 1 and 12")
+
+    input_path = None
+
+    try:
+        # Save uploaded file
+        input_path = await save_upload_file(file)
+
+        # Extract colors
+        result = extract_colors(input_path, max_colors=max_colors)
 
         if not result.success:
             raise HTTPException(status_code=500, detail=result.message)
