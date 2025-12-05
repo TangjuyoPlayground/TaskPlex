@@ -19,7 +19,6 @@ import type {
   CSSFormatterResponse,
   JSFormatterResponse,
   XMLMinifierResponse,
-  ColorExtractionResponse,
 } from '../types/api';
 
 // Re-export types for backwards compatibility
