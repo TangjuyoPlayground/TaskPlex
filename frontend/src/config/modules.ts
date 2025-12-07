@@ -473,8 +473,9 @@ export const MODULES: ModuleDefinition[] = [
     labelKey: 'modules.pdf.toWord.title',
     descriptionKey: 'modules.pdf.toWord.description',
     category: 'document',
-    status: 'placeholder',
-    color: 'text-red-500',
+    status: 'implemented',
+    color: 'text-red-600',
+    isNew: true,
   },
   {
     id: 'pdf-word-to-pdf',
@@ -484,7 +485,8 @@ export const MODULES: ModuleDefinition[] = [
     descriptionKey: 'modules.pdf.wordToPdf.description',
     category: 'document',
     status: 'placeholder',
-    color: 'text-red-500',
+    color: 'text-blue-500',
+    isNew: true,
   },
   {
     id: 'pdf-ocr',

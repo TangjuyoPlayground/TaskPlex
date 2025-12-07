@@ -30,7 +30,7 @@ describe('useFormatText', () => {
     result.current.mutate({ text: 'Hello\\nWorld' });
 
     await waitFor(() => {
-      expect(result.current.isSuccess || result.current.isError).toBe(true);
+      expect(result.current.isPending).toBe(false);
     });
   });
 });

@@ -195,6 +195,28 @@
       "invert": "Inverser"
     }
   },
+  "pdfToWord": {
+    "title": "PDF vers Word",
+    "subtitle": "Convertir votre PDF en DOCX éditable (texte uniquement).",
+    "selectFile": "Sélectionner un PDF",
+    "dragDrop": "Glissez-déposez ou cliquez pour choisir un PDF",
+    "convertButton": "Convertir en Word",
+    "processing": "Conversion...",
+    "downloadResult": "Télécharger le fichier Word",
+    "info": "Nous extrayons le texte et générons un fichier DOCX.",
+    "note": "Les images et mises en forme avancées ne sont pas préservées."
+  },
+  "wordToPdf": {
+    "title": "Word vers PDF",
+    "subtitle": "Convertir rapidement un DOCX en PDF.",
+    "selectFile": "Sélectionner un DOCX",
+    "dragDrop": "Glissez-déposez ou cliquez pour choisir un DOCX",
+    "convertButton": "Convertir en PDF",
+    "processing": "Conversion...",
+    "downloadResult": "Télécharger le PDF",
+    "info": "Nous rendons le texte dans un document PDF.",
+    "note": "Les mises en page complexes peuvent ne pas être conservées (rendu texte)."
+  },
   "textFormatter": {
     "title": "Formater du texte",
     "subtitle": "Remplacer les séquences littérales \\n par de vrais retours à la ligne.",

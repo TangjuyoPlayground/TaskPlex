@@ -195,6 +195,28 @@
       "invert": "Invert"
     }
   },
+  "pdfToWord": {
+    "title": "PDF to Word",
+    "subtitle": "Convert your PDF into an editable DOCX (text only).",
+    "selectFile": "Select a PDF",
+    "dragDrop": "Drag & drop or click to choose a PDF",
+    "convertButton": "Convert to Word",
+    "processing": "Converting...",
+    "downloadResult": "Download Word file",
+    "info": "We extract text content and generate a DOCX file.",
+    "note": "Images and advanced formatting are not preserved."
+  },
+  "wordToPdf": {
+    "title": "Word to PDF",
+    "subtitle": "Convert a DOCX to PDF quickly.",
+    "selectFile": "Select a DOCX",
+    "dragDrop": "Drag & drop or click to choose a DOCX",
+    "convertButton": "Convert to PDF",
+    "processing": "Converting...",
+    "downloadResult": "Download PDF",
+    "info": "We render text into a PDF document.",
+    "note": "Complex layouts may not be preserved; text-only rendering."
+  },
   "textFormatter": {
     "title": "Format Text",
     "subtitle": "Replace literal \\n sequences by real line breaks.",

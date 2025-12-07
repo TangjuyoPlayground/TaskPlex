@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import List
 
 from app.config import (
+    SUPPORTED_DOCX_FORMAT,
     SUPPORTED_IMAGE_FORMATS,
     SUPPORTED_PDF_FORMAT,
     SUPPORTED_VIDEO_FORMATS,
@@ -40,6 +41,11 @@ def validate_image_format(filename: str) -> bool:
 def validate_pdf_format(filename: str) -> bool:
     """Validate if a file is a PDF"""
     return validate_file_format(filename, SUPPORTED_PDF_FORMAT)
+
+
+def validate_docx_format(filename: str) -> bool:
+    """Validate if a file is a DOCX document"""
+    return validate_file_format(filename, SUPPORTED_DOCX_FORMAT)
 
 
 def get_file_extension(filename: str) -> str:

@@ -6,7 +6,14 @@ import { renderHook, waitFor } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import React from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { useCompressPDF, useMergePDFs, useSplitPDF, useReorganizePDF } from '../../../hooks/usePDF';
+import {
+  useCompressPDF,
+  useMergePDFs,
+  useSplitPDF,
+  useReorganizePDF,
+  usePDFToWord,
+  useWordToPDF,
+} from '../../../hooks/usePDF';
 
 const createWrapper = () => {
   const queryClient = new QueryClient({
@@ -180,6 +187,28 @@ describe('useReorganizePDF', () => {
     await waitFor(() => {
       expect(result.current.isPending).toBe(false);
     }, { timeout: 3000 });
+  });
+});
+
+describe('usePDFToWord', () => {
+  it('expose mutation methods', () => {
+    const { result } = renderHook(() => usePDFToWord(), {
+      wrapper: createWrapper(),
+    });
+
+    expect(result.current.mutate).toBeDefined();
+    expect(result.current.isPending).toBe(false);
+  });
+});
+
+describe('useWordToPDF', () => {
+  it('expose mutation methods', () => {
+    const { result } = renderHook(() => useWordToPDF(), {
+      wrapper: createWrapper(),
+    });
+
+    expect(result.current.mutate).toBeDefined();
+    expect(result.current.isPending).toBe(false);
   });
 });
 

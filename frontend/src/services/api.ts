@@ -118,6 +118,20 @@ export const ApiService = {
     return response.data;
   },
 
+  pdfToWord: async (file: File) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    const response = await api.post<PDFProcessingResponse>('/pdf/to-word', formData);
+    return response.data;
+  },
+
+  wordToPdf: async (file: File) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    const response = await api.post<PDFProcessingResponse>('/pdf/word-to-pdf', formData);
+    return response.data;
+  },
+
   mergePDFs: async (files: File[]) => {
     const formData = new FormData();
     files.forEach(file => formData.append('files', file));

@@ -12,6 +12,7 @@ pypdf>=6.4.0
 pymupdf>=1.24.0
 pdf2image>=1.17.0
 pytesseract>=0.3.13
+python-docx>=0.8.11
 
 # Video processing
 ffmpeg-python>=0.2.0
