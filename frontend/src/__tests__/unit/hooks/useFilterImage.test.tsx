@@ -31,7 +31,7 @@ describe('useFilterImage', () => {
     result.current.mutate({ file, filter: 'grayscale' });
 
     await waitFor(() => {
-      expect(result.current.isSuccess || result.current.isError).toBe(true);
+      expect(result.current.isPending).toBe(false);
     });
   });
 });

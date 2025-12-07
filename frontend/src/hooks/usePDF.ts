@@ -42,6 +42,18 @@ export const useOCRPDF = () => {
   });
 };
 
+export const usePDFToWord = () => {
+  return useMutation<PDFProcessingResponse, Error, { file: File }>({
+    mutationFn: async ({ file }) => ApiService.pdfToWord(file),
+  });
+};
+
+export const useWordToPDF = () => {
+  return useMutation<PDFProcessingResponse, Error, { file: File }>({
+    mutationFn: async ({ file }) => ApiService.wordToPdf(file),
+  });
+};
+
 export const usePasswordPDF = () => {
   return useMutation<
     PDFProcessingResponse,

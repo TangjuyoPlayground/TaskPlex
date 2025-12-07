@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { Upload, FileText, FileVideo, FileImage, File } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
-export type FileType = 'video' | 'image' | 'pdf' | 'any';
+export type FileType = 'video' | 'image' | 'pdf' | 'document' | 'any';
 
 interface FileDropzoneProps {
   file: File | null;
@@ -21,6 +21,7 @@ const iconMap = {
   image: FileImage,
   pdf: FileText,
   any: File,
+  document: FileText,
 };
 
 const colorClasses = {

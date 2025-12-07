@@ -42,6 +42,7 @@ API_DESCRIPTION = os.getenv(
 SUPPORTED_VIDEO_FORMATS = ["mp4", "avi", "mov", "mkv", "flv", "wmv"]
 SUPPORTED_IMAGE_FORMATS = ["jpg", "jpeg", "png", "gif", "bmp", "webp"]
 SUPPORTED_PDF_FORMAT = ["pdf"]
+SUPPORTED_DOCX_FORMAT = ["docx"]
 
 # Video compression presets
 VIDEO_COMPRESSION_PRESETS = {
