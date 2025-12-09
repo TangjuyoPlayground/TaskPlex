@@ -218,6 +218,10 @@ export interface HashResponse extends ApiResponse {
   salt_used?: string | null;
 }
 
+export interface Base64Response extends ApiResponse {
+  result: string;
+}
+
 // Generic file processing result (useful for UI components)
 export interface ProcessingResult {
   success: boolean;

@@ -22,6 +22,7 @@ import type {
   XMLMinifierResponse,
   TextFormatResponse,
   HashResponse,
+  Base64Response,
 } from '../types/api';
 
 // Re-export types for backwards compatibility
@@ -49,6 +50,7 @@ export type {
   ColorConversionResponse,
   TextFormatResponse,
   HashResponse,
+  Base64Response,
 } from '../types/api';
 
 // API URL from environment variable with fallback
@@ -425,6 +427,16 @@ export const ApiService = {
       uppercase,
       ...(salt ? { salt } : {}),
     });
+    return response.data;
+  },
+
+  // Base64
+  encodeBase64: async (text: string) => {
+    const response = await api.post<Base64Response>('/base64/encode', { text });
+    return response.data;
+  },
+  decodeBase64: async (text: string) => {
+    const response = await api.post<Base64Response>('/base64/decode', { text });
     return response.data;
   },
  

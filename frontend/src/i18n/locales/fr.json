@@ -281,6 +281,57 @@
       "sha512": "SHA512"
     }
   },
+  "base64": {
+    "title": "Encodeur/Décodeur Base64",
+    "subtitle": "Convertissez un texte vers/depuis Base64 en un seul endroit.",
+    "mode": {
+      "encode": "Encoder",
+      "decode": "Décoder"
+    },
+    "switch": "Changer de mode",
+    "inputEncode": "Texte à encoder",
+    "inputHintEncode": "Collez du texte brut ; il sera converti en Base64",
+    "inputDecode": "Base64 à décoder",
+    "inputHintDecode": "Collez le Base64 ; il sera décodé ci-dessous",
+    "placeholderEncode": "Entrez le texte à encoder...",
+    "placeholderDecode": "Entrez le Base64 à décoder...",
+    "encode": "Encoder",
+    "decode": "Décoder",
+    "processing": "Traitement...",
+    "output": "Résultat",
+    "outputHint": "Copiez le résultat ci-dessous",
+    "outputPlaceholder": "Le résultat apparaîtra ici...",
+    "copy": "Copier",
+    "copied": "Copié !"
+  },
+  "base64Encode": {
+    "title": "Encodeur Base64",
+    "subtitle": "Encodez n'importe quel texte en Base64.",
+    "inputLabel": "Texte à encoder",
+    "inputHint": "Collez du texte brut ; il sera converti en Base64",
+    "placeholder": "Entrez le texte à encoder...",
+    "encode": "Encoder",
+    "processing": "Encodage...",
+    "output": "Résultat Base64",
+    "outputHint": "Copiez la chaîne encodée",
+    "outputPlaceholder": "Le texte encodé apparaîtra ici...",
+    "copy": "Copier",
+    "copied": "Copié !"
+  },
+  "base64Decode": {
+    "title": "Décodeur Base64",
+    "subtitle": "Décodez du Base64 en texte clair.",
+    "inputLabel": "Entrée Base64",
+    "inputHint": "Collez du Base64 à décoder",
+    "placeholder": "Entrez le Base64 à décoder...",
+    "decode": "Décoder",
+    "processing": "Décodage...",
+    "output": "Texte décodé",
+    "outputHint": "Copiez la chaîne décodée",
+    "outputPlaceholder": "Le texte décodé apparaîtra ici...",
+    "copy": "Copier",
+    "copied": "Copié !"
+  },
   "resizeImage": {
     "title": "Redimensionner l'image",
     "imageFile": "Fichier image",
@@ -949,6 +1000,18 @@
       "hashGenerator": {
         "title": "Générateur de hash",
         "description": "Générer des hashs MD5, SHA1, SHA256"
+      },
+      "base64": {
+        "title": "Encodeur/Décodeur Base64",
+        "description": "Encoder ou décoder du texte en Base64"
+      },
+      "base64Encode": {
+        "title": "Encodeur Base64",
+        "description": "Encoder du texte en Base64"
+      },
+      "base64Decode": {
+        "title": "Décodeur Base64",
+        "description": "Décoder du Base64 en texte"
       },
       "base64": {
         "title": "Encodeur Base64",

@@ -260,6 +260,57 @@
       "sha512": "SHA512"
     }
   },
+  "base64": {
+    "title": "Base64 Encode/Decode",
+    "subtitle": "Convert text to/from Base64 in one place.",
+    "mode": {
+      "encode": "Encode",
+      "decode": "Decode"
+    },
+    "switch": "Switch mode",
+    "inputEncode": "Text to encode",
+    "inputHintEncode": "Paste plain text; it will be converted to Base64",
+    "inputDecode": "Base64 to decode",
+    "inputHintDecode": "Paste Base64 text; it will be decoded below",
+    "placeholderEncode": "Enter text to encode...",
+    "placeholderDecode": "Enter Base64 to decode...",
+    "encode": "Encode",
+    "decode": "Decode",
+    "processing": "Processing...",
+    "output": "Result",
+    "outputHint": "Copy the result below",
+    "outputPlaceholder": "Result will appear here...",
+    "copy": "Copy",
+    "copied": "Copied!"
+  },
+  "base64Encode": {
+    "title": "Base64 Encoder",
+    "subtitle": "Encode any text to Base64.",
+    "inputLabel": "Text to encode",
+    "inputHint": "Paste plain text; it will be converted to Base64",
+    "placeholder": "Enter text to encode...",
+    "encode": "Encode",
+    "processing": "Encoding...",
+    "output": "Base64 result",
+    "outputHint": "Copy the encoded string",
+    "outputPlaceholder": "Encoded text will appear here...",
+    "copy": "Copy",
+    "copied": "Copied!"
+  },
+  "base64Decode": {
+    "title": "Base64 Decoder",
+    "subtitle": "Decode Base64 to plain text.",
+    "inputLabel": "Base64 input",
+    "inputHint": "Paste Base64 text to decode",
+    "placeholder": "Enter Base64 to decode...",
+    "decode": "Decode",
+    "processing": "Decoding...",
+    "output": "Decoded text",
+    "outputHint": "Copy the decoded string",
+    "outputPlaceholder": "Decoded text will appear here...",
+    "copy": "Copy",
+    "copied": "Copied!"
+  },
   "colorConverter": {
     "title": "Color Converter",
     "subtitle": "Convert between HEX, RGB, HSL and CMYK. Pick a color or paste a value.",
@@ -950,6 +1001,18 @@
         "title": "Hash Generator",
         "description": "Generate MD5, SHA1, SHA256 hashes"
       },
+    "base64": {
+      "title": "Base64 Encode/Decode",
+      "description": "Encode or decode text in Base64"
+    },
+    "base64Encode": {
+      "title": "Base64 Encoder",
+      "description": "Encode text to Base64"
+    },
+    "base64Decode": {
+      "title": "Base64 Decoder",
+      "description": "Decode Base64 to text"
+    },
       "base64": {
         "title": "Base64 Encoder",
         "description": "Encode and decode Base64"

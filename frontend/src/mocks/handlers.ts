@@ -489,6 +489,25 @@ export const hashHandlers = [
   }),
 ];
 
+// Base64 handlers
+export const base64Handlers = [
+  http.post(`${API_PATTERN}/base64/encode`, async ({ request }) => {
+    const body = (await request.json()) as { text?: string };
+    const text = body.text || '';
+    return HttpResponse.json(successResponse({ result: btoa(text) }));
+  }),
+  http.post(`${API_PATTERN}/base64/decode`, async ({ request }) => {
+    const body = (await request.json()) as { text?: string };
+    const text = body.text || '';
+    try {
+      const decoded = atob(text);
+      return HttpResponse.json(successResponse({ result: decoded }));
+    } catch {
+      return errorResponse('Invalid Base64', 400);
+    }
+  }),
+];
+
 export const handlers = [
   ...videoHandlers,
   ...taskHandlers,
@@ -499,6 +518,7 @@ export const handlers = [
   ...qrcodeHandlers,
   ...colorHandlers,
   ...hashHandlers,
+  ...base64Handlers,
   ...downloadHandlers,
 ];
 

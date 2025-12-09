@@ -108,6 +108,8 @@ export const iconMap = {
   'code-formatter': Code2,
   'hash-generator': Hash,
   'base64-encoder': Binary,
+  'base64-only-encode': Binary,
+  'base64-only-decode': Binary,
   'url-encoder': Link,
   'uuid-generator': Key,
   'password-generator': KeyRound,
