@@ -45,6 +45,18 @@
       "finalizing": "Finalizando..."
     }
   },
+    "dev": {
+      "passwordGenerator": {
+        "title": "Generador de contraseñas",
+        "description": "Genera contraseñas seguras con opciones personalizables."
+      }
+    },
+    "security": {
+      "passwordChecker": {
+        "title": "Verificador de contraseña",
+        "description": "Verifica la fortaleza de una contraseña y obtén sugerencias para mejorarla."
+      }
+    },
   "sidebar": {
     "noFavorites": "Sin favoritos aún",
     "addFavoritesHint": "Agrega favoritos desde el panel"
@@ -149,6 +161,50 @@
     "validation": {
       "fileRequired": "Selecciona primero un archivo de video."
     }
+  },
+  "passwordGenerator": {
+    "title": "Generador de contraseñas",
+    "description": "Genera contraseñas seguras con opciones personalizables.",
+    "length": "Longitud",
+    "includeLower": "Incluir minúsculas",
+    "includeUpper": "Incluir mayúsculas",
+    "includeDigits": "Incluir dígitos",
+    "includeSymbols": "Incluir símbolos",
+    "excludeAmbiguous": "Excluir caracteres ambiguos (0, O, 1, l, I)",
+    "generate": "Generar",
+    "generating": "Generando...",
+    "result": "Resultado",
+    "noPassword": "Aún no se ha generado contraseña",
+    "copy": "Copiar",
+    "copied": "¡Copiado!",
+    "analyzing": "Analizando fortaleza...",
+    "strength": "Fortaleza",
+    "strong": "Fuerte",
+    "medium": "Media",
+    "weak": "Débil",
+    "badgeLower": "Minúsculas",
+    "badgeUpper": "Mayúsculas",
+    "badgeDigit": "Dígito",
+    "badgeSymbol": "Símbolo",
+    "badgeLength": "12+ caracteres"
+  },
+  "passwordChecker": {
+    "title": "Verificador de contraseña",
+    "description": "Verifica la fortaleza de una contraseña y obtén sugerencias para mejorarla.",
+    "password": "Contraseña",
+    "placeholder": "Ingresa una contraseña para verificar",
+    "check": "Verificar",
+    "checking": "Verificando...",
+    "strength": "Fortaleza",
+    "length": "Longitud",
+    "score": "Puntaje",
+    "entropy": "Entropía",
+    "badgeLower": "Minúsculas",
+    "badgeUpper": "Mayúsculas",
+    "badgeDigit": "Dígito",
+    "badgeSymbol": "Símbolo",
+    "suggestions": "Sugerencias",
+    "disclaimer": "Aviso: esta verificación no usa listas de contraseñas comprometidas/diccionarios; solo evalúa variedad de caracteres y longitud."
   },
   "image": {
     "title": "Procesamiento de imagen",
