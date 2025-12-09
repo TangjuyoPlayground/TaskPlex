@@ -191,7 +191,8 @@
     "badgeUpper": "Mayúsculas",
     "badgeDigit": "Dígito",
     "badgeSymbol": "Símbolo",
-    "suggestions": "Sugerencias"
+    "suggestions": "Sugerencias",
+    "disclaimer": "Aviso: esta verificación no usa listas de contraseñas comprometidas/diccionarios; solo evalúa variedad de caracteres y longitud."
   },
   "image": {
     "title": "Procesamiento de imagen",

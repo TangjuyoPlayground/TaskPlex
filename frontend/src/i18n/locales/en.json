@@ -899,7 +899,8 @@
     "badgeUpper": "Uppercase",
     "badgeDigit": "Digit",
     "badgeSymbol": "Symbol",
-    "suggestions": "Suggestions"
+    "suggestions": "Suggestions",
+    "disclaimer": "Disclaimer: this check does not use breach/dictionary lists; it only scores character variety and length."
   },
       "changeSpeed": {
         "title": "Change Speed",

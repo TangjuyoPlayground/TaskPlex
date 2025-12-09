@@ -84,6 +84,10 @@ export const PasswordCheckerScreen: React.FC = () => {
                 </div>
               </div>
             )}
+
+            <p className="text-xs text-gray-500 dark:text-gray-400">
+              {t('passwordChecker.disclaimer')}
+            </p>
           </div>
         )}
       </div>

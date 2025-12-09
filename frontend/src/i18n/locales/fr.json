@@ -191,7 +191,8 @@
     "badgeUpper": "Majuscules",
     "badgeDigit": "Chiffre",
     "badgeSymbol": "Symbole",
-    "suggestions": "Suggestions"
+    "suggestions": "Suggestions",
+    "disclaimer": "Avertissement : cette vérification n'utilise pas de listes de mots de passe compromis/dictionnaires ; elle se base uniquement sur la variété de caractères et la longueur."
   },
   "image": {
     "title": "Traitement d'image",
