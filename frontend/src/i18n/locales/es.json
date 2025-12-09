@@ -45,6 +45,18 @@
       "finalizing": "Finalizando..."
     }
   },
+    "dev": {
+      "passwordGenerator": {
+        "title": "Generador de contraseñas",
+        "description": "Genera contraseñas seguras con opciones personalizables."
+      }
+    },
+    "security": {
+      "passwordChecker": {
+        "title": "Verificador de contraseña",
+        "description": "Verifica la fortaleza de una contraseña y obtén sugerencias para mejorarla."
+      }
+    },
   "sidebar": {
     "noFavorites": "Sin favoritos aún",
     "addFavoritesHint": "Agrega favoritos desde el panel"

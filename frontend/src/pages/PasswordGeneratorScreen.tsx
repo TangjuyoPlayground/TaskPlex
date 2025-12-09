@@ -132,7 +132,7 @@ export const PasswordGeneratorScreen: React.FC = () => {
               loading={isPending}
               labelKey="passwordGenerator.generate"
               loadingLabelKey="passwordGenerator.generating"
-              color="indigo"
+              color="purple"
             />
             <ErrorAlert message={errorMessage} />
           </div>

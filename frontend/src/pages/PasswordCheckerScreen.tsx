@@ -51,7 +51,7 @@ export const PasswordCheckerScreen: React.FC = () => {
           loading={isPending}
           labelKey="passwordChecker.check"
           loadingLabelKey="passwordChecker.checking"
-          color="indigo"
+          color="purple"
         />
 
         <ErrorAlert message={isError ? error?.message : undefined} />

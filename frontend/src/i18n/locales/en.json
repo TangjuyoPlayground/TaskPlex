@@ -45,6 +45,18 @@
       "finalizing": "Finalizing..."
     }
   },
+    "dev": {
+      "passwordGenerator": {
+        "title": "Password Generator",
+        "description": "Generate strong passwords with customizable options."
+      }
+    },
+    "security": {
+      "passwordChecker": {
+        "title": "Password Checker",
+        "description": "Check password strength and get suggestions to improve it."
+      }
+    },
   "sidebar": {
     "noFavorites": "No favorites yet",
     "addFavoritesHint": "Add favorites from the dashboard"

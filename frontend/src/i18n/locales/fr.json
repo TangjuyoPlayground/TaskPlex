@@ -45,6 +45,18 @@
       "finalizing": "Finalisation..."
     }
   },
+    "dev": {
+      "passwordGenerator": {
+        "title": "Générateur de mot de passe",
+        "description": "Générez des mots de passe robustes avec des options personnalisables."
+      }
+    },
+    "security": {
+      "passwordChecker": {
+        "title": "Vérificateur de mot de passe",
+        "description": "Vérifiez la robustesse d'un mot de passe et obtenez des suggestions pour l'améliorer."
+      }
+    },
   "sidebar": {
     "noFavorites": "Aucun favori pour le moment",
     "addFavoritesHint": "Ajoutez des favoris depuis le tableau de bord"
