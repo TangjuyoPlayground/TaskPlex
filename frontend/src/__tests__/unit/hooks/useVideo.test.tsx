@@ -6,7 +6,7 @@ import { renderHook, waitFor } from '@testing-library/react';
 import { describe, it, expect, beforeEach } from 'vitest';
 import React from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { useCompressVideo, useConvertVideo } from '../../../hooks/useVideo';
+import { useCompressVideo, useConvertVideo, useVideoToGif } from '../../../hooks/useVideo';
 
 // Create a fresh QueryClient for each test
 const createWrapper = () => {
@@ -99,6 +99,31 @@ describe('useConvertVideo', () => {
     
     result.current.mutate({ file, outputFormat: 'webm', quality: 'medium' });
     
+    await waitFor(() => {
+      expect(result.current.isSuccess || result.current.isError).toBe(true);
+    }, { timeout: 3000 });
+  });
+});
+
+describe('useVideoToGif', () => {
+  it('returns mutation object with correct structure', () => {
+    const { result } = renderHook(() => useVideoToGif(), {
+      wrapper: createWrapper(),
+    });
+
+    expect(result.current.mutate).toBeDefined();
+    expect(result.current.isPending).toBe(false);
+  });
+
+  it('can trigger video to GIF mutation', async () => {
+    const { result } = renderHook(() => useVideoToGif(), {
+      wrapper: createWrapper(),
+    });
+
+    const file = createMockFile('test.mp4', 'video/mp4');
+
+    result.current.mutate({ file, options: { fps: 12, width: 320 } });
+
     await waitFor(() => {
       expect(result.current.isSuccess || result.current.isError).toBe(true);
     }, { timeout: 3000 });

@@ -45,5 +45,5 @@ echo "✅ Starting API server..."
 echo "   API: http://localhost:8000"
 echo "   Docs: http://localhost:8000/docs"
 echo ""
-python -m app.main
+python -m app.main --reload --log-level debug
 

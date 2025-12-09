@@ -34,3 +34,15 @@ class VideoProcessingResponse(BaseModel):
     original_size: Optional[int] = None
     processed_size: Optional[int] = None
     compression_ratio: Optional[float] = None
+
+
+class VideoToGifRequest(BaseModel):
+    """Request model for converting video to GIF"""
+
+    start_time: float = Field(default=0.0, ge=0, description="Start time in seconds")
+    duration: Optional[float] = Field(
+        default=None, gt=0, description="Duration in seconds (optional)"
+    )
+    width: Optional[int] = Field(default=None, ge=32, le=3840, description="Target width in pixels")
+    fps: int = Field(default=12, ge=1, le=60, description="Frames per second for GIF")
+    loop: bool = Field(default=True, description="Whether the GIF should loop")

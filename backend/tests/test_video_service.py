@@ -12,6 +12,7 @@ from app.services.video_service import (
     compress_video,
     convert_video,
     get_available_h264_encoder,
+    video_to_gif,
 )
 
 
@@ -218,6 +219,121 @@ class TestConvertVideo:
         result = convert_video(Path("/tmp/input.mp4"), Path("/tmp/output.avi"), "avi", "medium")
 
         assert result.success is False
+
+
+class TestVideoToGif:
+    """Tests for video_to_gif function"""
+
+    @patch("app.services.video_service.get_file_size")
+    @patch("app.services.video_service.ffmpeg.run")
+    @patch("app.services.video_service.ffmpeg.output")
+    @patch("app.services.video_service.ffmpeg.filter")
+    @patch("app.services.video_service.ffmpeg.filter_multi_output")
+    @patch("app.services.video_service.ffmpeg.input")
+    def test_successful_video_to_gif(
+        self,
+        mock_input,
+        mock_split,
+        mock_filter,
+        mock_output,
+        mock_run,
+        mock_size,
+    ):
+        """Test successful conversion to GIF"""
+        mock_size.side_effect = [500000, 120000]
+
+        mock_input.return_value = MagicMock(name="input_stream")
+        fps_stream = MagicMock(name="fps_stream")
+        scaled_stream = MagicMock(name="scaled_stream")
+        split_streams = (MagicMock(name="split0"), MagicMock(name="split1"))
+        palette = MagicMock(name="palette")
+        palette_use = MagicMock(name="palette_use")
+        output_stream = MagicMock(name="output_stream")
+
+        mock_filter.side_effect = [fps_stream, scaled_stream, palette_use]
+        mock_split.return_value = split_streams
+        split_streams[0].filter.return_value = palette
+        mock_output.return_value = output_stream
+
+        result = video_to_gif(
+            input_path=Path("/tmp/input.mp4"),
+            output_path=Path("/tmp/output.gif"),
+            start_time=1.5,
+            duration=3.0,
+            width=320,
+            fps=10,
+            loop=True,
+        )
+
+        assert result.success is True
+        assert result.download_url == "/api/v1/download/output.gif"
+
+    def test_invalid_fps(self):
+        """Test invalid fps is rejected early"""
+        result = video_to_gif(
+            input_path=Path("/tmp/input.mp4"),
+            output_path=Path("/tmp/output.gif"),
+            fps=0,
+        )
+
+        assert result.success is False
+        assert "fps" in result.message.lower()
+
+    @patch("app.services.video_service.ffmpeg.run")
+    @patch("app.services.video_service.ffmpeg.output")
+    @patch("app.services.video_service.ffmpeg.filter")
+    @patch("app.services.video_service.ffmpeg.filter_multi_output")
+    @patch("app.services.video_service.ffmpeg.input")
+    @patch("app.services.video_service.get_file_size")
+    def test_ffmpeg_error(
+        self,
+        mock_size,
+        mock_input,
+        mock_split,
+        mock_filter,
+        mock_output,
+        mock_run,
+    ):
+        """Test FFmpeg error handling for GIF conversion"""
+        import ffmpeg
+
+        mock_size.side_effect = [1000, 2000]
+        mock_input.return_value = MagicMock()
+        mock_filter.side_effect = [MagicMock(), MagicMock(), MagicMock()]
+        mock_split.return_value = (MagicMock(), MagicMock())
+        mock_output.return_value = MagicMock()
+        mock_run.side_effect = ffmpeg.Error("ffmpeg", b"", b"gif error")
+
+        result = video_to_gif(Path("/tmp/input.mp4"), Path("/tmp/output.gif"))
+
+        assert result.success is False
+        assert "ffmpeg" in result.message.lower()
+
+    @patch("app.services.video_service.ffmpeg.run", side_effect=Exception("Unexpected error"))
+    @patch("app.services.video_service.ffmpeg.output")
+    @patch("app.services.video_service.ffmpeg.filter")
+    @patch("app.services.video_service.ffmpeg.filter_multi_output")
+    @patch("app.services.video_service.ffmpeg.input")
+    @patch("app.services.video_service.get_file_size", return_value=1000)
+    def test_general_exception(
+        self,
+        mock_size,
+        mock_input,
+        mock_split,
+        mock_filter,
+        mock_output,
+        mock_run,
+    ):
+        """Test general exception handling for GIF conversion"""
+        mock_input.return_value = MagicMock()
+        mock_filter.side_effect = [MagicMock(), MagicMock(), MagicMock()]
+        mock_split.return_value = (MagicMock(), MagicMock())
+        mock_output.return_value = MagicMock()
+
+        result = video_to_gif(Path("/tmp/input.mp4"), Path("/tmp/output.gif"))
+
+        assert result.success is False
+        assert "error converting video to gif" in result.message.lower()
 
     @patch("app.services.video_service.ffmpeg.run")
     @patch("app.services.video_service.ffmpeg.output")

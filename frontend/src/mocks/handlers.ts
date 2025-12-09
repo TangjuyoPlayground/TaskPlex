@@ -97,6 +97,19 @@ export const videoHandlers = [
     );
   }),
 
+  // Video to GIF (synchronous)
+  http.post(`${API_PATTERN}/video/to-gif`, async () => {
+    await delay(40);
+    return HttpResponse.json(
+      successResponse({
+        download_url: '/api/v1/download/preview.gif',
+        filename: 'preview.gif',
+        original_size: 2048000,
+        processed_size: 512000,
+      })
+    );
+  }),
+
   // Convert video (async with SSE progress)
   http.post(`${API_PATTERN}/video/convert/async`, async () => {
     await delay(30);

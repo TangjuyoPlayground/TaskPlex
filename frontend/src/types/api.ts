@@ -18,6 +18,14 @@ export interface VideoProcessingResponse extends ApiResponse {
   compression_ratio?: number;
 }
 
+export interface VideoToGifOptions {
+  start_time?: number;
+  duration?: number;
+  width?: number;
+  fps?: number;
+  loop?: boolean;
+}
+
 // PDF Processing
 export interface PDFProcessingResponse extends ApiResponse {
   filename?: string;

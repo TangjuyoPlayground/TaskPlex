@@ -4,6 +4,7 @@ Video processing service using FFmpeg
 
 from pathlib import Path
 import subprocess
+from typing import Optional
 
 import ffmpeg
 
@@ -283,5 +284,109 @@ def rotate_video(input_path: Path, output_path: Path, angle: int) -> VideoProces
         return VideoProcessingResponse(
             success=False,
             message=f"Error rotating video: {str(e)}",
+            filename=output_path.name if output_path else None,
+        )
+
+
+def video_to_gif(
+    input_path: Path,
+    output_path: Path,
+    start_time: float = 0.0,
+    duration: Optional[float] = None,
+    width: Optional[int] = None,
+    fps: int = 12,
+    loop: bool = True,
+) -> VideoProcessingResponse:
+    """
+    Convert a video segment to an animated GIF using FFmpeg with palette optimization.
+
+    Args:
+        input_path: Path to input video.
+        output_path: Path to save generated GIF.
+        start_time: Start time in seconds.
+        duration: Duration in seconds (optional).
+        width: Target width in pixels (maintains aspect ratio).
+        fps: Frames per second for the GIF.
+        loop: Whether the GIF should loop indefinitely.
+
+    Returns:
+        VideoProcessingResponse with conversion results.
+    """
+    try:
+        # Basic validation to avoid expensive FFmpeg runs for invalid params
+        if start_time < 0:
+            return VideoProcessingResponse(
+                success=False,
+                message="start_time must be non-negative",
+                filename=output_path.name if output_path else None,
+            )
+
+        if duration is not None and duration <= 0:
+            return VideoProcessingResponse(
+                success=False,
+                message="duration must be greater than 0 when provided",
+                filename=output_path.name if output_path else None,
+            )
+
+        if fps < 1 or fps > 60:
+            return VideoProcessingResponse(
+                success=False,
+                message="fps must be between 1 and 60",
+                filename=output_path.name if output_path else None,
+            )
+
+        if width is not None and width < 32:
+            return VideoProcessingResponse(
+                success=False,
+                message="width must be at least 32 pixels",
+                filename=output_path.name if output_path else None,
+            )
+
+        original_size = get_file_size(input_path)
+
+        input_kwargs = {}
+        if start_time:
+            input_kwargs["ss"] = start_time
+        if duration:
+            input_kwargs["t"] = duration
+
+        # Build the FFmpeg pipeline with palette optimization
+        stream = ffmpeg.input(str(input_path), **input_kwargs)
+        stream = ffmpeg.filter(stream, "fps", fps)
+
+        if width:
+            stream = ffmpeg.filter(stream, "scale", width, -1, flags="lanczos")
+
+        split_streams = stream.filter_multi_output("split")
+        palette = split_streams[0].filter("palettegen")
+        palette_use = ffmpeg.filter([split_streams[1], palette], "paletteuse")
+
+        # loop=0 => infinite loop, loop=1 => play once then stop
+        output = ffmpeg.output(palette_use, str(output_path), loop=0 if loop else 1)
+        ffmpeg.run(output, overwrite_output=True, capture_stdout=True, capture_stderr=True)
+
+        processed_size = get_file_size(output_path)
+
+        return VideoProcessingResponse(
+            success=True,
+            message="GIF created successfully",
+            filename=output_path.name,
+            download_url=f"/api/v1/download/{output_path.name}",
+            original_size=original_size,
+            processed_size=processed_size,
+        )
+
+    except ffmpeg.Error as e:
+        error_message = e.stderr.decode() if e.stderr else str(e)
+        return VideoProcessingResponse(
+            success=False,
+            message=f"FFmpeg error: {error_message}",
+            filename=output_path.name if output_path else None,
+        )
+
+    except Exception as e:
+        return VideoProcessingResponse(
+            success=False,
+            message=f"Error converting video to GIF: {str(e)}",
             filename=output_path.name if output_path else None,
         )

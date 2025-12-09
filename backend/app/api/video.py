@@ -9,7 +9,7 @@ from fastapi import APIRouter, BackgroundTasks, File, Form, HTTPException, Uploa
 
 from app.config import TEMP_DIR
 from app.models.video import VideoProcessingResponse
-from app.services.video_service import compress_video, convert_video, rotate_video
+from app.services.video_service import compress_video, convert_video, rotate_video, video_to_gif
 from app.services.video_service_async import (
     compress_video_with_progress,
     convert_video_with_progress,
@@ -155,6 +155,67 @@ async def rotate_video_endpoint(
 
     finally:
         # Clean up input file
+        if input_path:
+            delete_file(input_path)
+
+
+@router.post("/to-gif", response_model=VideoProcessingResponse)
+async def video_to_gif_endpoint(
+    file: UploadFile = File(..., description="Video file to convert to GIF"),
+    start_time: float = Form(0.0, description="Start time in seconds"),
+    duration: float | None = Form(None, description="Duration in seconds"),
+    width: int | None = Form(None, description="Target width in pixels"),
+    fps: int = Form(12, description="Frames per second for GIF"),
+    loop: bool = Form(True, description="Loop GIF indefinitely"),
+):
+    """
+    Convert a segment of a video to an animated GIF.
+
+    Supports common video formats: MP4, AVI, MOV, MKV, FLV, WMV
+    """
+    if not validate_video_format(file.filename):
+        raise HTTPException(status_code=400, detail="Unsupported video format")
+
+    if start_time < 0:
+        raise HTTPException(status_code=400, detail="start_time must be non-negative")
+
+    if duration is not None and duration <= 0:
+        raise HTTPException(status_code=400, detail="duration must be greater than 0")
+
+    if fps < 1 or fps > 60:
+        raise HTTPException(status_code=400, detail="fps must be between 1 and 60")
+
+    if width is not None and width < 32:
+        raise HTTPException(status_code=400, detail="width must be at least 32 pixels")
+
+    input_path = None
+    output_path = None
+
+    try:
+        # Save uploaded file
+        input_path = await save_upload_file(file)
+
+        # Create output path
+        output_filename = generate_unique_filename(f"gif_{Path(file.filename).stem}.gif")
+        output_path = TEMP_DIR / output_filename
+
+        # Convert video to GIF
+        result = video_to_gif(
+            input_path=input_path,
+            output_path=output_path,
+            start_time=start_time,
+            duration=duration,
+            width=width,
+            fps=fps,
+            loop=loop,
+        )
+
+        if not result.success:
+            raise HTTPException(status_code=500, detail=result.message)
+
+        return result
+
+    finally:
         if input_path:
             delete_file(input_path)
 
