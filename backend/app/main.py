@@ -12,12 +12,14 @@ from fastapi.responses import FileResponse, JSONResponse
 import uvicorn
 
 from app.api import (
+    base64 as base64_api,
+)
+from app.api import (
     code_formatter,
     code_minifier,
     color,
     css_formatter,
     css_minifier,
-    base64 as base64_api,
     hash,
     html_formatter,
     html_minifier,

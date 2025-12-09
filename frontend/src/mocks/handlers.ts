@@ -502,7 +502,7 @@ export const base64Handlers = [
     try {
       const decoded = atob(text);
       return HttpResponse.json(successResponse({ result: decoded }));
-    } catch (err) {
+    } catch {
       return errorResponse('Invalid Base64', 400);
     }
   }),

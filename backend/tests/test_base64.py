@@ -24,4 +24,3 @@ def test_decode_base64():
 def test_decode_base64_invalid():
     response = client.post("/api/v1/base64/decode", json={"text": "!!notbase64!!"})
     assert response.status_code == 400
-

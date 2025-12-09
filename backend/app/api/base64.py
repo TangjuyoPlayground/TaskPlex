@@ -30,4 +30,3 @@ async def decode_base64_endpoint(request: Base64Request) -> Base64Response:
     if not result.success:
         raise HTTPException(status_code=400, detail=result.message)
     return result
-

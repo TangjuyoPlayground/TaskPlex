@@ -17,4 +17,3 @@ class Base64Response(BaseModel):
     success: bool
     message: str
     result: str
-

@@ -21,4 +21,3 @@ def decode_base64(text: str) -> Base64Response:
         return Base64Response(success=True, message="Decoded successfully", result=decoded)
     except Exception as exc:
         return Base64Response(success=False, message=f"Error decoding: {exc}", result="")
-
