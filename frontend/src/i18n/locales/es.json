@@ -281,6 +281,57 @@
       "sha512": "SHA512"
     }
   },
+  "base64": {
+    "title": "Codificador/Decodificador Base64",
+    "subtitle": "Convierte texto hacia/desde Base64 en un solo lugar.",
+    "mode": {
+      "encode": "Codificar",
+      "decode": "Decodificar"
+    },
+    "switch": "Cambiar modo",
+    "inputEncode": "Texto a codificar",
+    "inputHintEncode": "Pega texto plano; se convertirá a Base64",
+    "inputDecode": "Base64 a decodificar",
+    "inputHintDecode": "Pega el texto Base64; se decodificará abajo",
+    "placeholderEncode": "Ingresa el texto a codificar...",
+    "placeholderDecode": "Ingresa el Base64 a decodificar...",
+    "encode": "Codificar",
+    "decode": "Decodificar",
+    "processing": "Procesando...",
+    "output": "Resultado",
+    "outputHint": "Copia el resultado abajo",
+    "outputPlaceholder": "El resultado aparecerá aquí...",
+    "copy": "Copiar",
+    "copied": "¡Copiado!"
+  },
+  "base64Encode": {
+    "title": "Codificador Base64",
+    "subtitle": "Codifica cualquier texto a Base64.",
+    "inputLabel": "Texto a codificar",
+    "inputHint": "Pega texto plano; se convertirá a Base64",
+    "placeholder": "Ingresa el texto a codificar...",
+    "encode": "Codificar",
+    "processing": "Codificando...",
+    "output": "Resultado Base64",
+    "outputHint": "Copia la cadena codificada",
+    "outputPlaceholder": "El texto codificado aparecerá aquí...",
+    "copy": "Copiar",
+    "copied": "¡Copiado!"
+  },
+  "base64Decode": {
+    "title": "Decodificador Base64",
+    "subtitle": "Decodifica Base64 a texto plano.",
+    "inputLabel": "Entrada Base64",
+    "inputHint": "Pega Base64 para decodificar",
+    "placeholder": "Ingresa el Base64 a decodificar...",
+    "decode": "Decodificar",
+    "processing": "Decodificando...",
+    "output": "Texto decodificado",
+    "outputHint": "Copia la cadena decodificada",
+    "outputPlaceholder": "El texto decodificado aparecerá aquí...",
+    "copy": "Copiar",
+    "copied": "¡Copiado!"
+  },
   "resizeImage": {
     "title": "Redimensionar imagen",
     "imageFile": "Archivo de imagen",
@@ -949,6 +1000,18 @@
       "hashGenerator": {
         "title": "Generador de hash",
         "description": "Generar hashes MD5, SHA1, SHA256"
+      },
+      "base64": {
+        "title": "Codificador/Decodificador Base64",
+        "description": "Codificar o decodificar texto en Base64"
+      },
+      "base64Encode": {
+        "title": "Codificador Base64",
+        "description": "Codificar texto a Base64"
+      },
+      "base64Decode": {
+        "title": "Decodificador Base64",
+        "description": "Decodificar Base64 a texto"
       },
       "base64": {
         "title": "Codificador Base64",

@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useFormatText } from '../../../hooks/useText';
 import { useConvertColor } from '../../../hooks/useColor';
 import { useHash } from '../../../hooks/useHash';
+import { useBase64 } from '../../../hooks/useBase64';
 
 const createWrapper = () => {
   const queryClient = new QueryClient({
@@ -64,6 +65,26 @@ describe('useHash', () => {
   it('generates a hash', async () => {
     const { result } = renderHook(() => useHash(), { wrapper: createWrapper() });
     result.current.mutate({ text: 'hello', algorithm: 'md5', uppercase: true });
+
+    await waitFor(() => {
+      expect(result.current.isPending).toBe(false);
+    });
+  });
+});
+
+describe('useBase64', () => {
+  it('encode mutation', async () => {
+    const { result } = renderHook(() => useBase64('encode'), { wrapper: createWrapper() });
+    result.current.mutate({ text: 'hello' });
+
+    await waitFor(() => {
+      expect(result.current.isPending).toBe(false);
+    });
+  });
+
+  it('decode mutation', async () => {
+    const { result } = renderHook(() => useBase64('decode'), { wrapper: createWrapper() });
+    result.current.mutate({ text: 'aGVsbG8=' });
 
     await waitFor(() => {
       expect(result.current.isPending).toBe(false);
