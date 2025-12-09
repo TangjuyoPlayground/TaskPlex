@@ -117,6 +117,24 @@
     "compression": "Compression",
     "downloadResult": "Télécharger le résultat"
   },
+  "videoToGif": {
+    "title": "Vidéo vers GIF",
+    "description": "Crée un GIF optimisé à partir d'un segment de votre vidéo.",
+    "videoFile": "Fichier vidéo",
+    "dragDrop": "Glissez-déposez une vidéo ou cliquez pour téléverser",
+    "startTime": "Temps de début (s)",
+    "duration": "Durée (s, optionnel)",
+    "width": "Largeur (px, optionnel)",
+    "fps": "Images par seconde",
+    "loop": "Boucle GIF",
+    "convert": "Créer le GIF",
+    "processing": "Conversion en GIF...",
+    "result": "Résultat",
+    "previewPlaceholder": "L'aperçu du GIF apparaîtra ici",
+    "validation": {
+      "fileRequired": "Sélectionnez d'abord une vidéo."
+    }
+  },
   "image": {
     "title": "Traitement d'image",
     "operation": "Opération",

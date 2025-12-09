@@ -5,6 +5,7 @@ import type {
   ImageProcessingResponse,
   ColorExtractionResponse,
   ColorConversionResponse,
+  VideoToGifOptions,
   RegexResponse,
   UnitConversionResponse,
   QRCodeResponse,
@@ -48,6 +49,7 @@ export type {
   XMLMinifierResponse,
   ColorExtractionResponse,
   ColorConversionResponse,
+  VideoToGifOptions,
   TextFormatResponse,
   HashResponse,
   Base64Response,
@@ -113,6 +115,30 @@ export const ApiService = {
     formData.append('file', file);
     formData.append('angle', angle.toString());
     const response = await api.post<VideoProcessingResponse>('/video/rotate', formData);
+    return response.data;
+  },
+
+  videoToGif: async (file: File, options: VideoToGifOptions = {}) => {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    if (options.start_time !== undefined) {
+      formData.append('start_time', options.start_time.toString());
+    }
+    if (options.duration !== undefined) {
+      formData.append('duration', options.duration.toString());
+    }
+    if (options.width !== undefined) {
+      formData.append('width', options.width.toString());
+    }
+    if (options.fps !== undefined) {
+      formData.append('fps', options.fps.toString());
+    }
+    if (options.loop !== undefined) {
+      formData.append('loop', options.loop ? 'true' : 'false');
+    }
+
+    const response = await api.post<VideoProcessingResponse>('/video/to-gif', formData);
     return response.data;
   },
 
