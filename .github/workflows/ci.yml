@@ -28,6 +28,11 @@ jobs:
           cache: 'pip'
           cache-dependency-path: backend/requirements.txt
 
+      - name: Install System Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libzbar0
+
       - name: Install Linters
         run: |
           pip install ruff black isort
@@ -97,6 +102,11 @@ jobs:
           python-version: '3.12'
           cache: 'pip'
           cache-dependency-path: backend/requirements.txt
+
+      - name: Install System Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libzbar0
 
       - name: Install Backend Dependencies
         run: |

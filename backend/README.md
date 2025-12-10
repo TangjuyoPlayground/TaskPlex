@@ -53,6 +53,7 @@ AnyTools/
 - FFmpeg (for video processing)
 - Tesseract OCR (for PDF OCR feature)
 - Poppler (for PDF to image conversion)
+- ZBar (for QR Code reading)
 
 #### Installing FFmpeg
 
