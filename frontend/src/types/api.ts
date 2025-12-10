@@ -269,6 +269,14 @@ export interface UUIDGenerateResponse extends ApiResponse {
   uuids: string[];
 }
 
+export interface URLEncodeDecodeRequest {
+  text: string;
+}
+
+export interface URLResponse extends ApiResponse {
+  result: string;
+}
+
 export interface Base64Response extends ApiResponse {
   result: string;
 }

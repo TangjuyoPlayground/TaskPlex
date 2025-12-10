@@ -30,6 +30,8 @@ import type {
   PasswordCheckResponse,
   UUIDGenerateRequest,
   UUIDGenerateResponse,
+  URLEncodeDecodeRequest,
+  URLResponse,
   Base64Response,
 } from '../types/api';
 
@@ -66,6 +68,8 @@ export type {
   PasswordCheckResponse,
   UUIDGenerateRequest,
   UUIDGenerateResponse,
+  URLEncodeDecodeRequest,
+  URLResponse,
   Base64Response,
 } from '../types/api';
 
@@ -493,6 +497,16 @@ export const ApiService = {
   // UUID Generator
   generateUUIDs: async (payload: UUIDGenerateRequest = {}) => {
     const response = await api.post<UUIDGenerateResponse>('/uuid/generate', payload);
+    return response.data;
+  },
+
+  // URL Encoder / Decoder
+  encodeURL: async (text: string) => {
+    const response = await api.post<URLResponse>('/url/encode', { text } satisfies URLEncodeDecodeRequest);
+    return response.data;
+  },
+  decodeURL: async (text: string) => {
+    const response = await api.post<URLResponse>('/url/decode', { text } satisfies URLEncodeDecodeRequest);
     return response.data;
   },
 

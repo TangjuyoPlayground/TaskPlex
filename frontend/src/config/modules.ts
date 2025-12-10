@@ -603,8 +603,8 @@ export const MODULES: ModuleDefinition[] = [
     labelKey: 'modules.dev.urlEncoder.title',
     descriptionKey: 'modules.dev.urlEncoder.description',
     category: 'developer',
-    status: 'placeholder',
-    color: 'text-yellow-500',
+    status: 'implemented',
+    color: 'text-yellow-600',
   },
   {
     id: 'uuid-generator',

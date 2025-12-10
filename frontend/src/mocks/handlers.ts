@@ -161,6 +161,25 @@ export const videoHandlers = [
     );
   }),
 
+  // URL encode/decode
+  http.post(`${API_PATTERN}/url/encode`, async () => {
+    await delay(10);
+    return HttpResponse.json(
+      successResponse({
+        result: 'hello%20world',
+      })
+    );
+  }),
+
+  http.post(`${API_PATTERN}/url/decode`, async () => {
+    await delay(10);
+    return HttpResponse.json(
+      successResponse({
+        result: 'hello world',
+      })
+    );
+  }),
+
   // Convert video (async with SSE progress)
   http.post(`${API_PATTERN}/video/convert/async`, async () => {
     await delay(30);
