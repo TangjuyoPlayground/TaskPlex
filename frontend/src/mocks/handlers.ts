@@ -485,6 +485,42 @@ export const qrcodeHandlers = [
 ];
 
 // ============================================
+// BARCODE HANDLERS
+// ============================================
+export const barcodeHandlers = [
+  http.post(`${API_PATTERN}/barcode/generate`, async ({ request }) => {
+    await delay(100);
+    
+    const body = await request.json() as { 
+      data: string; 
+      barcode_type?: string; 
+      width?: number; 
+      height?: number; 
+      add_checksum?: boolean;
+    };
+    const { data, barcode_type } = body;
+
+    if (!data || data.trim().length === 0) {
+      return errorResponse('Data is required');
+    }
+
+    if (data.length > 100) {
+      return errorResponse('Data too long (max 100 characters)');
+    }
+
+    // Generate a mock filename
+    const filename = `barcode_${Date.now()}.png`;
+
+    return HttpResponse.json({
+      success: true,
+      message: `Barcode (${barcode_type || 'code128'}) generated successfully`,
+      barcode_url: `/api/v1/download/${filename}`,
+      filename,
+    });
+  }),
+];
+
+// ============================================
 // COLOR HANDLERS
 // ============================================
 export const colorHandlers = [
@@ -649,6 +685,7 @@ export const handlers = [
   ...regexHandlers,
   ...unitsHandlers,
   ...qrcodeHandlers,
+  ...barcodeHandlers,
   ...colorHandlers,
   ...hashHandlers,
   ...base64Handlers,

@@ -34,6 +34,7 @@ import type {
   URLEncodeDecodeRequest,
   URLResponse,
   Base64Response,
+  BarcodeResponse,
 } from '../types/api';
 
 // Re-export types for backwards compatibility
@@ -73,6 +74,8 @@ export type {
   URLEncodeDecodeRequest,
   URLResponse,
   Base64Response,
+  BarcodeRequest,
+  BarcodeResponse,
 } from '../types/api';
 
 // API URL from environment variable with fallback
@@ -360,6 +363,18 @@ export const ApiService = {
       size,
       border,
       error_correction: errorCorrection
+    });
+    return response.data;
+  },
+
+  // Barcode Generator
+  generateBarcode: async (data: string, barcodeType?: string, width?: number, height?: number, addChecksum?: boolean) => {
+    const response = await api.post<BarcodeResponse>('/barcode/generate', {
+      data,
+      barcode_type: barcodeType || 'code128',
+      width: width !== undefined ? width : 1.0,
+      height: height !== undefined ? height : 50.0,
+      add_checksum: addChecksum !== undefined ? addChecksum : true,
     });
     return response.data;
   },

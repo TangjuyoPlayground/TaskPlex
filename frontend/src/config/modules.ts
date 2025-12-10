@@ -774,8 +774,8 @@ export const MODULES: ModuleDefinition[] = [
     labelKey: 'modules.dev.barcodeGenerator.title',
     descriptionKey: 'modules.dev.barcodeGenerator.description',
     category: 'developer',
-    status: 'placeholder',
-    color: 'text-yellow-500',
+    status: 'implemented',
+    color: 'text-yellow-600',
   },
   {
     id: 'number-converter',
