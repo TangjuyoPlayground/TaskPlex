@@ -359,8 +359,8 @@ export const MODULES: ModuleDefinition[] = [
     labelKey: 'modules.image.collage.title',
     descriptionKey: 'modules.image.collage.description',
     category: 'media',
-    status: 'placeholder',
-    color: 'text-blue-500',
+    status: 'implemented',
+    color: 'text-blue-600',
   },
   {
     id: 'image-watermark',

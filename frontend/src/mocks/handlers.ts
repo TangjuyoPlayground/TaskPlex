@@ -295,6 +295,23 @@ export const imageHandlers = [
       })
     );
   }),
+
+  // Create collage
+  http.post(`${API_PATTERN}/image/collage`, async () => {
+    await delay(100);
+    return HttpResponse.json(
+      successResponse({
+        download_url: '/api/v1/download/collage.png',
+        filename: 'collage.png',
+        processed_size: 3145728, // 3MB
+        dimensions: {
+          width: 1600,
+          height: 1600,
+        },
+        message: 'Collage created successfully (2x2 grid)',
+      })
+    );
+  }),
 ];
 
 // ============================================

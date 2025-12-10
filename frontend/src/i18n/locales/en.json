@@ -296,6 +296,25 @@
       "invert": "Invert"
     }
   },
+  "createCollage": {
+    "title": "Create Collage",
+    "subtitle": "Arrange multiple images in a grid to create a collage.",
+    "selectGrid": "Select Grid",
+    "gridInfo": "Grid: {{rows}}x{{cols}} ({{total}} cells)",
+    "uploadImages": "Upload Images",
+    "dragDrop": "Drag and drop or click to select images",
+    "uploadedImages": "Uploaded Images ({{count}})",
+    "shuffle": "Shuffle Images",
+    "createCollage": "Create Collage",
+    "processing": "Creating collage...",
+    "preview": "Preview",
+    "clickToChange": "Click on a cell to select its image",
+    "result": "Result",
+    "downloadResult": "Download Collage",
+    "selectImage": "Select an image",
+    "existingImages": "Existing images",
+    "addNewImage": "Add a new image"
+  },
   "pdfToWord": {
     "title": "PDF to Word",
     "subtitle": "Convert your PDF into an editable DOCX (text only).",

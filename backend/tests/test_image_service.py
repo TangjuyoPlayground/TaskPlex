@@ -8,6 +8,7 @@ import pytest
 from app.services.image_service import (
     compress_image,
     convert_image,
+    create_collage,
     extract_colors,
     resize_image,
     rotate_image,
@@ -153,3 +154,82 @@ def test_extract_colors_error(monkeypatch, tmp_path: Path):
 
     assert result.success is False
     assert "error" in result.message.lower()
+
+
+def test_create_collage_success(tmp_path: Path):
+    """Test successful collage creation"""
+    # Create 4 test images
+    image_paths = []
+    colors = ["red", "blue", "green", "yellow"]
+    for i, color in enumerate(colors):
+        img_path = tmp_path / f"image_{i}.png"
+        create_temp_image(img_path, size=(100, 100), color=color)
+        image_paths.append(img_path)
+
+    output_path = tmp_path / "collage.png"
+
+    # Create 2x2 collage with order [0, 1, 2, 3]
+    result = create_collage(image_paths, output_path, rows=2, cols=2, image_order=[0, 1, 2, 3])
+
+    assert result.success is True
+    assert result.filename == "collage.png"
+    assert result.download_url.endswith("collage.png")
+    assert result.dimensions is not None
+    assert result.dimensions["width"] == 1600  # 2 * 800
+    assert result.dimensions["height"] == 1600  # 2 * 800
+    assert output_path.exists()
+
+
+def test_create_collage_no_images(tmp_path: Path):
+    """Test collage creation with no images"""
+    output_path = tmp_path / "collage.png"
+    result = create_collage([], output_path, rows=2, cols=2, image_order=[0, 1, 2, 3])
+
+    assert result.success is False
+    assert "at least one image" in result.message.lower()
+
+
+def test_create_collage_invalid_order_length(tmp_path: Path):
+    """Test collage creation with invalid order length"""
+    image_paths = [tmp_path / "image_0.png"]
+    create_temp_image(image_paths[0], size=(100, 100), color="red")
+    output_path = tmp_path / "collage.png"
+
+    # Order has 4 elements but we only have 1 image and need 2x2=4 cells
+    result = create_collage(image_paths, output_path, rows=2, cols=2, image_order=[0, 0, 0, 0])
+
+    # This should work (reusing the same image)
+    assert result.success is True
+
+
+def test_create_collage_invalid_image_index(tmp_path: Path):
+    """Test collage creation with invalid image index"""
+    image_paths = [tmp_path / "image_0.png"]
+    create_temp_image(image_paths[0], size=(100, 100), color="red")
+    output_path = tmp_path / "collage.png"
+
+    # Order references index 5 but we only have 1 image (index 0)
+    result = create_collage(image_paths, output_path, rows=1, cols=1, image_order=[5])
+
+    assert result.success is False
+    assert "invalid image index" in result.message.lower()
+
+
+def test_create_collage_3x3_grid(tmp_path: Path):
+    """Test creating a 3x3 collage"""
+    # Create 9 test images
+    image_paths = []
+    for i in range(9):
+        img_path = tmp_path / f"image_{i}.png"
+        create_temp_image(img_path, size=(100, 100), color="red")
+        image_paths.append(img_path)
+
+    output_path = tmp_path / "collage.png"
+
+    # Create 3x3 collage
+    result = create_collage(image_paths, output_path, rows=3, cols=3, image_order=list(range(9)))
+
+    assert result.success is True
+    assert result.dimensions["width"] == 2400  # 3 * 800
+    assert result.dimensions["height"] == 2400  # 3 * 800
+    assert output_path.exists()

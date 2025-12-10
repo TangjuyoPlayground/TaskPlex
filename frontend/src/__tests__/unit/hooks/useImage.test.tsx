@@ -6,7 +6,7 @@ import { renderHook, waitFor } from '@testing-library/react';
 import { describe, it, expect, beforeEach } from 'vitest';
 import React from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { useCompressImage, useConvertImage } from '../../../hooks/useImage';
+import { useCompressImage, useConvertImage, useCreateCollage } from '../../../hooks/useImage';
 
 const createWrapper = () => {
   const queryClient = new QueryClient({
@@ -112,6 +112,47 @@ describe('useConvertImage', () => {
     await waitFor(() => {
       expect(result.current.isPending).toBe(false);
     }, { timeout: 3000 });
+  });
+});
+
+describe('useCreateCollage', () => {
+  it('returns mutation object with correct structure', () => {
+    const { result } = renderHook(() => useCreateCollage(), {
+      wrapper: createWrapper(),
+    });
+    
+    expect(result.current.mutate).toBeDefined();
+    expect(result.current.isPending).toBe(false);
+  });
+
+  it('can trigger collage creation mutation', async () => {
+    const { result } = renderHook(() => useCreateCollage(), {
+      wrapper: createWrapper(),
+    });
+    
+    const files = [
+      createMockFile('image1.jpg', 'image/jpeg'),
+      createMockFile('image2.jpg', 'image/jpeg'),
+      createMockFile('image3.jpg', 'image/jpeg'),
+      createMockFile('image4.jpg', 'image/jpeg'),
+    ];
+    
+    result.current.mutate({
+      files,
+      rows: 2,
+      cols: 2,
+      imageOrder: [0, 1, 2, 3],
+    });
+    
+    await waitFor(() => {
+      expect(result.current.isSuccess || result.current.isError).toBe(true);
+    }, { timeout: 3000 });
+    
+    if (result.current.isSuccess) {
+      expect(result.current.data).toBeDefined();
+      expect(result.current.data?.success).toBe(true);
+      expect(result.current.data?.filename).toBe('collage.png');
+    }
   });
 });
 

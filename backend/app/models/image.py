@@ -51,3 +51,13 @@ class ColorExtractionResponse(BaseModel):
     message: str
     filename: str
     colors: list[ColorInfo]
+
+
+class CollageRequest(BaseModel):
+    """Request model for creating a collage"""
+
+    rows: int = Field(..., ge=1, le=10, description="Number of rows in the grid")
+    cols: int = Field(..., ge=1, le=10, description="Number of columns in the grid")
+    image_order: list[int] = Field(
+        ..., description="Order of images in the grid (indices from 0 to rows*cols-1)"
+    )

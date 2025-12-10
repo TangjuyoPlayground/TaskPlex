@@ -87,6 +87,13 @@ export interface ColorExtractionResponse extends ApiResponse {
   colors: ColorInfo[];
 }
 
+export interface CollageRequest {
+  files: File[];
+  rows: number;
+  cols: number;
+  imageOrder: number[];
+}
+
 export interface ColorConversionResponse extends ApiResponse {
   input_format: string;
   normalized_hex: string;

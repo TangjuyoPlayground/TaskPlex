@@ -13,6 +13,7 @@ from app.services.image_service import (
     apply_filter,
     compress_image,
     convert_image,
+    create_collage,
     extract_colors,
     resize_image,
     rotate_image,
@@ -359,3 +360,86 @@ async def filter_image_endpoint(
     finally:
         if input_path:
             delete_file(input_path)
+
+
+@router.post("/collage", response_model=ImageProcessingResponse)
+async def create_collage_endpoint(
+    files: list[UploadFile] = File(..., description="Image files for the collage"),
+    rows: int = Form(..., description="Number of rows in the grid (1-10)"),
+    cols: int = Form(..., description="Number of columns in the grid (1-10)"),
+    image_order: str = Form(
+        ...,
+        description="Comma-separated list of image indices in order (e.g., '0,1,2,3' for 2x2 grid)",
+    ),
+):
+    """
+    Create a collage from multiple images arranged in a grid
+
+    Supported formats: JPG, JPEG, PNG, GIF, BMP, WEBP
+    """
+    # Validate grid dimensions
+    if rows < 1 or rows > 10:
+        raise HTTPException(status_code=400, detail="Rows must be between 1 and 10")
+    if cols < 1 or cols > 10:
+        raise HTTPException(status_code=400, detail="Columns must be between 1 and 10")
+
+    total_cells = rows * cols
+    if len(files) == 0:
+        raise HTTPException(status_code=400, detail="At least one image is required")
+
+    # Validate file formats
+    for file in files:
+        if not validate_image_format(file.filename):
+            raise HTTPException(
+                status_code=400, detail=f"Unsupported image format: {file.filename}"
+            )
+
+    # Parse image order
+    try:
+        order_list = [int(x.strip()) for x in image_order.split(",")]
+    except ValueError:
+        raise HTTPException(
+            status_code=400,
+            detail="Invalid image_order format. Use comma-separated integers (e.g., '0,1,2,3')",
+        )
+
+    if len(order_list) != total_cells:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Image order must have {total_cells} elements (rows * cols), got {len(order_list)}",
+        )
+
+    # Validate indices
+    for idx in order_list:
+        if idx < 0 or idx >= len(files):
+            raise HTTPException(
+                status_code=400,
+                detail=f"Invalid image index {idx}. Must be between 0 and {len(files) - 1}",
+            )
+
+    input_paths = []
+    output_path = None
+
+    try:
+        # Save all uploaded files
+        for file in files:
+            input_path = await save_upload_file(file)
+            input_paths.append(input_path)
+
+        # Create output path
+        output_filename = generate_unique_filename("collage.png")
+        output_path = TEMP_DIR / output_filename
+
+        # Create collage
+        result = create_collage(input_paths, output_path, rows, cols, order_list)
+
+        if not result.success:
+            raise HTTPException(status_code=500, detail=result.message)
+
+        return result
+
+    finally:
+        # Clean up input files
+        for input_path in input_paths:
+            if input_path:
+                delete_file(input_path)
