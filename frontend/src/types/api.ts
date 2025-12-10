@@ -252,6 +252,54 @@ export interface HTMLValidationResponse extends ApiResponse {
   warnings?: string[];
 }
 
+// JSON Validator
+export interface JSONErrorDetail {
+  message: string;
+  line?: number;
+  column?: number;
+}
+
+export interface JSONValidationResponse extends ApiResponse {
+  valid: boolean;
+  errors: JSONErrorDetail[];
+}
+
+// XML Validator
+export interface XMLErrorDetail {
+  message: string;
+  line?: number;
+  column?: number;
+}
+
+export interface XMLValidationResponse extends ApiResponse {
+  valid: boolean;
+  errors: XMLErrorDetail[];
+}
+
+// JavaScript Validator
+export interface JSErrorDetail {
+  message: string;
+  line?: number;
+  column?: number;
+}
+
+export interface JSValidationResponse extends ApiResponse {
+  valid: boolean;
+  errors: JSErrorDetail[];
+}
+
+// Python Validator
+export interface PyErrorDetail {
+  message: string;
+  line?: number;
+  column?: number;
+}
+
+export interface PyValidationResponse extends ApiResponse {
+  valid: boolean;
+  errors: PyErrorDetail[];
+}
+
 // HTML Minifier
 export interface HTMLMinifierResponse extends ApiResponse {
   minified_html?: string;

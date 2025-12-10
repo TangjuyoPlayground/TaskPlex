@@ -613,6 +613,70 @@
     "noErrors": "No structural issues detected.",
     "location": "Line {{line}}, column {{column}}"
   },
+  "jsonValidator": {
+    "title": "JSON Validator",
+    "description": "Check your JSON for syntax errors and structural issues.",
+    "inputLabel": "JSON to validate",
+    "inputPlaceholder": "Paste or type JSON here...",
+    "inputHint": "We check for valid JSON syntax.",
+    "validateButton": "Validate JSON",
+    "validating": "Validating...",
+    "results": "Results",
+    "resultsHint": "Detected issues will be listed with their line and column when available.",
+    "valid": "Valid JSON",
+    "invalid": "Issues found",
+    "placeholder": "Validation results will appear here.",
+    "noErrors": "No structural issues detected.",
+    "location": "Line {{line}}, column {{column}}"
+  },
+  "xmlValidator": {
+    "title": "XML Validator",
+    "description": "Check your XML for syntax errors and structural issues.",
+    "inputLabel": "XML to validate",
+    "inputPlaceholder": "Paste or type XML here...",
+    "inputHint": "We check for valid XML syntax.",
+    "validateButton": "Validate XML",
+    "validating": "Validating...",
+    "results": "Results",
+    "resultsHint": "Detected issues will be listed with their line and column when available.",
+    "valid": "Valid XML",
+    "invalid": "Issues found",
+    "placeholder": "Validation results will appear here.",
+    "noErrors": "No structural issues detected.",
+    "location": "Line {{line}}, column {{column}}"
+  },
+  "jsValidator": {
+    "title": "JavaScript Validator",
+    "description": "Check your JavaScript code for syntax errors.",
+    "inputLabel": "JavaScript to validate",
+    "inputPlaceholder": "Paste or type JavaScript code here...",
+    "inputHint": "We check for valid JavaScript syntax.",
+    "validateButton": "Validate JavaScript",
+    "validating": "Validating...",
+    "results": "Results",
+    "resultsHint": "Detected issues will be listed with their line and column when available.",
+    "valid": "Valid JavaScript",
+    "invalid": "Issues found",
+    "placeholder": "Validation results will appear here.",
+    "noErrors": "No structural issues detected.",
+    "location": "Line {{line}}, column {{column}}"
+  },
+  "pyValidator": {
+    "title": "Python Validator",
+    "description": "Check your Python code for syntax errors.",
+    "inputLabel": "Python to validate",
+    "inputPlaceholder": "Paste or type Python code here...",
+    "inputHint": "We check for valid Python syntax.",
+    "validateButton": "Validate Python",
+    "validating": "Validating...",
+    "results": "Results",
+    "resultsHint": "Detected issues will be listed with their line and column when available.",
+    "valid": "Valid Python",
+    "invalid": "Issues found",
+    "placeholder": "Validation results will appear here.",
+    "noErrors": "No structural issues detected.",
+    "location": "Line {{line}}, column {{column}}"
+  },
   "units": {
     "title": "Unit Converter",
     "from": "From",
@@ -1304,6 +1368,22 @@
       "htmlValidator": {
         "title": "HTML Validator",
         "description": "Validate HTML syntax"
+      },
+      "jsonValidator": {
+        "title": "JSON Validator",
+        "description": "Validate JSON syntax"
+      },
+      "xmlValidator": {
+        "title": "XML Validator",
+        "description": "Validate XML syntax"
+      },
+      "jsValidator": {
+        "title": "JavaScript Validator",
+        "description": "Validate JavaScript syntax"
+      },
+      "pyValidator": {
+        "title": "Python Validator",
+        "description": "Validate Python syntax"
       },
       "barcodeGenerator": {
         "title": "Barcode Generator",
