@@ -215,6 +215,21 @@
     "result": "Résultat",
     "placeholder": "Générez des UUID pour les voir ici"
   },
+  "urlEncoder": {
+    "title": "Encodeur/Décodeur URL",
+    "description": "Encoder ou décoder des chaînes d'URL en toute sécurité.",
+    "encodeTab": "Encoder",
+    "decodeTab": "Décoder",
+    "toEncode": "Texte à encoder",
+    "toDecode": "Texte à décoder",
+    "encode": "Encoder",
+    "decode": "Décoder",
+    "processing": "Traitement...",
+    "result": "Résultat",
+    "placeholder": "Le résultat apparaîtra ici",
+    "encodePlaceholder": "Saisissez du texte à encoder en URL",
+    "decodePlaceholder": "Saisissez du texte URL-encodé à décoder"
+  },
   "image": {
     "title": "Traitement d'image",
     "operation": "Opération",

@@ -203,6 +203,21 @@
     "result": "Result",
     "placeholder": "Generate UUIDs to see them here"
   },
+  "urlEncoder": {
+    "title": "URL Encoder/Decoder",
+    "description": "Encode or decode URL strings safely.",
+    "encodeTab": "Encode",
+    "decodeTab": "Decode",
+    "toEncode": "Text to encode",
+    "toDecode": "Text to decode",
+    "encode": "Encode",
+    "decode": "Decode",
+    "processing": "Processing...",
+    "result": "Result",
+    "placeholder": "Result will appear here",
+    "encodePlaceholder": "Enter text to URL-encode",
+    "decodePlaceholder": "Enter URL-encoded text to decode"
+  },
   "image": {
     "title": "Image Processing",
     "operation": "Operation",
