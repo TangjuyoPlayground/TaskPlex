@@ -34,6 +34,7 @@ import type {
   URLEncodeDecodeRequest,
   URLResponse,
   Base64Response,
+  BarcodeResponse,
 } from '../types/api';
 
 // Re-export types for backwards compatibility
@@ -73,6 +74,8 @@ export type {
   URLEncodeDecodeRequest,
   URLResponse,
   Base64Response,
+  BarcodeRequest,
+  BarcodeResponse,
 } from '../types/api';
 
 // API URL from environment variable with fallback
