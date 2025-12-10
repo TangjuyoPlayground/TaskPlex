@@ -308,6 +308,25 @@
       "invert": "Invertir"
     }
   },
+  "createCollage": {
+    "title": "Crear collage",
+    "subtitle": "Organiza varias imágenes en una cuadrícula para crear un collage.",
+    "selectGrid": "Seleccionar cuadrícula",
+    "gridInfo": "Cuadrícula: {{rows}}x{{cols}} ({{total}} celdas)",
+    "uploadImages": "Subir imágenes",
+    "dragDrop": "Arrastra y suelta o haz clic para seleccionar imágenes",
+    "uploadedImages": "Imágenes subidas ({{count}})",
+    "shuffle": "Mezclar imágenes",
+    "createCollage": "Crear collage",
+    "processing": "Creando collage...",
+    "preview": "Vista previa",
+    "clickToChange": "Haz clic en una celda para seleccionar su imagen",
+    "result": "Resultado",
+    "downloadResult": "Descargar collage",
+    "selectImage": "Seleccionar una imagen",
+    "existingImages": "Imágenes existentes",
+    "addNewImage": "Agregar una nueva imagen"
+  },
   "pdfToWord": {
     "title": "PDF a Word",
     "subtitle": "Convierte tu PDF en DOCX editable (solo texto).",

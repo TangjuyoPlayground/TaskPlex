@@ -20,14 +20,20 @@ def generate_unique_filename(original_filename: str) -> str:
         original_filename: Original name of the file
 
     Returns:
-        Unique filename with UUID prefix
+        Unique filename with timestamp and UUID prefix
     """
     extension = Path(original_filename).suffix
-    unique_id = uuid.uuid4().hex[:8]
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    # Use full UUID for better uniqueness
+    unique_id = uuid.uuid4().hex[:12]  # Increased from 8 to 12 for better uniqueness
+    # Use current year (automatically 2025 or later)
+    timestamp = datetime.now().strftime(
+        "%Y%m%d_%H%M%S_%f"
+    )  # Added microseconds for better uniqueness
     name = Path(original_filename).stem
+    # Sanitize name to avoid issues with special characters
+    sanitized_name = "".join(c for c in name if c.isalnum() or c in ("-", "_"))[:50]  # Limit length
 
-    return f"{timestamp}_{unique_id}_{name}{extension}"
+    return f"{timestamp}_{unique_id}_{sanitized_name}{extension}"
 
 
 async def save_upload_file(upload_file: UploadFile, custom_filename: str = None) -> Path:

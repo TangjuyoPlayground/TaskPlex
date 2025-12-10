@@ -492,3 +492,149 @@ def resize_image(
             message=f"Error resizing image: {str(e)}",
             filename=output_path.name if output_path else None,
         )
+
+
+def create_collage(
+    image_paths: list[Path],
+    output_path: Path,
+    rows: int,
+    cols: int,
+    image_order: list[int],
+) -> ImageProcessingResponse:
+    """
+    Create a collage from multiple images arranged in a grid
+
+    Args:
+        image_paths: List of paths to input images
+        output_path: Path to save the collage
+        rows: Number of rows in the grid
+        cols: Number of columns in the grid
+        image_order: Order of images in the grid (indices from 0 to len(image_paths)-1)
+
+    Returns:
+        ImageProcessingResponse with collage creation results
+    """
+    try:
+        total_cells = rows * cols
+        num_images = len(image_paths)
+
+        # Validate that we have enough images
+        if num_images == 0:
+            return ImageProcessingResponse(
+                success=False,
+                message="At least one image is required",
+                filename=output_path.name if output_path else None,
+            )
+
+        # Validate image order
+        if len(image_order) != total_cells:
+            return ImageProcessingResponse(
+                success=False,
+                message=f"Image order must have {total_cells} elements (rows * cols)",
+                filename=output_path.name if output_path else None,
+            )
+
+        # Validate that all indices in image_order are valid
+        for idx in image_order:
+            if idx < 0 or idx >= num_images:
+                return ImageProcessingResponse(
+                    success=False,
+                    message=f"Invalid image index {idx}. Must be between 0 and {num_images - 1}",
+                    filename=output_path.name if output_path else None,
+                )
+
+        # Open all images and get their dimensions
+        images = []
+        for img_path in image_paths:
+            try:
+                with Image.open(img_path) as img:
+                    # Convert to RGB if necessary
+                    if img.mode != "RGB":
+                        rgb_img = Image.new("RGB", img.size, (255, 255, 255))
+                        if img.mode == "RGBA":
+                            rgb_img.paste(
+                                img, mask=img.split()[3] if len(img.split()) == 4 else None
+                            )
+                        else:
+                            rgb_img.paste(img)
+                        images.append(rgb_img.copy())
+                    else:
+                        images.append(img.copy())
+            except Exception as e:
+                return ImageProcessingResponse(
+                    success=False,
+                    message=f"Error opening image {img_path.name}: {str(e)}",
+                    filename=output_path.name if output_path else None,
+                )
+
+        # Calculate cell size based on the first image's aspect ratio
+        # We'll use a standard size and let images fill their cells
+        # Use a reasonable default size (e.g., 800x800 per cell)
+        cell_width = 800
+        cell_height = 800
+
+        # Create the collage canvas
+        collage_width = cell_width * cols
+        collage_height = cell_height * rows
+        collage = Image.new("RGB", (collage_width, collage_height), (255, 255, 255))
+
+        # Place images in the grid according to image_order
+        for grid_idx, image_idx in enumerate(image_order):
+            row = grid_idx // cols
+            col = grid_idx % cols
+
+            # Get the image to place
+            img = images[image_idx]
+
+            # Resize image to cover the cell while preserving aspect ratio
+            # Then crop to exact cell size (cover behavior - like CSS object-fit: cover)
+            img_aspect = img.width / img.height
+            cell_aspect = cell_width / cell_height
+
+            if img_aspect > cell_aspect:
+                # Image is wider than cell - fit to height, then crop width
+                new_height = cell_height
+                new_width = int(cell_height * img_aspect)
+            else:
+                # Image is taller than cell - fit to width, then crop height
+                new_width = cell_width
+                new_height = int(cell_width / img_aspect)
+
+            # Resize image to cover size
+            resized_img = img.resize((new_width, new_height), Image.LANCZOS)
+
+            # Crop to exact cell dimensions (center crop)
+            left = (new_width - cell_width) // 2
+            top = (new_height - cell_height) // 2
+            right = left + cell_width
+            bottom = top + cell_height
+            cropped_img = resized_img.crop((left, top, right, bottom))
+
+            # Calculate position
+            x_offset = col * cell_width
+            y_offset = row * cell_height
+
+            # Paste image onto collage (fills cell exactly, no white spaces)
+            collage.paste(cropped_img, (x_offset, y_offset))
+
+        # Save the collage
+        collage.save(output_path, format="PNG", quality=95, optimize=True)
+
+        # Get file size
+        collage_size = get_file_size(output_path)
+
+        return ImageProcessingResponse(
+            success=True,
+            message=f"Collage created successfully ({rows}x{cols} grid)",
+            filename=output_path.name,
+            download_url=f"/api/v1/download/{output_path.name}",
+            processed_size=collage_size,
+            dimensions={"width": collage_width, "height": collage_height},
+        )
+
+    except Exception as e:
+        return ImageProcessingResponse(
+            success=False,
+            message=f"Error creating collage: {str(e)}",
+            filename=output_path.name if output_path else None,
+        )

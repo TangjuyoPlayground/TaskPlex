@@ -64,3 +64,15 @@ export const useResizeImage = () => {
   });
 };
 
+export const useCreateCollage = () => {
+  return useMutation<
+    ImageProcessingResponse,
+    Error,
+    { files: File[]; rows: number; cols: number; imageOrder: number[] }
+  >({
+    mutationFn: async ({ files, rows, cols, imageOrder }) => {
+      return ApiService.createCollage(files, rows, cols, imageOrder);
+    },
+  });
+};
+

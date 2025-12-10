@@ -60,6 +60,7 @@ const JSFormatterScreen = createLazyComponent(() => import('./pages/JSFormatterS
 const XMLMinifierScreen = createLazyComponent(() => import('./pages/XMLMinifierScreen'), 'XMLMinifierScreen');
 const TextFormatterScreen = createLazyComponent(() => import('./pages/TextFormatterScreen'), 'TextFormatterScreen');
 const FilterImageScreen = createLazyComponent(() => import('./pages/FilterImageScreen'), 'FilterImageScreen');
+const CreateCollageScreen = createLazyComponent(() => import('./pages/CreateCollageScreen'), 'CreateCollageScreen');
 const HashGeneratorScreen = createLazyComponent(() => import('./pages/HashGeneratorScreen'), 'HashGeneratorScreen');
 const PasswordGeneratorScreen = createLazyComponent(() => import('./pages/PasswordGeneratorScreen'), 'PasswordGeneratorScreen');
 const PasswordCheckerScreen = createLazyComponent(() => import('./pages/PasswordCheckerScreen'), 'PasswordCheckerScreen');
@@ -98,6 +99,7 @@ const componentMap: Record<string, React.LazyExoticComponent<React.ComponentType
   'image-adjust': AdjustImageScreen,
   'image-filters': FilterImageScreen,
   'image-extract-colors': ExtractColorsScreen,
+  'image-collage': CreateCollageScreen,
   'image-resize': ResizeImageScreen,
   
   // PDF

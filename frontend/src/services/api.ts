@@ -320,6 +320,19 @@ export const ApiService = {
     return response.data;
   },
 
+  createCollage: async (files: File[], rows: number, cols: number, imageOrder: number[]) => {
+    const formData = new FormData();
+    // Append all files with the same key 'files' for FastAPI to accept as list
+    files.forEach((file) => {
+      formData.append('files', file);
+    });
+    formData.append('rows', rows.toString());
+    formData.append('cols', cols.toString());
+    formData.append('image_order', imageOrder.join(','));
+    const response = await api.post<ImageProcessingResponse>('/image/collage', formData);
+    return response.data;
+  },
+
   // Regex
   testRegex: async (pattern: string, text: string, flags: string) => {
     const response = await api.post<RegexResponse>('/regex/validate', {
