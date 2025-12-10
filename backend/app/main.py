@@ -11,8 +11,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 import uvicorn
 
-from app.api import base64 as base64_api
 from app.api import (
+    barcode,
     code_formatter,
     code_minifier,
     color,
@@ -39,6 +39,7 @@ from app.api import (
     xml_formatter,
     xml_minifier,
 )
+from app.api import base64 as base64_api
 from app.config import (
     API_DESCRIPTION,
     API_TITLE,
@@ -143,6 +144,7 @@ async def health_check():
             "regex": "/api/v1/regex",
             "units": "/api/v1/units",
             "qrcode": "/api/v1/qrcode",
+            "barcode": "/api/v1/barcode",
             "code-formatter": "/api/v1/code-formatter",
             "code-minifier": "/api/v1/code-minifier",
             "html-formatter": "/api/v1/html-formatter",
@@ -167,6 +169,7 @@ app.include_router(pdf.router, prefix="/api/v1")
 app.include_router(regex.router, prefix="/api/v1")
 app.include_router(units.router, prefix="/api/v1")
 app.include_router(qrcode.router, prefix="/api/v1")
+app.include_router(barcode.router, prefix="/api/v1")
 app.include_router(code_formatter.router, prefix="/api/v1")
 app.include_router(code_minifier.router, prefix="/api/v1")
 app.include_router(html_formatter.router, prefix="/api/v1")

@@ -23,6 +23,9 @@ pint>=0.23
 # QR Code generation
 qrcode[pil]>=8.0
 
+# Barcode generation
+python-barcode>=0.15.1
+
 # Code formatting and minification
 jsbeautifier>=1.15.1
 rcssmin>=1.1.2

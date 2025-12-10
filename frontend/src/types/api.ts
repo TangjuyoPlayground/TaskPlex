@@ -132,6 +132,20 @@ export interface QRCodeResponse extends ApiResponse {
   filename?: string;
 }
 
+// Barcode
+export interface BarcodeRequest {
+  data: string;
+  barcode_type?: 'ean13' | 'ean8' | 'upca' | 'upce' | 'code128' | 'code39' | 'isbn13' | 'isbn10';
+  width?: number;
+  height?: number;
+  add_checksum?: boolean;
+}
+
+export interface BarcodeResponse extends ApiResponse {
+  barcode_url?: string;
+  filename?: string;
+}
+
 // Code Formatter
 export interface CodeFormatterResponse extends ApiResponse {
   formatted_code?: string;

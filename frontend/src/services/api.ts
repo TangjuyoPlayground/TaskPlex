@@ -364,6 +364,18 @@ export const ApiService = {
     return response.data;
   },
 
+  // Barcode Generator
+  generateBarcode: async (data: string, barcodeType?: string, width?: number, height?: number, addChecksum?: boolean) => {
+    const response = await api.post<BarcodeResponse>('/barcode/generate', {
+      data,
+      barcode_type: barcodeType || 'code128',
+      width: width !== undefined ? width : 1.0,
+      height: height !== undefined ? height : 50.0,
+      add_checksum: addChecksum !== undefined ? addChecksum : true,
+    });
+    return response.data;
+  },
+
   // Code Formatter
   formatCode: async (code: string, language?: string, indentSize?: number, indentChar?: string, wrapLineLength?: number) => {
     const response = await api.post<CodeFormatterResponse>('/code-formatter/format', {
