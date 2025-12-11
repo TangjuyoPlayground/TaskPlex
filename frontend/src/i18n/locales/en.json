@@ -711,6 +711,39 @@
     "lines": "Lines",
     "placeholder": "Enter text above and click 'Count' to see statistics"
   },
+  "keywordExtractor": {
+    "title": "Keyword Extractor",
+    "description": "Extract keywords from your text automatically",
+    "inputLabel": "Text to Analyze",
+    "inputPlaceholder": "Paste or type your text here...",
+    "inputHint": "Keywords will be extracted from the text, excluding common stop words",
+    "extract": "Extract Keywords",
+    "extracting": "Extracting...",
+    "results": "Extracted Keywords",
+    "placeholder": "Enter text above and click 'Extract Keywords' to see results"
+  },
+  "emailExtractor": {
+    "title": "Email Extractor",
+    "description": "Extract email addresses from your text",
+    "inputLabel": "Text to Analyze",
+    "inputPlaceholder": "Paste or type your text here...",
+    "inputHint": "All email addresses will be extracted from the text",
+    "extract": "Extract Emails",
+    "extracting": "Extracting...",
+    "results": "Extracted Emails",
+    "placeholder": "Enter text above and click 'Extract Emails' to see results"
+  },
+  "urlExtractor": {
+    "title": "URL Extractor",
+    "description": "Extract URLs from your text",
+    "inputLabel": "Text to Analyze",
+    "inputPlaceholder": "Paste or type your text here...",
+    "inputHint": "All URLs (http, https, www, ftp) will be extracted from the text",
+    "extract": "Extract URLs",
+    "extracting": "Extracting...",
+    "results": "Extracted URLs",
+    "placeholder": "Enter text above and click 'Extract URLs' to see results"
+  },
   "units": {
     "title": "Unit Converter",
     "from": "From",

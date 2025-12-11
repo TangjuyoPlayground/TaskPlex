@@ -29,6 +29,9 @@ import type {
   PyValidationResponse,
   LoremIpsumResponse,
   WordCounterResponse,
+  KeywordExtractorResponse,
+  EmailExtractorResponse,
+  URLExtractorResponse,
   CSSFormatterResponse,
   JSFormatterResponse,
   XMLMinifierResponse,
@@ -73,6 +76,10 @@ export type {
   LoremIpsumResponse,
   WordCounterRequest,
   WordCounterResponse,
+  TextExtractorRequest,
+  KeywordExtractorResponse,
+  EmailExtractorResponse,
+  URLExtractorResponse,
   CSSFormatterResponse,
   JSFormatterResponse,
   XMLMinifierResponse,
@@ -559,6 +566,28 @@ export const ApiService = {
   // Word Counter
   countWords: async (text: string) => {
     const response = await api.post<WordCounterResponse>('/word-counter/count', {
+      text,
+    });
+    return response.data;
+  },
+
+  // Text Extractors
+  extractKeywords: async (text: string) => {
+    const response = await api.post<KeywordExtractorResponse>('/text-extractor/keywords', {
+      text,
+    });
+    return response.data;
+  },
+
+  extractEmails: async (text: string) => {
+    const response = await api.post<EmailExtractorResponse>('/text-extractor/emails', {
+      text,
+    });
+    return response.data;
+  },
+
+  extractURLs: async (text: string) => {
+    const response = await api.post<URLExtractorResponse>('/text-extractor/urls', {
       text,
     });
     return response.data;

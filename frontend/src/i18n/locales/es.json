@@ -723,6 +723,39 @@
     "lines": "Líneas",
     "placeholder": "Ingresa texto arriba y haz clic en 'Contar' para ver las estadísticas"
   },
+  "keywordExtractor": {
+    "title": "Extractor de palabras clave",
+    "description": "Extrae palabras clave de tu texto automáticamente",
+    "inputLabel": "Texto a analizar",
+    "inputPlaceholder": "Pega o escribe tu texto aquí...",
+    "inputHint": "Las palabras clave se extraerán del texto, excluyendo palabras vacías comunes",
+    "extract": "Extraer palabras clave",
+    "extracting": "Extrayendo...",
+    "results": "Palabras clave extraídas",
+    "placeholder": "Ingresa texto arriba y haz clic en 'Extraer palabras clave' para ver los resultados"
+  },
+  "emailExtractor": {
+    "title": "Extractor de emails",
+    "description": "Extrae direcciones de email de tu texto",
+    "inputLabel": "Texto a analizar",
+    "inputPlaceholder": "Pega o escribe tu texto aquí...",
+    "inputHint": "Todas las direcciones de email se extraerán del texto",
+    "extract": "Extraer emails",
+    "extracting": "Extrayendo...",
+    "results": "Emails extraídos",
+    "placeholder": "Ingresa texto arriba y haz clic en 'Extraer emails' para ver los resultados"
+  },
+  "urlExtractor": {
+    "title": "Extractor de URLs",
+    "description": "Extrae URLs de tu texto",
+    "inputLabel": "Texto a analizar",
+    "inputPlaceholder": "Pega o escribe tu texto aquí...",
+    "inputHint": "Todas las URLs (http, https, www, ftp) se extraerán del texto",
+    "extract": "Extraer URLs",
+    "extracting": "Extrayendo...",
+    "results": "URLs extraídas",
+    "placeholder": "Ingresa texto arriba y haz clic en 'Extraer URLs' para ver los resultados"
+  },
   "jsonValidator": {
     "title": "Validador JSON",
     "description": "Validar la sintaxis y estructura JSON.",

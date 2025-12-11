@@ -82,6 +82,9 @@ const ColorConverterScreen = createLazyComponent(() => import('./pages/ColorConv
 const NumberConverterScreen = createLazyComponent(() => import('./pages/NumberConverterScreen'), 'NumberConverterScreen');
 const LoremIpsumScreen = createLazyComponent(() => import('./pages/LoremIpsumScreen'), 'LoremIpsumScreen');
 const WordCounterScreen = createLazyComponent(() => import('./pages/WordCounterScreen'), 'WordCounterScreen');
+const KeywordExtractorScreen = createLazyComponent(() => import('./pages/KeywordExtractorScreen'), 'KeywordExtractorScreen');
+const EmailExtractorScreen = createLazyComponent(() => import('./pages/EmailExtractorScreen'), 'EmailExtractorScreen');
+const URLExtractorScreen = createLazyComponent(() => import('./pages/URLExtractorScreen'), 'URLExtractorScreen');
 
 // PDF Module - lazy loaded (heavy dependencies like react-pdf)
 const PDFCompress = createLazyComponent(() => import('./pages/pdf/PDFCompress'), 'PDFCompress');
@@ -128,6 +131,9 @@ const componentMap: Record<string, React.LazyExoticComponent<React.ComponentType
   'number-converter': NumberConverterScreen,
   'lorem-ipsum': LoremIpsumScreen,
   'word-counter': WordCounterScreen,
+  'keyword-extractor': KeywordExtractorScreen,
+  'email-extractor': EmailExtractorScreen,
+  'url-extractor': URLExtractorScreen,
   'fake-data-generator': JSONDataGeneratorScreen,
   'code-formatter': CodeFormatterScreen,
   'code-minifier': CodeMinifierScreen,
