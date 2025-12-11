@@ -805,8 +805,8 @@ export const MODULES: ModuleDefinition[] = [
     labelKey: 'modules.text.accentRemover.title',
     descriptionKey: 'modules.text.accentRemover.description',
     category: 'text',
-    status: 'placeholder',
-    color: 'text-orange-600',
+    status: 'implemented',
+    color: 'text-blue-600',
   },
   {
     id: 'email-extractor',

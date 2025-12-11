@@ -12,6 +12,7 @@ from fastapi.responses import FileResponse, JSONResponse
 import uvicorn
 
 from app.api import (
+    accent_remover,
     barcode,
     code_formatter,
     code_minifier,
@@ -212,6 +213,7 @@ app.include_router(py_validator.router, prefix="/api/v1")
 app.include_router(text.router, prefix="/api/v1")
 app.include_router(text_extractor.router, prefix="/api/v1")
 app.include_router(word_counter.router, prefix="/api/v1")
+app.include_router(accent_remover.router, prefix="/api/v1")
 app.include_router(color.router, prefix="/api/v1")
 app.include_router(palette_generator.router, prefix="/api/v1")
 app.include_router(gradient_generator.router, prefix="/api/v1")

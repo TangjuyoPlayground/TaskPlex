@@ -735,6 +735,18 @@
     "results": "Palabras clave extraídas",
     "placeholder": "Ingresa texto arriba y haz clic en 'Extraer palabras clave' para ver los resultados"
   },
+  "accentRemover": {
+    "title": "Eliminador de acentos",
+    "description": "Elimina acentos y diacríticos del texto",
+    "inputLabel": "Texto a procesar",
+    "inputPlaceholder": "Pega o escribe tu texto con acentos aquí...",
+    "inputHint": "Todos los acentos y diacríticos serán eliminados del texto",
+    "remove": "Eliminar acentos",
+    "removing": "Eliminando...",
+    "result": "Resultado",
+    "removedCount": "{{count}} acento(s) eliminado(s)",
+    "placeholder": "Ingresa texto arriba y haz clic en 'Eliminar acentos' para ver el resultado"
+  },
   "emailExtractor": {
     "title": "Extractor de emails",
     "description": "Extrae direcciones de email de tu texto",

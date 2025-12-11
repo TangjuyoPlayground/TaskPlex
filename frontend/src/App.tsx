@@ -82,6 +82,7 @@ const ColorConverterScreen = createLazyComponent(() => import('./pages/ColorConv
 const NumberConverterScreen = createLazyComponent(() => import('./pages/NumberConverterScreen'), 'NumberConverterScreen');
 const LoremIpsumScreen = createLazyComponent(() => import('./pages/LoremIpsumScreen'), 'LoremIpsumScreen');
 const WordCounterScreen = createLazyComponent(() => import('./pages/WordCounterScreen'), 'WordCounterScreen');
+const AccentRemoverScreen = createLazyComponent(() => import('./pages/AccentRemoverScreen'), 'AccentRemoverScreen');
 const KeywordExtractorScreen = createLazyComponent(() => import('./pages/KeywordExtractorScreen'), 'KeywordExtractorScreen');
 const EmailExtractorScreen = createLazyComponent(() => import('./pages/EmailExtractorScreen'), 'EmailExtractorScreen');
 const URLExtractorScreen = createLazyComponent(() => import('./pages/URLExtractorScreen'), 'URLExtractorScreen');
@@ -133,6 +134,7 @@ const componentMap: Record<string, React.LazyExoticComponent<React.ComponentType
   'number-converter': NumberConverterScreen,
   'lorem-ipsum': LoremIpsumScreen,
   'word-counter': WordCounterScreen,
+  'accent-remover': AccentRemoverScreen,
   'keyword-extractor': KeywordExtractorScreen,
   'email-extractor': EmailExtractorScreen,
     'url-extractor': URLExtractorScreen,
