@@ -977,8 +977,8 @@ export const MODULES: ModuleDefinition[] = [
     labelKey: 'modules.text.wordCounter.title',
     descriptionKey: 'modules.text.wordCounter.description',
     category: 'text',
-    status: 'placeholder',
-    color: 'text-orange-600',
+    status: 'implemented',
+    color: 'text-blue-600',
   },
   {
     id: 'case-converter',

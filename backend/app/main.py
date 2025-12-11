@@ -42,6 +42,7 @@ from app.api import (
     url_encoder,
     uuid_generator,
     video,
+    word_counter,
     xml_formatter,
     xml_minifier,
     xml_validator,
@@ -150,6 +151,7 @@ async def health_check():
             "pdf": "/api/v1/pdf",
             "regex": "/api/v1/regex",
             "units": "/api/v1/units",
+            "word-counter": "/api/v1/word-counter",
             "qrcode": "/api/v1/qrcode",
             "barcode": "/api/v1/barcode",
             "code-formatter": "/api/v1/code-formatter",
@@ -202,6 +204,7 @@ app.include_router(xml_minifier.router, prefix="/api/v1")
 app.include_router(xml_validator.router, prefix="/api/v1")
 app.include_router(py_validator.router, prefix="/api/v1")
 app.include_router(text.router, prefix="/api/v1")
+app.include_router(word_counter.router, prefix="/api/v1")
 app.include_router(color.router, prefix="/api/v1")
 app.include_router(hash.router, prefix="/api/v1")
 app.include_router(password.router, prefix="/api/v1")

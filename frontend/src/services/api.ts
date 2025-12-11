@@ -28,6 +28,7 @@ import type {
   JSValidationResponse,
   PyValidationResponse,
   LoremIpsumResponse,
+  WordCounterResponse,
   CSSFormatterResponse,
   JSFormatterResponse,
   XMLMinifierResponse,
@@ -70,6 +71,8 @@ export type {
   JSValidationResponse,
   PyValidationResponse,
   LoremIpsumResponse,
+  WordCounterRequest,
+  WordCounterResponse,
   CSSFormatterResponse,
   JSFormatterResponse,
   XMLMinifierResponse,
@@ -549,6 +552,14 @@ export const ApiService = {
       type,
       count,
       start_with_lorem: startWithLorem,
+    });
+    return response.data;
+  },
+
+  // Word Counter
+  countWords: async (text: string) => {
+    const response = await api.post<WordCounterResponse>('/word-counter/count', {
+      text,
     });
     return response.data;
   },

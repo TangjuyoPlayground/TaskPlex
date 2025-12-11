@@ -706,6 +706,23 @@
     "placeholder": "El texto Lorem Ipsum generado aparecerá aquí...",
     "generatedCount": "{{count}} {{type}} generado(s)"
   },
+  "wordCounter": {
+    "title": "Contador de palabras",
+    "description": "Cuenta palabras, caracteres, oraciones, párrafos y líneas en tu texto",
+    "inputLabel": "Texto a analizar",
+    "inputPlaceholder": "Pega o escribe tu texto aquí...",
+    "inputHint": "El texto será analizado para contar palabras, caracteres, oraciones, párrafos y líneas",
+    "count": "Contar",
+    "counting": "Contando...",
+    "statistics": "Estadísticas",
+    "words": "Palabras",
+    "characters": "Caracteres",
+    "charactersNoSpaces": "Caracteres (sin espacios)",
+    "sentences": "Oraciones",
+    "paragraphs": "Párrafos",
+    "lines": "Líneas",
+    "placeholder": "Ingresa texto arriba y haz clic en 'Contar' para ver las estadísticas"
+  },
   "jsonValidator": {
     "title": "Validador JSON",
     "description": "Validar la sintaxis y estructura JSON.",

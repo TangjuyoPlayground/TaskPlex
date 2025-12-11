@@ -315,6 +315,20 @@ export interface LoremIpsumResponse extends ApiResponse {
   count?: number;
 }
 
+// Word Counter
+export interface WordCounterRequest {
+  text: string;
+}
+
+export interface WordCounterResponse extends ApiResponse {
+  word_count?: number;
+  character_count?: number;
+  character_count_no_spaces?: number;
+  sentence_count?: number;
+  paragraph_count?: number;
+  line_count?: number;
+}
+
 // HTML Minifier
 export interface HTMLMinifierResponse extends ApiResponse {
   minified_html?: string;
