@@ -770,7 +770,7 @@ export const MODULES: ModuleDefinition[] = [
   {
     id: 'json-validator',
     path: '/dev/json-validator',
-    icon: 'file-json',
+    icon: 'file-code',
     labelKey: 'modules.dev.jsonValidator.title',
     descriptionKey: 'modules.dev.jsonValidator.description',
     category: 'developer',
