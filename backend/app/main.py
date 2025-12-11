@@ -30,6 +30,7 @@ from app.api import (
     json_formatter,
     json_minifier,
     json_validator,
+    lorem_ipsum,
     number_converter,
     password,
     pdf,
@@ -164,6 +165,7 @@ async def health_check():
             "json-formatter": "/api/v1/json-formatter",
             "json-minifier": "/api/v1/json-minifier",
             "json-validator": "/api/v1/json-validator",
+            "lorem-ipsum": "/api/v1/lorem-ipsum",
             "xml-formatter": "/api/v1/xml-formatter",
             "xml-minifier": "/api/v1/xml-minifier",
             "xml-validator": "/api/v1/xml-validator",
@@ -194,6 +196,7 @@ app.include_router(json_formatter.router, prefix="/api/v1")
 app.include_router(json_minifier.router, prefix="/api/v1")
 app.include_router(json_validator.router, prefix="/api/v1")
 app.include_router(json_data_generator.router, prefix="/api/v1")
+app.include_router(lorem_ipsum.router, prefix="/api/v1")
 app.include_router(xml_formatter.router, prefix="/api/v1")
 app.include_router(xml_minifier.router, prefix="/api/v1")
 app.include_router(xml_validator.router, prefix="/api/v1")

@@ -660,12 +660,12 @@ export const MODULES: ModuleDefinition[] = [
   {
     id: 'lorem-ipsum',
     path: '/dev/lorem-ipsum',
-    icon: 'lorem-ipsum',
+    icon: 'file-text',
     labelKey: 'modules.dev.loremIpsum.title',
     descriptionKey: 'modules.dev.loremIpsum.description',
     category: 'developer',
-    status: 'placeholder',
-    color: 'text-yellow-500',
+    status: 'implemented',
+    color: 'text-purple-600',
   },
   {
     id: 'code-formatter',

@@ -34,6 +34,7 @@ rjsmin>=1.2.2
 
 # Data generation
 rstr>=3.0.0
+lorem>=0.1.1
 
 # Environment variables
 python-dotenv>=1.0.0

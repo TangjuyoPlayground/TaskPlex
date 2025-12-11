@@ -27,6 +27,7 @@ import type {
   XMLValidationResponse,
   JSValidationResponse,
   PyValidationResponse,
+  LoremIpsumResponse,
   CSSFormatterResponse,
   JSFormatterResponse,
   XMLMinifierResponse,
@@ -68,6 +69,7 @@ export type {
   XMLValidationResponse,
   JSValidationResponse,
   PyValidationResponse,
+  LoremIpsumResponse,
   CSSFormatterResponse,
   JSFormatterResponse,
   XMLMinifierResponse,
@@ -537,6 +539,16 @@ export const ApiService = {
   validatePython: async (python: string) => {
     const response = await api.post<PyValidationResponse>('/py-validator/validate', {
       python,
+    });
+    return response.data;
+  },
+
+  // Lorem Ipsum Generator
+  generateLoremIpsum: async (type: 'paragraphs' | 'words' | 'sentences', count: number, startWithLorem?: boolean) => {
+    const response = await api.post<LoremIpsumResponse>('/lorem-ipsum/generate', {
+      type,
+      count,
+      start_with_lorem: startWithLorem,
     });
     return response.data;
   },

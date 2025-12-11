@@ -80,6 +80,7 @@ const SettingsScreen = createLazyComponent(() => import('./pages/SettingsScreen'
 const PlaceholderScreen = createLazyComponent(() => import('./pages/PlaceholderScreen'), 'PlaceholderScreen');
 const ColorConverterScreen = createLazyComponent(() => import('./pages/ColorConverterScreen'), 'ColorConverterScreen');
 const NumberConverterScreen = createLazyComponent(() => import('./pages/NumberConverterScreen'), 'NumberConverterScreen');
+const LoremIpsumScreen = createLazyComponent(() => import('./pages/LoremIpsumScreen'), 'LoremIpsumScreen');
 
 // PDF Module - lazy loaded (heavy dependencies like react-pdf)
 const PDFCompress = createLazyComponent(() => import('./pages/pdf/PDFCompress'), 'PDFCompress');
@@ -128,6 +129,7 @@ const componentMap: Record<string, React.LazyExoticComponent<React.ComponentType
   'barcode-generator': BarcodeGeneratorScreen,
   'color-converter': ColorConverterScreen,
   'number-converter': NumberConverterScreen,
+  'lorem-ipsum': LoremIpsumScreen,
   'fake-data-generator': JSONDataGeneratorScreen,
   'code-formatter': CodeFormatterScreen,
   'code-minifier': CodeMinifierScreen,
