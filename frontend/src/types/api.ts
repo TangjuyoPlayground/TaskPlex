@@ -329,6 +329,17 @@ export interface WordCounterResponse extends ApiResponse {
   line_count?: number;
 }
 
+// Accent Remover
+export interface AccentRemoverRequest {
+  text: string;
+}
+
+export interface AccentRemoverResponse extends ApiResponse {
+  original_text?: string;
+  result_text?: string;
+  removed_count?: number;
+}
+
 // Text Extractors
 export interface TextExtractorRequest {
   text: string;

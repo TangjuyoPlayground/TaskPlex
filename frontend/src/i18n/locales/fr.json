@@ -735,6 +735,18 @@
     "results": "Mots-clés extraits",
     "placeholder": "Entrez du texte ci-dessus et cliquez sur 'Extraire les mots-clés' pour voir les résultats"
   },
+  "accentRemover": {
+    "title": "Suppresseur d'accents",
+    "description": "Supprimez les accents et les diacritiques du texte",
+    "inputLabel": "Texte à traiter",
+    "inputPlaceholder": "Collez ou tapez votre texte avec accents ici...",
+    "inputHint": "Tous les accents et diacritiques seront supprimés du texte",
+    "remove": "Supprimer les accents",
+    "removing": "Suppression...",
+    "result": "Résultat",
+    "removedCount": "{{count}} accent(s) supprimé(s)",
+    "placeholder": "Entrez du texte ci-dessus et cliquez sur 'Supprimer les accents' pour voir le résultat"
+  },
   "emailExtractor": {
     "title": "Extracteur d'emails",
     "description": "Extrayez les adresses email de votre texte",

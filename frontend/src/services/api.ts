@@ -29,6 +29,7 @@ import type {
   PyValidationResponse,
   LoremIpsumResponse,
   WordCounterResponse,
+  AccentRemoverResponse,
   KeywordExtractorResponse,
   EmailExtractorResponse,
   URLExtractorResponse,
@@ -80,6 +81,8 @@ export type {
   LoremIpsumResponse,
   WordCounterRequest,
   WordCounterResponse,
+  AccentRemoverRequest,
+  AccentRemoverResponse,
   TextExtractorRequest,
   KeywordExtractorResponse,
   EmailExtractorResponse,
@@ -577,6 +580,14 @@ export const ApiService = {
   // Word Counter
   countWords: async (text: string) => {
     const response = await api.post<WordCounterResponse>('/word-counter/count', {
+      text,
+    });
+    return response.data;
+  },
+
+  // Accent Remover
+  removeAccents: async (text: string) => {
+    const response = await api.post<AccentRemoverResponse>('/accent-remover/remove', {
       text,
     });
     return response.data;

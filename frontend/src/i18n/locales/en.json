@@ -723,6 +723,18 @@
     "results": "Extracted Keywords",
     "placeholder": "Enter text above and click 'Extract Keywords' to see results"
   },
+  "accentRemover": {
+    "title": "Accent Remover",
+    "description": "Remove accents and diacritics from text",
+    "inputLabel": "Text to Process",
+    "inputPlaceholder": "Paste or type your text with accents here...",
+    "inputHint": "All accents and diacritics will be removed from the text",
+    "remove": "Remove Accents",
+    "removing": "Removing...",
+    "result": "Result",
+    "removedCount": "{{count}} accent(s) removed",
+    "placeholder": "Enter text above and click 'Remove Accents' to see the result"
+  },
   "emailExtractor": {
     "title": "Email Extractor",
     "description": "Extract email addresses from your text",
