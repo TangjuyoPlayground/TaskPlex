@@ -38,6 +38,7 @@ from app.api import (
     qrcode,
     regex,
     text,
+    text_extractor,
     units,
     url_encoder,
     uuid_generator,
@@ -172,6 +173,7 @@ async def health_check():
             "xml-minifier": "/api/v1/xml-minifier",
             "xml-validator": "/api/v1/xml-validator",
             "py-validator": "/api/v1/py-validator",
+            "text-extractor": "/api/v1/text-extractor",
         },
     }
 
@@ -204,6 +206,7 @@ app.include_router(xml_minifier.router, prefix="/api/v1")
 app.include_router(xml_validator.router, prefix="/api/v1")
 app.include_router(py_validator.router, prefix="/api/v1")
 app.include_router(text.router, prefix="/api/v1")
+app.include_router(text_extractor.router, prefix="/api/v1")
 app.include_router(word_counter.router, prefix="/api/v1")
 app.include_router(color.router, prefix="/api/v1")
 app.include_router(hash.router, prefix="/api/v1")

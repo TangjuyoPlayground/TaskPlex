@@ -329,6 +329,26 @@ export interface WordCounterResponse extends ApiResponse {
   line_count?: number;
 }
 
+// Text Extractors
+export interface TextExtractorRequest {
+  text: string;
+}
+
+export interface KeywordExtractorResponse extends ApiResponse {
+  keywords?: string[];
+  count?: number;
+}
+
+export interface EmailExtractorResponse extends ApiResponse {
+  emails?: string[];
+  count?: number;
+}
+
+export interface URLExtractorResponse extends ApiResponse {
+  urls?: string[];
+  count?: number;
+}
+
 // HTML Minifier
 export interface HTMLMinifierResponse extends ApiResponse {
   minified_html?: string;

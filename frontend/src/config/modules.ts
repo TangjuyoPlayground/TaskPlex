@@ -905,8 +905,8 @@ export const MODULES: ModuleDefinition[] = [
     labelKey: 'modules.text.keywordExtractor.title',
     descriptionKey: 'modules.text.keywordExtractor.description',
     category: 'text',
-    status: 'placeholder',
-    color: 'text-orange-600',
+    status: 'implemented',
+    color: 'text-purple-600',
   },
   {
     id: 'accent-remover',
@@ -925,8 +925,8 @@ export const MODULES: ModuleDefinition[] = [
     labelKey: 'modules.text.emailExtractor.title',
     descriptionKey: 'modules.text.emailExtractor.description',
     category: 'text',
-    status: 'placeholder',
-    color: 'text-orange-600',
+    status: 'implemented',
+    color: 'text-blue-600',
   },
   {
     id: 'url-extractor',
@@ -935,8 +935,8 @@ export const MODULES: ModuleDefinition[] = [
     labelKey: 'modules.text.urlExtractor.title',
     descriptionKey: 'modules.text.urlExtractor.description',
     category: 'text',
-    status: 'placeholder',
-    color: 'text-orange-600',
+    status: 'implemented',
+    color: 'text-green-600',
   },
 
   // ============================================
