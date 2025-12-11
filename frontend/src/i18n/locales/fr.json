@@ -13,6 +13,7 @@
     "success": "Succès",
     "upload": "Téléverser",
     "download": "Télécharger",
+    "copy": "Copier",
     "process": "Traiter",
     "reset": "Réinitialiser",
     "back": "Retour",
@@ -688,6 +689,22 @@
     "placeholder": "Les résultats de validation s'afficheront ici.",
     "noErrors": "Aucun problème structurel détecté.",
     "location": "Ligne {{line}}, colonne {{column}}"
+  },
+  "loremIpsum": {
+    "title": "Générateur Lorem Ipsum",
+    "description": "Générer du texte de remplissage pour vos designs et maquettes.",
+    "type": "Type",
+    "paragraphs": "Paragraphes",
+    "words": "Mots",
+    "sentences": "Phrases",
+    "count": "Nombre",
+    "startWithLorem": "Commencer par 'Lorem ipsum'",
+    "startWithLoremHint": "Si le texte doit commencer par 'Lorem ipsum dolor sit amet'",
+    "generate": "Générer",
+    "generating": "Génération...",
+    "generatedText": "Texte généré",
+    "placeholder": "Le texte Lorem Ipsum généré apparaîtra ici...",
+    "generatedCount": "{{count}} {{type}} généré(s)"
   },
   "jsonValidator": {
     "title": "Validateur JSON",

@@ -13,6 +13,7 @@
     "success": "Éxito",
     "upload": "Subir",
     "download": "Descargar",
+    "copy": "Copiar",
     "process": "Procesar",
     "reset": "Restablecer",
     "back": "Volver",
@@ -688,6 +689,22 @@
     "placeholder": "Los resultados de validación aparecerán aquí.",
     "noErrors": "No se detectaron problemas estructurales.",
     "location": "Línea {{line}}, columna {{column}}"
+  },
+  "loremIpsum": {
+    "title": "Generador Lorem Ipsum",
+    "description": "Generar texto de relleno para tus diseños y maquetas.",
+    "type": "Tipo",
+    "paragraphs": "Párrafos",
+    "words": "Palabras",
+    "sentences": "Frases",
+    "count": "Cantidad",
+    "startWithLorem": "Comenzar con 'Lorem ipsum'",
+    "startWithLoremHint": "Si el texto debe comenzar con 'Lorem ipsum dolor sit amet'",
+    "generate": "Generar",
+    "generating": "Generando...",
+    "generatedText": "Texto generado",
+    "placeholder": "El texto Lorem Ipsum generado aparecerá aquí...",
+    "generatedCount": "{{count}} {{type}} generado(s)"
   },
   "jsonValidator": {
     "title": "Validador JSON",

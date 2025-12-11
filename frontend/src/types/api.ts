@@ -300,6 +300,21 @@ export interface PyValidationResponse extends ApiResponse {
   errors: PyErrorDetail[];
 }
 
+// Lorem Ipsum Generator
+export type LoremIpsumType = 'paragraphs' | 'words' | 'sentences';
+
+export interface LoremIpsumRequest {
+  type: LoremIpsumType;
+  count: number;
+  start_with_lorem?: boolean;
+}
+
+export interface LoremIpsumResponse extends ApiResponse {
+  text?: string;
+  type?: string;
+  count?: number;
+}
+
 // HTML Minifier
 export interface HTMLMinifierResponse extends ApiResponse {
   minified_html?: string;

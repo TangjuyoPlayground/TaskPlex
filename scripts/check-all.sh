@@ -100,7 +100,7 @@ fi
 if ! npx tsc --version &> /dev/null; then
     print_warning "TypeScript compiler not found, skipping type check"
 else
-    echo "Running TypeScript type check (tsc --noEmit)..."
+    echo "Running TypeScript type check (npx tsc --noEmit)..."
     TYPE_CHECK_OUTPUT=$(npx tsc --noEmit 2>&1)
     TYPE_CHECK_EXIT_CODE=$?
     

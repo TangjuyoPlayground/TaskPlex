@@ -13,6 +13,7 @@
     "success": "Success",
     "upload": "Upload",
     "download": "Download",
+    "copy": "Copy",
     "process": "Process",
     "reset": "Reset",
     "back": "Back",
@@ -676,6 +677,22 @@
     "placeholder": "Validation results will appear here.",
     "noErrors": "No structural issues detected.",
     "location": "Line {{line}}, column {{column}}"
+  },
+  "loremIpsum": {
+    "title": "Lorem Ipsum Generator",
+    "description": "Generate placeholder text for your designs and mockups.",
+    "type": "Type",
+    "paragraphs": "Paragraphs",
+    "words": "Words",
+    "sentences": "Sentences",
+    "count": "Count",
+    "startWithLorem": "Start with 'Lorem ipsum'",
+    "startWithLoremHint": "Whether to start the text with 'Lorem ipsum dolor sit amet'",
+    "generate": "Generate",
+    "generating": "Generating...",
+    "generatedText": "Generated Text",
+    "placeholder": "Generated Lorem Ipsum text will appear here...",
+    "generatedCount": "Generated {{count}} {{type}}"
   },
   "units": {
     "title": "Unit Converter",
