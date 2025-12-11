@@ -23,6 +23,10 @@ import type {
   HTMLFormatterResponse,
   HTMLValidationResponse,
   HTMLMinifierResponse,
+  JSONValidationResponse,
+  XMLValidationResponse,
+  JSValidationResponse,
+  PyValidationResponse,
   CSSFormatterResponse,
   JSFormatterResponse,
   XMLMinifierResponse,
@@ -60,6 +64,10 @@ export type {
   HTMLFormatterResponse,
   HTMLValidationResponse,
   HTMLMinifierResponse,
+  JSONValidationResponse,
+  XMLValidationResponse,
+  JSValidationResponse,
+  PyValidationResponse,
   CSSFormatterResponse,
   JSFormatterResponse,
   XMLMinifierResponse,
@@ -497,6 +505,38 @@ export const ApiService = {
   validateHTML: async (html: string) => {
     const response = await api.post<HTMLValidationResponse>('/html-validator/validate', {
       html,
+    });
+    return response.data;
+  },
+
+  // JSON Validator
+  validateJSON: async (json: string) => {
+    const response = await api.post<JSONValidationResponse>('/json-validator/validate', {
+      json,
+    });
+    return response.data;
+  },
+
+  // XML Validator
+  validateXML: async (xml: string) => {
+    const response = await api.post<XMLValidationResponse>('/xml-validator/validate', {
+      xml,
+    });
+    return response.data;
+  },
+
+  // JavaScript Validator
+  validateJavaScript: async (javascript: string) => {
+    const response = await api.post<JSValidationResponse>('/js-validator/validate', {
+      javascript,
+    });
+    return response.data;
+  },
+
+  // Python Validator
+  validatePython: async (python: string) => {
+    const response = await api.post<PyValidationResponse>('/py-validator/validate', {
+      python,
     });
     return response.data;
   },

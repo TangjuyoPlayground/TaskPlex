@@ -25,12 +25,15 @@ from app.api import (
     image,
     js_formatter,
     js_minifier,
+    js_validator,
     json_data_generator,
     json_formatter,
     json_minifier,
+    json_validator,
     number_converter,
     password,
     pdf,
+    py_validator,
     qrcode,
     regex,
     text,
@@ -40,6 +43,7 @@ from app.api import (
     video,
     xml_formatter,
     xml_minifier,
+    xml_validator,
 )
 from app.api import base64 as base64_api
 from app.config import (
@@ -156,10 +160,14 @@ async def health_check():
             "css-minifier": "/api/v1/css-minifier",
             "js-formatter": "/api/v1/js-formatter",
             "js-minifier": "/api/v1/js-minifier",
+            "js-validator": "/api/v1/js-validator",
             "json-formatter": "/api/v1/json-formatter",
             "json-minifier": "/api/v1/json-minifier",
+            "json-validator": "/api/v1/json-validator",
             "xml-formatter": "/api/v1/xml-formatter",
             "xml-minifier": "/api/v1/xml-minifier",
+            "xml-validator": "/api/v1/xml-validator",
+            "py-validator": "/api/v1/py-validator",
         },
     }
 
@@ -181,11 +189,15 @@ app.include_router(css_formatter.router, prefix="/api/v1")
 app.include_router(css_minifier.router, prefix="/api/v1")
 app.include_router(js_formatter.router, prefix="/api/v1")
 app.include_router(js_minifier.router, prefix="/api/v1")
+app.include_router(js_validator.router, prefix="/api/v1")
 app.include_router(json_formatter.router, prefix="/api/v1")
 app.include_router(json_minifier.router, prefix="/api/v1")
+app.include_router(json_validator.router, prefix="/api/v1")
 app.include_router(json_data_generator.router, prefix="/api/v1")
 app.include_router(xml_formatter.router, prefix="/api/v1")
 app.include_router(xml_minifier.router, prefix="/api/v1")
+app.include_router(xml_validator.router, prefix="/api/v1")
+app.include_router(py_validator.router, prefix="/api/v1")
 app.include_router(text.router, prefix="/api/v1")
 app.include_router(color.router, prefix="/api/v1")
 app.include_router(hash.router, prefix="/api/v1")
