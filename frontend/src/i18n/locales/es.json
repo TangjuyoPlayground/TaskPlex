@@ -1568,11 +1568,25 @@
     "data": {
       "csvToJson": {
         "title": "CSV a JSON",
-        "description": "Convertir archivos CSV a JSON"
+        "description": "Convertir archivos CSV a JSON",
+        "selectFile": "Seleccionar archivo CSV",
+        "dropFile": "Arrastre su archivo CSV aquí o haga clic para explorar",
+        "change": "Cambiar archivo",
+        "convertBtn": "Convertir a JSON",
+        "converting": "Convirtiendo...",
+        "successMessage": "{{count}} filas convertidas exitosamente",
+        "downloadResult": "Descargar JSON"
       },
       "jsonToCsv": {
         "title": "JSON a CSV",
-        "description": "Convertir JSON a CSV"
+        "description": "Convertir JSON a CSV",
+        "selectFile": "Seleccionar archivo JSON",
+        "dropFile": "Arrastre su archivo JSON aquí o haga clic para explorar",
+        "change": "Cambiar archivo",
+        "convertBtn": "Convertir a CSV",
+        "converting": "Convirtiendo...",
+        "successMessage": "{{count}} filas convertidas exitosamente",
+        "downloadResult": "Descargar CSV"
       },
       "csvEditor": {
         "title": "Editor CSV",
