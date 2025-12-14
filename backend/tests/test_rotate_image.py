@@ -18,18 +18,13 @@ class TestRotateImageEndpoint:
 
     @patch("app.api.image.rotate_image")
     @patch("app.api.image.save_upload_file")
-    def test_rotate_image_success_90(self, mock_save, mock_rotate):
+    def test_rotate_image_success_90(self, mock_save, mock_rotate, tmp_path):
         """Test successful image rotation by 90 degrees"""
-        # Create a temporary test image file
-        test_file = Path(__file__).parent / "test_data" / "test_image.png"
-        test_file.parent.mkdir(exist_ok=True)
+        from PIL import Image
 
-        # Create a simple test image if it doesn't exist
-        if not test_file.exists():
-            from PIL import Image
-
-            img = Image.new("RGB", (100, 100), color="red")
-            img.save(test_file)
+        test_file = tmp_path / "test_image.png"
+        img = Image.new("RGB", (100, 100), color="red")
+        img.save(test_file)
 
         mock_save.return_value = test_file
         mock_rotate.return_value = MagicMock(
@@ -56,17 +51,13 @@ class TestRotateImageEndpoint:
         assert data["filename"] == "rotated_90_test_image.png"
 
     @patch("app.api.image.save_upload_file")
-    def test_rotate_image_invalid_angle(self, mock_save):
+    def test_rotate_image_invalid_angle(self, mock_save, tmp_path):
         """Test rotation with invalid angle"""
-        test_file = Path(__file__).parent / "test_data" / "test_image.png"
-        test_file.parent.mkdir(exist_ok=True)
+        from PIL import Image
 
-        # Create a simple test image if it doesn't exist
-        if not test_file.exists():
-            from PIL import Image
-
-            img = Image.new("RGB", (100, 100), color="red")
-            img.save(test_file)
+        test_file = tmp_path / "test_image.png"
+        img = Image.new("RGB", (100, 100), color="red")
+        img.save(test_file)
 
         mock_save.return_value = test_file
 
@@ -81,10 +72,9 @@ class TestRotateImageEndpoint:
         assert "Invalid angle" in response.json()["detail"]
 
     @patch("app.api.image.save_upload_file")
-    def test_rotate_image_invalid_format(self, mock_save):
+    def test_rotate_image_invalid_format(self, mock_save, tmp_path):
         """Test rotation with invalid file format"""
-        test_file = Path(__file__).parent / "test_data" / "test.txt"
-        test_file.parent.mkdir(exist_ok=True)
+        test_file = tmp_path / "test.txt"
         test_file.write_text("not an image")
         mock_save.return_value = test_file
 
