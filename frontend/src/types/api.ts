@@ -497,6 +497,21 @@ export interface Base64Response extends ApiResponse {
   result: string;
 }
 
+// CSV Converter
+export interface CSVToJSONResponse extends ApiResponse {
+  json_data: string;
+  download_url?: string | null;
+  filename?: string | null;
+  rows_count: number;
+}
+
+export interface JSONToCSVResponse extends ApiResponse {
+  csv_data: string;
+  download_url?: string | null;
+  filename?: string | null;
+  rows_count: number;
+}
+
 // Generic file processing result (useful for UI components)
 export interface ProcessingResult {
   success: boolean;

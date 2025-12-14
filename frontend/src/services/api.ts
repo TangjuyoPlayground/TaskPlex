@@ -52,6 +52,8 @@ import type {
   PaletteGeneratorResponse,
   GradientType,
   GradientGeneratorResponse,
+  CSVToJSONResponse,
+  JSONToCSVResponse,
 } from '../types/api';
 
 // Re-export types for backwards compatibility
@@ -116,6 +118,8 @@ export type {
   GradientType,
   GradientGeneratorRequest,
   GradientGeneratorResponse,
+  CSVToJSONResponse,
+  JSONToCSVResponse,
 } from '../types/api';
 
 // API URL from environment variable with fallback
@@ -767,6 +771,29 @@ export const ApiService = {
   convertColor: async (color: string) => {
     const response = await api.post<ColorConversionResponse>('/color/convert', {
       color,
+    });
+    return response.data;
+  },
+  
+  // CSV Converter
+  csvToJSON: async (file: File) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    const response = await api.post<CSVToJSONResponse>('/csv-converter/csv-to-json', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  },
+  
+  jsonToCSV: async (file: File) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    const response = await api.post<JSONToCSVResponse>('/csv-converter/json-to-csv', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
     });
     return response.data;
   },

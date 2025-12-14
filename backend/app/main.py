@@ -19,6 +19,7 @@ from app.api import (
     color,
     css_formatter,
     css_minifier,
+    csv_converter,
     gradient_generator,
     hash,
     html_formatter,
@@ -223,6 +224,7 @@ app.include_router(url_encoder.router, prefix="/api/v1")
 app.include_router(uuid_generator.router, prefix="/api/v1")
 app.include_router(number_converter.router, prefix="/api/v1")
 app.include_router(base64_api.router, prefix="/api/v1")
+app.include_router(csv_converter.router, prefix="/api/v1")
 app.include_router(tasks_router, prefix="/api/v1")
 
 

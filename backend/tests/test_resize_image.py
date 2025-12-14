@@ -18,18 +18,13 @@ class TestResizeImageEndpoint:
 
     @patch("app.api.image.resize_image")
     @patch("app.api.image.save_upload_file")
-    def test_resize_image_success_width_only(self, mock_save, mock_resize):
+    def test_resize_image_success_width_only(self, mock_save, mock_resize, tmp_path):
         """Test successful image resizing with width only"""
-        # Create a temporary test image file
-        test_file = Path(__file__).parent / "test_data" / "test_image.png"
-        test_file.parent.mkdir(exist_ok=True)
+        from PIL import Image
 
-        # Create a simple test image if it doesn't exist
-        if not test_file.exists():
-            from PIL import Image
-
-            img = Image.new("RGB", (100, 100), color="red")
-            img.save(test_file)
+        test_file = tmp_path / "test_image.png"
+        img = Image.new("RGB", (100, 100), color="red")
+        img.save(test_file)
 
         mock_save.return_value = test_file
         mock_resize.return_value = MagicMock(
@@ -57,16 +52,13 @@ class TestResizeImageEndpoint:
 
     @patch("app.api.image.resize_image")
     @patch("app.api.image.save_upload_file")
-    def test_resize_image_success_both_dimensions(self, mock_save, mock_resize):
+    def test_resize_image_success_both_dimensions(self, mock_save, mock_resize, tmp_path):
         """Test successful image resizing with both width and height"""
-        test_file = Path(__file__).parent / "test_data" / "test_image.png"
-        test_file.parent.mkdir(exist_ok=True)
+        from PIL import Image
 
-        if not test_file.exists():
-            from PIL import Image
-
-            img = Image.new("RGB", (100, 100), color="red")
-            img.save(test_file)
+        test_file = tmp_path / "test_image.png"
+        img = Image.new("RGB", (100, 100), color="red")
+        img.save(test_file)
 
         mock_save.return_value = test_file
         mock_resize.return_value = MagicMock(
@@ -91,16 +83,13 @@ class TestResizeImageEndpoint:
         assert data["success"] is True
 
     @patch("app.api.image.save_upload_file")
-    def test_resize_image_no_dimensions(self, mock_save):
+    def test_resize_image_no_dimensions(self, mock_save, tmp_path):
         """Test resize with no dimensions specified"""
-        test_file = Path(__file__).parent / "test_data" / "test_image.png"
-        test_file.parent.mkdir(exist_ok=True)
+        from PIL import Image
 
-        if not test_file.exists():
-            from PIL import Image
-
-            img = Image.new("RGB", (100, 100), color="red")
-            img.save(test_file)
+        test_file = tmp_path / "test_image.png"
+        img = Image.new("RGB", (100, 100), color="red")
+        img.save(test_file)
 
         mock_save.return_value = test_file
 
@@ -115,16 +104,13 @@ class TestResizeImageEndpoint:
         assert "dimension" in response.json()["detail"].lower()
 
     @patch("app.api.image.save_upload_file")
-    def test_resize_image_invalid_width(self, mock_save):
+    def test_resize_image_invalid_width(self, mock_save, tmp_path):
         """Test resize with invalid width"""
-        test_file = Path(__file__).parent / "test_data" / "test_image.png"
-        test_file.parent.mkdir(exist_ok=True)
+        from PIL import Image
 
-        if not test_file.exists():
-            from PIL import Image
-
-            img = Image.new("RGB", (100, 100), color="red")
-            img.save(test_file)
+        test_file = tmp_path / "test_image.png"
+        img = Image.new("RGB", (100, 100), color="red")
+        img.save(test_file)
 
         mock_save.return_value = test_file
 
@@ -139,16 +125,13 @@ class TestResizeImageEndpoint:
         assert "positive" in response.json()["detail"].lower()
 
     @patch("app.api.image.save_upload_file")
-    def test_resize_image_invalid_resample(self, mock_save):
+    def test_resize_image_invalid_resample(self, mock_save, tmp_path):
         """Test resize with invalid resample algorithm"""
-        test_file = Path(__file__).parent / "test_data" / "test_image.png"
-        test_file.parent.mkdir(exist_ok=True)
+        from PIL import Image
 
-        if not test_file.exists():
-            from PIL import Image
-
-            img = Image.new("RGB", (100, 100), color="red")
-            img.save(test_file)
+        test_file = tmp_path / "test_image.png"
+        img = Image.new("RGB", (100, 100), color="red")
+        img.save(test_file)
 
         mock_save.return_value = test_file
 
@@ -166,10 +149,9 @@ class TestResizeImageEndpoint:
         )
 
     @patch("app.api.image.save_upload_file")
-    def test_resize_image_invalid_format(self, mock_save):
+    def test_resize_image_invalid_format(self, mock_save, tmp_path):
         """Test resize with invalid file format"""
-        test_file = Path(__file__).parent / "test_data" / "test.txt"
-        test_file.parent.mkdir(exist_ok=True)
+        test_file = tmp_path / "test.txt"
         test_file.write_text("not an image")
         mock_save.return_value = test_file
 

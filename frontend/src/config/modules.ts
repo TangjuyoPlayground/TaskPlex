@@ -686,7 +686,7 @@ export const MODULES: ModuleDefinition[] = [
     labelKey: 'modules.data.csvToJson.title',
     descriptionKey: 'modules.data.csvToJson.description',
     category: 'data',
-    status: 'placeholder',
+    status: 'implemented',
     color: 'text-teal-600',
   },
   {
@@ -696,7 +696,7 @@ export const MODULES: ModuleDefinition[] = [
     labelKey: 'modules.data.jsonToCsv.title',
     descriptionKey: 'modules.data.jsonToCsv.description',
     category: 'data',
-    status: 'placeholder',
+    status: 'implemented',
     color: 'text-teal-600',
   },
 

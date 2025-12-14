@@ -89,6 +89,8 @@ const EmailExtractorScreen = createLazyComponent(() => import('./pages/EmailExtr
 const URLExtractorScreen = createLazyComponent(() => import('./pages/URLExtractorScreen'), 'URLExtractorScreen');
 const PaletteGeneratorScreen = createLazyComponent(() => import('./pages/PaletteGeneratorScreen'), 'PaletteGeneratorScreen');
 const GradientGeneratorScreen = createLazyComponent(() => import('./pages/GradientGeneratorScreen'), 'GradientGeneratorScreen');
+const CSVToJSONScreen = createLazyComponent(() => import('./pages/CSVToJSONScreen'), 'CSVToJSONScreen');
+const JSONToCSVScreen = createLazyComponent(() => import('./pages/JSONToCSVScreen'), 'JSONToCSVScreen');
 
 // PDF Module - lazy loaded (heavy dependencies like react-pdf)
 const PDFCompress = createLazyComponent(() => import('./pages/pdf/PDFCompress'), 'PDFCompress');
@@ -143,6 +145,10 @@ const componentMap: Record<string, React.LazyExoticComponent<React.ComponentType
     'palette-generator': PaletteGeneratorScreen,
     'gradient-generator': GradientGeneratorScreen,
     'fake-data-generator': JSONDataGeneratorScreen,
+    
+    // Data
+    'csv-to-json': CSVToJSONScreen,
+    'json-to-csv': JSONToCSVScreen,
   'code-formatter': CodeFormatterScreen,
   'code-minifier': CodeMinifierScreen,
   'html-formatter': HTMLFormatterScreen,

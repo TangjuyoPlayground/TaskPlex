@@ -6,6 +6,7 @@ from pathlib import Path
 from unittest.mock import MagicMock, patch
 
 from fastapi.testclient import TestClient
+import pytest
 
 from app.main import app
 
@@ -17,15 +18,13 @@ class TestFilterImageEndpoint:
 
     @patch("app.api.image.apply_filter")
     @patch("app.api.image.save_upload_file")
-    def test_filter_image_success(self, mock_save, mock_filter):
-        test_file = Path(__file__).parent / "test_data" / "test_image.png"
-        test_file.parent.mkdir(exist_ok=True)
+    def test_filter_image_success(self, mock_save, mock_filter, tmp_path):
+        """Test successful filter application"""
+        from PIL import Image
 
-        if not test_file.exists():
-            from PIL import Image
-
-            img = Image.new("RGB", (32, 32), color="blue")
-            img.save(test_file)
+        test_file = tmp_path / "test_image.png"
+        img = Image.new("RGB", (32, 32), color="blue")
+        img.save(test_file)
 
         mock_save.return_value = test_file
         mock_filter.return_value = MagicMock(
@@ -50,15 +49,13 @@ class TestFilterImageEndpoint:
         assert data["success"] is True
         assert data["filename"] == "filtered_test_image.png"
 
-    def test_filter_image_invalid_filter(self):
-        test_file = Path(__file__).parent / "test_data" / "test_image.png"
-        test_file.parent.mkdir(exist_ok=True)
+    def test_filter_image_invalid_filter(self, tmp_path):
+        """Test filter with invalid filter name"""
+        from PIL import Image
 
-        if not test_file.exists():
-            from PIL import Image
-
-            img = Image.new("RGB", (32, 32), color="blue")
-            img.save(test_file)
+        test_file = tmp_path / "test_image.png"
+        img = Image.new("RGB", (32, 32), color="blue")
+        img.save(test_file)
 
         with open(test_file, "rb") as f:
             response = client.post(
@@ -70,9 +67,9 @@ class TestFilterImageEndpoint:
         assert response.status_code == 400
         assert "Unsupported filter" in response.json()["detail"]
 
-    def test_filter_image_invalid_format(self):
-        test_file = Path(__file__).parent / "test_data" / "test.txt"
-        test_file.parent.mkdir(exist_ok=True)
+    def test_filter_image_invalid_format(self, tmp_path):
+        """Test filter with invalid file format"""
+        test_file = tmp_path / "test.txt"
         test_file.write_text("not an image")
 
         with open(test_file, "rb") as f:
@@ -87,15 +84,13 @@ class TestFilterImageEndpoint:
 
     @patch("app.api.image.apply_filter")
     @patch("app.api.image.save_upload_file")
-    def test_filter_image_failure(self, mock_save, mock_filter):
-        test_file = Path(__file__).parent / "test_data" / "test_image.png"
-        test_file.parent.mkdir(exist_ok=True)
+    def test_filter_image_failure(self, mock_save, mock_filter, tmp_path):
+        """Test filter failure handling"""
+        from PIL import Image
 
-        if not test_file.exists():
-            from PIL import Image
-
-            img = Image.new("RGB", (32, 32), color="blue")
-            img.save(test_file)
+        test_file = tmp_path / "test_image.png"
+        img = Image.new("RGB", (32, 32), color="blue")
+        img.save(test_file)
 
         mock_save.return_value = test_file
         mock_filter.return_value = MagicMock(

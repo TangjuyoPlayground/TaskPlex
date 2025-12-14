@@ -6,6 +6,7 @@ from pathlib import Path
 from unittest.mock import MagicMock, patch
 
 from fastapi.testclient import TestClient
+import pytest
 
 from app.main import app
 
@@ -17,16 +18,13 @@ class TestExtractColorsEndpoint:
 
     @patch("app.api.image.extract_colors")
     @patch("app.api.image.save_upload_file")
-    def test_extract_colors_success(self, mock_save, mock_extract):
+    def test_extract_colors_success(self, mock_save, mock_extract, tmp_path):
         """Test successful color extraction"""
-        test_file = Path(__file__).parent / "test_data" / "test_image.png"
-        test_file.parent.mkdir(exist_ok=True)
+        from PIL import Image
 
-        if not test_file.exists():
-            from PIL import Image
-
-            img = Image.new("RGB", (10, 10), color="red")
-            img.save(test_file)
+        test_file = tmp_path / "test_image.png"
+        img = Image.new("RGB", (10, 10), color="red")
+        img.save(test_file)
 
         mock_save.return_value = test_file
         mock_extract.return_value = MagicMock(
@@ -48,16 +46,13 @@ class TestExtractColorsEndpoint:
         assert data["success"] is True
         assert data["colors"][0]["hex"] == "#ff0000"
 
-    def test_extract_colors_invalid_max(self):
+    def test_extract_colors_invalid_max(self, tmp_path):
         """Test invalid max_colors parameter"""
-        test_file = Path(__file__).parent / "test_data" / "test_image.png"
-        test_file.parent.mkdir(exist_ok=True)
+        from PIL import Image
 
-        if not test_file.exists():
-            from PIL import Image
-
-            img = Image.new("RGB", (10, 10), color="red")
-            img.save(test_file)
+        test_file = tmp_path / "test_image.png"
+        img = Image.new("RGB", (10, 10), color="red")
+        img.save(test_file)
 
         with open(test_file, "rb") as f:
             response = client.post(
@@ -69,10 +64,9 @@ class TestExtractColorsEndpoint:
         assert response.status_code == 400
         assert "max_colors" in response.json()["detail"]
 
-    def test_extract_colors_invalid_format(self):
+    def test_extract_colors_invalid_format(self, tmp_path):
         """Test invalid file format"""
-        test_file = Path(__file__).parent / "test_data" / "test.txt"
-        test_file.parent.mkdir(exist_ok=True)
+        test_file = tmp_path / "test.txt"
         test_file.write_text("not an image")
 
         with open(test_file, "rb") as f:
@@ -87,16 +81,13 @@ class TestExtractColorsEndpoint:
 
     @patch("app.api.image.extract_colors")
     @patch("app.api.image.save_upload_file")
-    def test_extract_colors_failure(self, mock_save, mock_extract):
+    def test_extract_colors_failure(self, mock_save, mock_extract, tmp_path):
         """Test service failure returns 500"""
-        test_file = Path(__file__).parent / "test_data" / "test_image.png"
-        test_file.parent.mkdir(exist_ok=True)
+        from PIL import Image
 
-        if not test_file.exists():
-            from PIL import Image
-
-            img = Image.new("RGB", (10, 10), color="red")
-            img.save(test_file)
+        test_file = tmp_path / "test_image.png"
+        img = Image.new("RGB", (10, 10), color="red")
+        img.save(test_file)
 
         mock_save.return_value = test_file
         mock_extract.return_value = MagicMock(

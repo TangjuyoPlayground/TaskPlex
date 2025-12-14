@@ -6,6 +6,7 @@ from pathlib import Path
 from unittest.mock import MagicMock, patch
 
 from fastapi.testclient import TestClient
+import pytest
 
 from app.main import app
 
@@ -17,15 +18,13 @@ class TestAdjustImageEndpoint:
 
     @patch("app.api.image.adjust_image")
     @patch("app.api.image.save_upload_file")
-    def test_adjust_image_success(self, mock_save, mock_adjust):
-        test_file = Path(__file__).parent / "test_data" / "test_image.png"
-        test_file.parent.mkdir(exist_ok=True)
+    def test_adjust_image_success(self, mock_save, mock_adjust, tmp_path):
+        """Test successful image adjustment"""
+        from PIL import Image
 
-        if not test_file.exists():
-            from PIL import Image
-
-            img = Image.new("RGB", (50, 50), color="red")
-            img.save(test_file)
+        test_file = tmp_path / "test_image.png"
+        img = Image.new("RGB", (50, 50), color="red")
+        img.save(test_file)
 
         mock_save.return_value = test_file
         mock_adjust.return_value = MagicMock(
@@ -50,15 +49,13 @@ class TestAdjustImageEndpoint:
         assert data["success"] is True
         assert data["filename"] == "adjusted_test_image.png"
 
-    def test_adjust_image_invalid_factor(self):
-        test_file = Path(__file__).parent / "test_data" / "test_image.png"
-        test_file.parent.mkdir(exist_ok=True)
+    def test_adjust_image_invalid_factor(self, tmp_path):
+        """Test image adjustment with invalid brightness factor"""
+        from PIL import Image
 
-        if not test_file.exists():
-            from PIL import Image
-
-            img = Image.new("RGB", (50, 50), color="red")
-            img.save(test_file)
+        test_file = tmp_path / "test_image.png"
+        img = Image.new("RGB", (50, 50), color="red")
+        img.save(test_file)
 
         with open(test_file, "rb") as f:
             response = client.post(
@@ -70,9 +67,9 @@ class TestAdjustImageEndpoint:
         assert response.status_code == 400
         assert "brightness" in response.json()["detail"]
 
-    def test_adjust_image_invalid_format(self):
-        test_file = Path(__file__).parent / "test_data" / "test.txt"
-        test_file.parent.mkdir(exist_ok=True)
+    def test_adjust_image_invalid_format(self, tmp_path):
+        """Test image adjustment with invalid file format"""
+        test_file = tmp_path / "test.txt"
         test_file.write_text("not an image")
 
         with open(test_file, "rb") as f:
@@ -87,15 +84,13 @@ class TestAdjustImageEndpoint:
 
     @patch("app.api.image.adjust_image")
     @patch("app.api.image.save_upload_file")
-    def test_adjust_image_failure(self, mock_save, mock_adjust):
-        test_file = Path(__file__).parent / "test_data" / "test_image.png"
-        test_file.parent.mkdir(exist_ok=True)
+    def test_adjust_image_failure(self, mock_save, mock_adjust, tmp_path):
+        """Test image adjustment failure handling"""
+        from PIL import Image
 
-        if not test_file.exists():
-            from PIL import Image
-
-            img = Image.new("RGB", (50, 50), color="red")
-            img.save(test_file)
+        test_file = tmp_path / "test_image.png"
+        img = Image.new("RGB", (50, 50), color="red")
+        img.save(test_file)
 
         mock_save.return_value = test_file
         mock_adjust.return_value = MagicMock(
