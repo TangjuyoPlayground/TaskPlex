@@ -832,6 +832,22 @@
       "fileRequired": "Por favor selecciona un archivo de audio"
     }
   },
+  "audioMetadata": {
+    "title": "Metadatos de Audio",
+    "description": "Extraer y ver metadatos detallados y etiquetas ID3 de archivos de audio",
+    "selectFile": "Seleccionar archivo de audio",
+    "dropFile": "Arrastra tu archivo de audio aquí o haz clic para explorar",
+    "extractBtn": "Extraer metadatos",
+    "extracting": "Extrayendo...",
+    "metadataTitle": "Metadatos de Audio",
+    "basicInfo": "Información básica",
+    "technicalInfo": "Información técnica",
+    "tags": "Etiquetas ID3",
+    "noMetadata": "No se encontraron metadatos en este archivo",
+    "validation": {
+      "fileRequired": "Por favor selecciona un archivo de audio"
+    }
+  },
   "audioMerge": {
     "selectFiles": "Seleccionar archivos de audio",
     "dropFiles": "Arrastra los archivos de audio aquí o haz clic para explorar",
@@ -1388,7 +1404,7 @@
       },
       "metadata": {
         "title": "Metadatos de audio",
-        "description": "Editar etiquetas ID3 y metadatos"
+        "description": "Extraer y ver metadatos detallados y etiquetas ID3 de archivos de audio"
       }
     },
     "image": {

@@ -134,7 +134,7 @@ export const MODULES: ModuleDefinition[] = [
     labelKey: 'modules.audio.metadata.title',
     descriptionKey: 'modules.audio.metadata.description',
     category: 'media',
-    status: 'placeholder',
+    status: 'implemented',
     color: 'text-pink-600',
   },
 

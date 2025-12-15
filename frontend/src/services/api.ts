@@ -4,6 +4,7 @@ import type {
   PDFProcessingResponse,
   ImageProcessingResponse,
   AudioProcessingResponse,
+  AudioMetadataResponse,
   ColorExtractionResponse,
   ColorConversionResponse,
   VideoToGifOptions,
@@ -65,6 +66,7 @@ export type {
   PDFProcessingResponse,
   ImageProcessingResponse,
   AudioProcessingResponse,
+  AudioMetadataResponse,
   RegexMatch,
   RegexResponse,
   UnitConversionResponse,
@@ -436,6 +438,17 @@ export const ApiService = {
     formData.append('quality', quality);
     formData.append('bitrate', bitrate);
     const response = await api.post<AudioProcessingResponse>('/audio/merge', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  },
+
+  getAudioMetadata: async (file: File) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    const response = await api.post<AudioMetadataResponse>('/audio/metadata', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },

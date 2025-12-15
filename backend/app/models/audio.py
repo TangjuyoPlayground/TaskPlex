@@ -25,3 +25,12 @@ class AudioConvertRequest(BaseModel):
     )
     quality: str = Field(default="medium", description="Conversion quality (low, medium, high)")
     bitrate: str = Field(default="192k", description="Audio bitrate (e.g., 128k, 192k, 256k, 320k)")
+
+
+class AudioMetadataResponse(BaseModel):
+    """Response model for audio metadata extraction"""
+
+    success: bool
+    message: str
+    filename: str = ""
+    metadata: dict = Field(default_factory=dict, description="Extracted audio metadata")

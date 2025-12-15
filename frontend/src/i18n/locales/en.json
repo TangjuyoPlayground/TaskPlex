@@ -820,6 +820,22 @@
       "fileRequired": "Please select an audio file"
     }
   },
+  "audioMetadata": {
+    "title": "Audio Metadata",
+    "description": "Extract and view detailed metadata and ID3 tags from audio files",
+    "selectFile": "Select Audio File",
+    "dropFile": "Drop your audio file here or click to browse",
+    "extractBtn": "Extract Metadata",
+    "extracting": "Extracting...",
+    "metadataTitle": "Audio Metadata",
+    "basicInfo": "Basic Information",
+    "technicalInfo": "Technical Information",
+    "tags": "ID3 Tags",
+    "noMetadata": "No metadata found in this file",
+    "validation": {
+      "fileRequired": "Please select an audio file"
+    }
+  },
   "audioMerge": {
     "selectFiles": "Select Audio Files",
     "dropFiles": "Drop audio files here or click to browse",
@@ -1312,7 +1328,7 @@
       },
       "metadata": {
         "title": "Audio Metadata",
-        "description": "Edit ID3 tags and metadata"
+        "description": "Extract and view audio file metadata and ID3 tags"
       }
     },
     "image": {

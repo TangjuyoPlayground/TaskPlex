@@ -17,6 +17,9 @@ python-docx>=0.8.11
 # Video processing
 ffmpeg-python>=0.2.0
 
+# Audio metadata
+mutagen>=1.47.0
+
 # Unit conversion
 pint>=0.23
 

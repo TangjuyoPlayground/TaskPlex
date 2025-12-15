@@ -7,8 +7,13 @@ from pathlib import Path
 from fastapi import APIRouter, File, Form, HTTPException, UploadFile
 
 from app.config import TEMP_DIR
-from app.models.audio import AudioProcessingResponse
-from app.services.audio_service import compress_audio, convert_audio, merge_audio
+from app.models.audio import AudioMetadataResponse, AudioProcessingResponse
+from app.services.audio_service import (
+    compress_audio,
+    convert_audio,
+    extract_audio_metadata,
+    merge_audio,
+)
 from app.utils.file_handler import delete_file, generate_unique_filename, save_upload_file
 
 router = APIRouter(prefix="/audio", tags=["Audio"])
@@ -263,3 +268,34 @@ async def merge_audio_endpoint(
         for input_path in input_paths:
             if input_path:
                 delete_file(input_path)
+
+
+@router.post("/metadata", response_model=AudioMetadataResponse)
+async def get_audio_metadata_endpoint(
+    file: UploadFile = File(..., description="Audio file to extract metadata from"),
+):
+    """
+    Extract metadata from an audio file.
+
+    Returns technical information (duration, bitrate, sample rate, channels, codec)
+    and ID3 tags (title, artist, album, genre, etc.) if available.
+    """
+    if not validate_audio_format(file.filename):
+        raise HTTPException(status_code=400, detail="Unsupported audio format")
+
+    input_path = None
+
+    try:
+        # Save uploaded file
+        input_path = await save_upload_file(file)
+
+        result = extract_audio_metadata(input_path=input_path)
+
+        if not result.success:
+            raise HTTPException(status_code=500, detail=result.message)
+
+        return result
+
+    finally:
+        if input_path:
+            delete_file(input_path)
