@@ -747,6 +747,34 @@
     "removedCount": "{{count}} accent(s) supprimé(s)",
     "placeholder": "Entrez du texte ci-dessus et cliquez sur 'Supprimer les accents' pour voir le résultat"
   },
+  "caseConverter": {
+    "title": "Convertisseur de casse",
+    "description": "Convertissez votre texte entre différents formats de casse",
+    "inputLabel": "Texte à convertir",
+    "inputPlaceholder": "Collez ou tapez votre texte ici...",
+    "caseTypeLabel": "Type de casse",
+    "types": {
+      "lowercase": "Minuscules",
+      "uppercase": "MAJUSCULES",
+      "titleCase": "Title Case",
+      "sentenceCase": "Sentence case",
+      "camelCase": "camelCase",
+      "pascalCase": "PascalCase",
+      "snakeCase": "snake_case",
+      "kebabCase": "kebab-case",
+      "title_case": "Title Case",
+      "sentence_case": "Sentence case",
+      "camel_case": "camelCase",
+      "pascal_case": "PascalCase",
+      "snake_case": "snake_case",
+      "kebab_case": "kebab-case"
+    },
+    "convert": "Convertir",
+    "converting": "Conversion...",
+    "result": "Résultat",
+    "convertedTo": "Converti en {{type}}",
+    "placeholder": "Entrez du texte ci-dessus et sélectionnez un type de casse pour voir le résultat"
+  },
   "emailExtractor": {
     "title": "Extracteur d'emails",
     "description": "Extrayez les adresses email de votre texte",

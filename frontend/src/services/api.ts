@@ -85,6 +85,9 @@ export type {
   WordCounterResponse,
   AccentRemoverRequest,
   AccentRemoverResponse,
+  CaseConverterRequest,
+  CaseConverterResponse,
+  CaseType,
   TextExtractorRequest,
   KeywordExtractorResponse,
   EmailExtractorResponse,
@@ -613,6 +616,15 @@ export const ApiService = {
   removeAccents: async (text: string) => {
     const response = await api.post<AccentRemoverResponse>('/accent-remover/remove', {
       text,
+    });
+    return response.data;
+  },
+
+  // Case Converter
+  convertCase: async (text: string, caseType: CaseType) => {
+    const response = await api.post<CaseConverterResponse>('/case-converter/convert', {
+      text,
+      case_type: caseType,
     });
     return response.data;
   },
