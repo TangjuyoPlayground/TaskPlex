@@ -58,7 +58,6 @@ import type {
   GradientGeneratorResponse,
   CSVToJSONResponse,
   JSONToCSVResponse,
-  AudioMetadataResponse,
 } from '../types/api';
 
 // Re-export types for backwards compatibility
@@ -130,7 +129,6 @@ export type {
   GradientGeneratorResponse,
   CSVToJSONResponse,
   JSONToCSVResponse,
-  AudioMetadataResponse,
 } from '../types/api';
 
 // API URL from environment variable with fallback
