@@ -3,10 +3,13 @@ Audio processing service using FFmpeg
 """
 
 from pathlib import Path
+from typing import Any
 
 import ffmpeg
+from mutagen import File as MutagenFile
+from mutagen.id3 import ID3NoHeaderError
 
-from app.models.audio import AudioProcessingResponse
+from app.models.audio import AudioMetadataResponse, AudioProcessingResponse
 from app.utils.file_handler import calculate_compression_ratio, get_file_size
 
 
@@ -340,3 +343,195 @@ def merge_audio(
             message=f"Error merging audio: {str(e)}",
             filename=output_path.name if output_path else None,
         )
+
+
+def extract_audio_metadata(input_path: Path) -> AudioMetadataResponse:
+    """
+    Extract metadata from an audio file using mutagen and ffprobe
+
+    Args:
+        input_path: Path to input audio file
+
+    Returns:
+        AudioMetadataResponse with extracted metadata
+    """
+    try:
+        metadata: dict[str, Any] = {}
+
+        # Get file size
+        file_size = get_file_size(input_path)
+        metadata["file_size"] = file_size
+        metadata["file_size_mb"] = round(file_size / (1024 * 1024), 2)
+
+        # Use ffprobe to get technical information
+        try:
+            probe = ffmpeg.probe(str(input_path))
+            audio_stream = next(
+                (
+                    stream
+                    for stream in probe.get("streams", [])
+                    if stream.get("codec_type") == "audio"
+                ),
+                None,
+            )
+
+            if audio_stream:
+                # Duration
+                duration = float(audio_stream.get("duration", 0))
+                metadata["duration"] = round(duration, 2)
+                metadata["duration_formatted"] = format_duration(duration)
+
+                # Bitrate
+                bitrate = audio_stream.get("bit_rate")
+                if bitrate:
+                    bitrate_kbps = int(bitrate) // 1000
+                    metadata["bitrate"] = bitrate_kbps
+                    metadata["bitrate_formatted"] = f"{bitrate_kbps} kbps"
+
+                # Sample rate
+                sample_rate = audio_stream.get("sample_rate")
+                if sample_rate:
+                    metadata["sample_rate"] = int(sample_rate)
+                    metadata["sample_rate_formatted"] = f"{int(sample_rate)} Hz"
+
+                # Channels
+                channels = audio_stream.get("channels")
+                if channels:
+                    metadata["channels"] = channels
+                    metadata["channels_formatted"] = (
+                        f"{channels} {'channel' if channels == 1 else 'channels'}"
+                    )
+
+                # Codec
+                codec = audio_stream.get("codec_name")
+                if codec:
+                    metadata["codec"] = codec
+
+                # Format
+                format_name = probe.get("format", {}).get("format_name", "")
+                if format_name:
+                    metadata["format"] = format_name.split(",")[0]  # Get first format
+        except Exception as e:
+            # If ffprobe fails, continue with mutagen metadata only
+            pass
+
+        # Use mutagen to get ID3 tags and other metadata
+        try:
+            audio_file = MutagenFile(str(input_path))
+
+            if audio_file is not None:
+                # Common tags
+                tag_mapping = {
+                    "TIT2": "title",  # ID3v2.3/2.4
+                    "TALB": "album",
+                    "TPE1": "artist",
+                    "TPE2": "album_artist",
+                    "TDRC": "date",
+                    "TRCK": "track",
+                    "TCON": "genre",
+                    "COMM": "comment",
+                    "TCOM": "composer",
+                    "TPUB": "publisher",
+                    "TCOP": "copyright",
+                }
+
+                # Try to get tags
+                for tag_key, metadata_key in tag_mapping.items():
+                    try:
+                        if hasattr(audio_file, "get"):
+                            value = audio_file.get(tag_key)
+                            if value:
+                                if isinstance(value, list) and len(value) > 0:
+                                    metadata[metadata_key] = str(value[0])
+                                elif value:
+                                    metadata[metadata_key] = str(value)
+                    except (KeyError, AttributeError):
+                        pass
+
+                # Try common mutagen properties
+                common_props = {
+                    "title": ["TIT2", "TITLE"],
+                    "artist": ["TPE1", "ARTIST"],
+                    "album": ["TALB", "ALBUM"],
+                    "date": ["TDRC", "DATE", "TDRL"],
+                    "genre": ["TCON", "GENRE"],
+                    "track": ["TRCK", "TRACKNUMBER"],
+                    "comment": ["COMM", "COMMENT"],
+                }
+
+                for prop_key, tag_keys in common_props.items():
+                    if prop_key not in metadata:
+                        for tag_key in tag_keys:
+                            try:
+                                if hasattr(audio_file, tag_key):
+                                    value = getattr(audio_file, tag_key)
+                                    if value:
+                                        if isinstance(value, list) and len(value) > 0:
+                                            metadata[prop_key] = str(value[0])
+                                        else:
+                                            metadata[prop_key] = str(value)
+                                        break
+                            except (KeyError, AttributeError):
+                                continue
+
+                # Get length from mutagen if not already set
+                if "duration" not in metadata and hasattr(audio_file, "info"):
+                    try:
+                        length = audio_file.info.length
+                        if length:
+                            metadata["duration"] = round(length, 2)
+                            metadata["duration_formatted"] = format_duration(length)
+                    except (AttributeError, TypeError):
+                        pass
+
+                # Get bitrate from mutagen if not already set
+                if "bitrate" not in metadata and hasattr(audio_file, "info"):
+                    try:
+                        bitrate = audio_file.info.bitrate
+                        if bitrate:
+                            metadata["bitrate"] = bitrate // 1000
+                            metadata["bitrate_formatted"] = f"{bitrate // 1000} kbps"
+                    except (AttributeError, TypeError):
+                        pass
+
+        except ID3NoHeaderError:
+            # File has no ID3 tags, that's okay
+            pass
+        except Exception as e:
+            # If mutagen fails, continue with ffprobe data only
+            pass
+
+        return AudioMetadataResponse(
+            success=True,
+            message="Metadata extracted successfully",
+            filename=input_path.name,
+            metadata=metadata,
+        )
+
+    except Exception as e:
+        return AudioMetadataResponse(
+            success=False,
+            message=f"Error extracting metadata: {str(e)}",
+            filename=input_path.name if input_path else "",
+            metadata={},
+        )
+
+
+def format_duration(seconds: float) -> str:
+    """
+    Format duration in seconds to human-readable string (MM:SS or HH:MM:SS)
+
+    Args:
+        seconds: Duration in seconds
+
+    Returns:
+        Formatted duration string
+    """
+    hours = int(seconds // 3600)
+    minutes = int((seconds % 3600) // 60)
+    secs = int(seconds % 60)
+
+    if hours > 0:
+        return f"{hours:02d}:{minutes:02d}:{secs:02d}"
+    else:
+        return f"{minutes:02d}:{secs:02d}"

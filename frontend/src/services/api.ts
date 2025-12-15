@@ -4,6 +4,7 @@ import type {
   PDFProcessingResponse,
   ImageProcessingResponse,
   AudioProcessingResponse,
+  AudioMetadataResponse,
   ColorExtractionResponse,
   ColorConversionResponse,
   VideoToGifOptions,
@@ -57,6 +58,7 @@ import type {
   GradientGeneratorResponse,
   CSVToJSONResponse,
   JSONToCSVResponse,
+  AudioMetadataResponse,
 } from '../types/api';
 
 // Re-export types for backwards compatibility
@@ -65,6 +67,7 @@ export type {
   PDFProcessingResponse,
   ImageProcessingResponse,
   AudioProcessingResponse,
+  AudioMetadataResponse,
   RegexMatch,
   RegexResponse,
   UnitConversionResponse,
@@ -127,6 +130,7 @@ export type {
   GradientGeneratorResponse,
   CSVToJSONResponse,
   JSONToCSVResponse,
+  AudioMetadataResponse,
 } from '../types/api';
 
 // API URL from environment variable with fallback
@@ -436,6 +440,17 @@ export const ApiService = {
     formData.append('quality', quality);
     formData.append('bitrate', bitrate);
     const response = await api.post<AudioProcessingResponse>('/audio/merge', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  },
+
+  getAudioMetadata: async (file: File) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    const response = await api.post<AudioMetadataResponse>('/audio/metadata', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },

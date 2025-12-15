@@ -61,6 +61,11 @@ export interface AudioProcessingResponse extends ApiResponse {
   compression_ratio?: number;
 }
 
+export interface AudioMetadataResponse extends ApiResponse {
+  filename: string;
+  metadata?: Record<string, string>;
+}
+
 export interface ImageDimensions {
   width: number;
   height: number;
