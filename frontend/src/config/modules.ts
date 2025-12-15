@@ -765,7 +765,7 @@ export const MODULES: ModuleDefinition[] = [
     labelKey: 'modules.text.caseConverter.title',
     descriptionKey: 'modules.text.caseConverter.description',
     category: 'text',
-    status: 'placeholder',
+    status: 'implemented',
     color: 'text-orange-600',
   },
   {

@@ -340,6 +340,20 @@ export interface AccentRemoverResponse extends ApiResponse {
   removed_count?: number;
 }
 
+// Case Converter
+export type CaseType = 'lowercase' | 'uppercase' | 'title_case' | 'sentence_case' | 'camel_case' | 'pascal_case' | 'snake_case' | 'kebab_case';
+
+export interface CaseConverterRequest {
+  text: string;
+  case_type: CaseType;
+}
+
+export interface CaseConverterResponse extends ApiResponse {
+  original_text?: string;
+  result_text?: string;
+  case_type?: string;
+}
+
 // Text Extractors
 export interface TextExtractorRequest {
   text: string;

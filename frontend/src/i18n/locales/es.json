@@ -747,6 +747,34 @@
     "removedCount": "{{count}} acento(s) eliminado(s)",
     "placeholder": "Ingresa texto arriba y haz clic en 'Eliminar acentos' para ver el resultado"
   },
+  "caseConverter": {
+    "title": "Convertidor de mayúsculas",
+    "description": "Convierte tu texto entre diferentes formatos de mayúsculas",
+    "inputLabel": "Texto a convertir",
+    "inputPlaceholder": "Pega o escribe tu texto aquí...",
+    "caseTypeLabel": "Tipo de mayúsculas",
+    "types": {
+      "lowercase": "minúsculas",
+      "uppercase": "MAYÚSCULAS",
+      "titleCase": "Title Case",
+      "sentenceCase": "Sentence case",
+      "camelCase": "camelCase",
+      "pascalCase": "PascalCase",
+      "snakeCase": "snake_case",
+      "kebabCase": "kebab-case",
+      "title_case": "Title Case",
+      "sentence_case": "Sentence case",
+      "camel_case": "camelCase",
+      "pascal_case": "PascalCase",
+      "snake_case": "snake_case",
+      "kebab_case": "kebab-case"
+    },
+    "convert": "Convertir",
+    "converting": "Convirtiendo...",
+    "result": "Resultado",
+    "convertedTo": "Convertido a {{type}}",
+    "placeholder": "Ingresa texto arriba y selecciona un tipo de mayúsculas para ver el resultado"
+  },
   "emailExtractor": {
     "title": "Extractor de emails",
     "description": "Extrae direcciones de email de tu texto",
