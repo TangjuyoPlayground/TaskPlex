@@ -40,6 +40,7 @@ const VideoToGIFScreen = createLazyComponent(() => import('./pages/VideoToGIFScr
 const VideoMergeScreen = createLazyComponent(() => import('./pages/VideoMergeScreen'), 'VideoMergeScreen');
 const ImageScreen = createLazyComponent(() => import('./pages/ImageScreen'), 'ImageScreen');
 const RotateImageScreen = createLazyComponent(() => import('./pages/RotateImageScreen'), 'RotateImageScreen');
+const FlipImageScreen = createLazyComponent(() => import('./pages/FlipImageScreen'), 'FlipImageScreen');
 const AdjustImageScreen = createLazyComponent(() => import('./pages/AdjustImageScreen'), 'AdjustImageScreen');
 const ExtractColorsScreen = createLazyComponent(() => import('./pages/ExtractColorsScreen'), 'ExtractColorsScreen');
 const ResizeImageScreen = createLazyComponent(() => import('./pages/ResizeImageScreen'), 'ResizeImageScreen');
@@ -123,6 +124,7 @@ const componentMap: Record<string, React.LazyExoticComponent<React.ComponentType
   'image-compress': ImageScreen,
   'image-convert': ImageScreen,
   'image-rotate': RotateImageScreen,
+  'image-flip': FlipImageScreen,
   'image-adjust': AdjustImageScreen,
   'image-filters': FilterImageScreen,
   'image-extract-colors': ExtractColorsScreen,

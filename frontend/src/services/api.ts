@@ -344,6 +344,14 @@ export const ApiService = {
     return response.data;
   },
 
+  flipImage: async (file: File, direction: string) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('direction', direction);
+    const response = await api.post<ImageProcessingResponse>('/image/flip', formData);
+    return response.data;
+  },
+
   extractColors: async (file: File, maxColors: number = 6) => {
     const formData = new FormData();
     formData.append('file', file);

@@ -263,6 +263,22 @@
     "original": "Original",
     "downloadResult": "Télécharger le résultat"
   },
+  "flipImage": {
+    "title": "Retourner l'image",
+    "imageFile": "Fichier image",
+    "dragDrop": "Glissez-déposez ou cliquez pour sélectionner",
+    "direction": "Direction",
+    "directions": {
+      "horizontal": "Horizontal",
+      "vertical": "Vertical"
+    },
+    "flipImage": "Retourner l'image",
+    "processing": "Traitement en cours...",
+    "result": "Résultat",
+    "preview": "L'aperçu apparaîtra ici",
+    "original": "Original",
+    "downloadResult": "Télécharger le résultat"
+  },
   "extractColors": {
     "title": "Extraire les couleurs",
     "imageFile": "Fichier image",
