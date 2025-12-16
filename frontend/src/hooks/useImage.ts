@@ -26,6 +26,14 @@ export const useRotateImage = () => {
   });
 };
 
+export const useFlipImage = () => {
+  return useMutation<ImageProcessingResponse, Error, { file: File; direction: string }>({
+    mutationFn: async ({ file, direction }) => {
+      return ApiService.flipImage(file, direction);
+    },
+  });
+};
+
 export const useExtractColors = () => {
   return useMutation<ColorExtractionResponse, Error, { file: File; maxColors?: number }>({
     mutationFn: async ({ file, maxColors = 6 }) => {

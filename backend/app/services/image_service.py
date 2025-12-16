@@ -494,6 +494,80 @@ def resize_image(
         )
 
 
+def flip_image(
+    input_path: Path, output_path: Path, direction: str = "horizontal"
+) -> ImageProcessingResponse:
+    """
+    Flip an image horizontally or vertically
+
+    Args:
+        input_path: Path to input image
+        output_path: Path to save flipped image
+        direction: Flip direction ("horizontal" or "vertical")
+
+    Returns:
+        ImageProcessingResponse with flip results
+    """
+    try:
+        # Get original file size
+        original_size = get_file_size(input_path)
+
+        # Open and flip image
+        with Image.open(input_path) as img:
+            # Get dimensions
+            dimensions = {"width": img.width, "height": img.height}
+
+            # Flip image based on direction
+            if direction.lower() == "horizontal":
+                flipped_img = ImageOps.mirror(img)
+            elif direction.lower() == "vertical":
+                flipped_img = ImageOps.flip(img)
+            else:
+                return ImageProcessingResponse(
+                    success=False,
+                    message=f"Invalid flip direction: {direction}. Use 'horizontal' or 'vertical'",
+                    filename=output_path.name if output_path else None,
+                )
+
+            # Preserve original format
+            output_format = img.format or "PNG"
+            if output_format == "JPEG":
+                # Convert RGBA to RGB if saving as JPEG
+                if flipped_img.mode == "RGBA":
+                    rgb_img = Image.new("RGB", flipped_img.size, (255, 255, 255))
+                    rgb_img.paste(
+                        flipped_img,
+                        mask=flipped_img.split()[3] if len(flipped_img.split()) == 4 else None,
+                    )
+                    flipped_img = rgb_img
+
+            # Save flipped image
+            if output_format in ["JPEG", "JPG"]:
+                flipped_img.save(output_path, format=output_format, quality=95, optimize=True)
+            else:
+                flipped_img.save(output_path, format=output_format, optimize=True)
+
+        # Get flipped file size
+        flipped_size = get_file_size(output_path)
+
+        return ImageProcessingResponse(
+            success=True,
+            message=f"Image flipped {direction} successfully",
+            filename=output_path.name,
+            download_url=f"/api/v1/download/{output_path.name}",
+            original_size=original_size,
+            processed_size=flipped_size,
+            dimensions=dimensions,
+        )
+
+    except Exception as e:
+        return ImageProcessingResponse(
+            success=False,
+            message=f"Error flipping image: {str(e)}",
+            filename=output_path.name if output_path else None,
+        )
+
+
 def create_collage(
     image_paths: list[Path],
     output_path: Path,

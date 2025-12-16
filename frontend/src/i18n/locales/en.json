@@ -251,6 +251,22 @@
     "original": "Original",
     "downloadResult": "Download Result"
   },
+  "flipImage": {
+    "title": "Flip Image",
+    "imageFile": "Image File",
+    "dragDrop": "Drag and drop or click to select",
+    "direction": "Direction",
+    "directions": {
+      "horizontal": "Horizontal",
+      "vertical": "Vertical"
+    },
+    "flipImage": "Flip Image",
+    "processing": "Processing...",
+    "result": "Result",
+    "preview": "Preview will appear here",
+    "original": "Original",
+    "downloadResult": "Download Result"
+  },
   "extractColors": {
     "title": "Extract Colors",
     "imageFile": "Image File",

@@ -15,6 +15,7 @@ from app.services.image_service import (
     convert_image,
     create_collage,
     extract_colors,
+    flip_image,
     resize_image,
     rotate_image,
 )
@@ -358,6 +359,51 @@ async def filter_image_endpoint(
 
         return result
     finally:
+        if input_path:
+            delete_file(input_path)
+
+
+@router.post("/flip", response_model=ImageProcessingResponse)
+async def flip_image_endpoint(
+    file: UploadFile = File(..., description="Image file to flip"),
+    direction: str = Form("horizontal", description="Flip direction (horizontal or vertical)"),
+):
+    """
+    Flip an image horizontally or vertically
+
+    Supported formats: JPG, JPEG, PNG, GIF, BMP, WEBP
+    """
+    # Validate file format
+    if not validate_image_format(file.filename):
+        raise HTTPException(status_code=400, detail="Unsupported image format")
+
+    # Validate direction
+    if direction.lower() not in ["horizontal", "vertical"]:
+        raise HTTPException(
+            status_code=400, detail="Invalid direction. Use 'horizontal' or 'vertical'"
+        )
+
+    input_path = None
+    output_path = None
+
+    try:
+        # Save uploaded file
+        input_path = await save_upload_file(file)
+
+        # Create output path
+        output_filename = generate_unique_filename(f"flipped_{direction}_{file.filename}")
+        output_path = TEMP_DIR / output_filename
+
+        # Flip image
+        result = flip_image(input_path, output_path, direction)
+
+        if not result.success:
+            raise HTTPException(status_code=500, detail=result.message)
+
+        return result
+
+    finally:
+        # Clean up input file
         if input_path:
             delete_file(input_path)
 

@@ -188,8 +188,8 @@ export const MODULES: ModuleDefinition[] = [
     labelKey: 'modules.image.flip.title',
     descriptionKey: 'modules.image.flip.description',
     category: 'media',
-    status: 'placeholder',
-    color: 'text-blue-500',
+    status: 'implemented',
+    color: 'text-blue-600',
   },
   {
     id: 'image-filters',
