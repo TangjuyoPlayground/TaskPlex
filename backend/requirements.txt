@@ -42,6 +42,9 @@ lorem>=0.1.1
 # Environment variables
 python-dotenv>=1.0.0
 
+# File encryption
+cryptography>=42.0.0
+
 # Testing
 pytest>=8.0.0
 pytest-asyncio>=0.23.0

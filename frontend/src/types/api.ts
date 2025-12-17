@@ -475,6 +475,14 @@ export interface HashResponse extends ApiResponse {
   salt_used?: string | null;
 }
 
+// File Encryption
+export interface EncryptionResponse extends ApiResponse {
+  filename: string;
+  download_url?: string;
+  original_size?: number;
+  processed_size?: number;
+}
+
 export interface PasswordGenerateRequest {
   length?: number;
   include_lowercase?: boolean;

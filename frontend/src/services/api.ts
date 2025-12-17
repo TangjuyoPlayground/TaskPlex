@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import type {
   VideoProcessingResponse,
   PDFProcessingResponse,
@@ -42,6 +42,7 @@ import type {
   XMLMinifierResponse,
   TextFormatResponse,
   HashResponse,
+  EncryptionResponse,
   PasswordGenerateRequest,
   PasswordGenerateResponse,
   PasswordCheckRequest,
@@ -107,6 +108,7 @@ export type {
   VideoExtractAudioOptions,
   TextFormatResponse,
   HashResponse,
+  EncryptionResponse,
   PasswordGenerateRequest,
   PasswordGenerateResponse,
   PasswordCheckRequest,
@@ -837,6 +839,51 @@ export const ApiService = {
   checkPassword: async (payload: PasswordCheckRequest) => {
     const response = await api.post<PasswordCheckResponse>('/password/check', payload);
     return response.data;
+  },
+
+  // File Encryption
+  encryptFile: async (file: File, password: string) => {
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('password', password);
+      const response = await api.post<EncryptionResponse>('/security/encrypt', formData);
+      return response.data;
+    } catch (error) {
+      // Extract error message from HTTP response
+      if (axios.isAxiosError(error)) {
+        const axiosError = error as AxiosError<{ detail?: string; message?: string }>;
+        if (axiosError.response?.data?.detail) {
+          throw new Error(axiosError.response.data.detail);
+        }
+        if (axiosError.response?.data?.message) {
+          throw new Error(axiosError.response.data.message);
+        }
+      }
+      throw error;
+    }
+  },
+
+  decryptFile: async (file: File, password: string) => {
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('password', password);
+      const response = await api.post<EncryptionResponse>('/security/decrypt', formData);
+      return response.data;
+    } catch (error) {
+      // Extract error message from HTTP response
+      if (axios.isAxiosError(error)) {
+        const axiosError = error as AxiosError<{ detail?: string; message?: string }>;
+        if (axiosError.response?.data?.detail) {
+          throw new Error(axiosError.response.data.detail);
+        }
+        if (axiosError.response?.data?.message) {
+          throw new Error(axiosError.response.data.message);
+        }
+      }
+      throw error;
+    }
   },
 
   // UUID Generator
