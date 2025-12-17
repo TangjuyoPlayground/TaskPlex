@@ -208,6 +208,27 @@
     "suggestions": "Suggestions",
     "disclaimer": "Avertissement : cette vérification n'utilise pas de listes de mots de passe compromis/dictionnaires ; elle se base uniquement sur la variété de caractères et la longueur."
   },
+  "fileEncryption": {
+    "title": "Chiffrement de fichiers",
+    "encrypt": "Chiffrer",
+    "decrypt": "Déchiffrer",
+    "selectFile": "Sélectionner un fichier",
+    "selectEncryptedFile": "Sélectionner un fichier chiffré",
+    "dropFile": "Glissez-déposez votre fichier ici ou cliquez pour parcourir",
+    "dropEncryptedFile": "Glissez-déposez votre fichier chiffré ici ou cliquez pour parcourir",
+    "password": "Mot de passe",
+    "passwordPlaceholder": "Entrez le mot de passe",
+    "passwordHint": "Utilisez un mot de passe fort. Vous devrez le retenir pour déchiffrer le fichier.",
+    "encryptBtn": "Chiffrer le fichier",
+    "decryptBtn": "Déchiffrer le fichier",
+    "encrypting": "Chiffrement...",
+    "decrypting": "Déchiffrement...",
+    "downloadResult": "Télécharger le résultat",
+    "infoTitle": "À propos du chiffrement",
+    "info1": "Les fichiers sont chiffrés avec AES-256, un algorithme de chiffrement sécurisé.",
+    "info2": "Le mot de passe est nécessaire pour déchiffrer le fichier. Perdez-le et vous ne pourrez plus accéder au fichier.",
+    "info3": "Les fichiers chiffrés ont l'extension .encrypted"
+  },
   "uuidGenerator": {
     "title": "Générateur UUID",
     "description": "Générer des identifiants UUID v4 en série.",

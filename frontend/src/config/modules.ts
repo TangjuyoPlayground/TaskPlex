@@ -700,7 +700,7 @@ export const MODULES: ModuleDefinition[] = [
     labelKey: 'modules.security.fileEncryption.title',
     descriptionKey: 'modules.security.fileEncryption.description',
     category: 'security',
-    status: 'placeholder',
+    status: 'implemented',
     color: 'text-indigo-600',
   },
   {

@@ -208,6 +208,27 @@
     "suggestions": "Sugerencias",
     "disclaimer": "Aviso: esta verificación no usa listas de contraseñas comprometidas/diccionarios; solo evalúa variedad de caracteres y longitud."
   },
+  "fileEncryption": {
+    "title": "Cifrado de archivos",
+    "encrypt": "Cifrar",
+    "decrypt": "Descifrar",
+    "selectFile": "Seleccionar un archivo",
+    "selectEncryptedFile": "Seleccionar un archivo cifrado",
+    "dropFile": "Arrastra y suelta tu archivo aquí o haz clic para explorar",
+    "dropEncryptedFile": "Arrastra y suelta tu archivo cifrado aquí o haz clic para explorar",
+    "password": "Contraseña",
+    "passwordPlaceholder": "Ingresa la contraseña",
+    "passwordHint": "Usa una contraseña fuerte. La necesitarás para descifrar el archivo.",
+    "encryptBtn": "Cifrar archivo",
+    "decryptBtn": "Descifrar archivo",
+    "encrypting": "Cifrando...",
+    "decrypting": "Descifrando...",
+    "downloadResult": "Descargar resultado",
+    "infoTitle": "Acerca del cifrado",
+    "info1": "Los archivos se cifran con AES-256, un algoritmo de cifrado seguro.",
+    "info2": "La contraseña es necesaria para descifrar el archivo. Si la pierdes, no podrás acceder al archivo.",
+    "info3": "Los archivos cifrados tienen la extensión .encrypted"
+  },
   "uuidGenerator": {
     "title": "Generador UUID",
     "description": "Genera identificadores UUID v4 en lote.",

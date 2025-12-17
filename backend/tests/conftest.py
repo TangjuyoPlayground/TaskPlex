@@ -77,5 +77,14 @@ def sample_pdf(tmp_path):
     return pdf_path
 
 
+@pytest.fixture
+def sample_text_file(tmp_path):
+    """Create a dummy text file for testing"""
+    text_path = tmp_path / "test_file.txt"
+    with open(text_path, "w", encoding="utf-8") as f:
+        f.write("This is a test file.\nLine 2\nLine 3")
+    return text_path
+
+
 # Note: Pour la vidéo, on peut soit avoir un petit fichier dans assets/, soit le générer avec ffmpeg
 # Pour l'instant on va simuler ou utiliser un asset si présent
