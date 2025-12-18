@@ -72,7 +72,7 @@
   },
   "home": {
     "heroTitle": "Tu",
-    "heroSubtitle": "Todas las herramientas que necesitas para ser productivo, en un solo lugar. Procesa videos, imágenes, PDF y más. 100% Gratis y Open Source.",
+    "heroSubtitle": "Todas las herramientas que necesitas para ser productivo. Procesamiento 100% local, cero recopilación de datos, completamente open source.",
     "searchPlaceholder": "Buscar herramientas... (ej: PDF, comprimir, convertir)",
     "noResults": "No se encontraron herramientas",
     "noResultsHint": "Intenta con otras palabras clave o revisa la ortografía",
@@ -1410,8 +1410,10 @@
     "video": "Video",
     "image": "Imagen",
     "audio": "Audio",
-    "devTools": "Herramientas Dev",
+    "code": "Código",
     "convert": "Convertir",
+    "generators": "Generadores",
+    "text": "Texto",
     "more": "Más herramientas",
     "implemented": "Disponible",
     "comingSoon": "Próximamente"
@@ -1661,10 +1663,6 @@
         "title": "Decodificador Base64",
         "description": "Decodificar Base64 a texto"
       },
-      "base64": {
-        "title": "Codificador Base64",
-        "description": "Codificar y decodificar Base64"
-      },
       "urlEncoder": {
         "title": "Codificador URL",
         "description": "Codificar y decodificar URLs"
@@ -1690,7 +1688,7 @@
         "description": "Convertir entre HEX, RGB, HSL"
       },
       "loremIpsum": {
-        "title": "Lorem Ipsum",
+        "title": "Generador Lorem Ipsum",
         "description": "Generar texto de relleno"
       },
       "codeFormatter": {

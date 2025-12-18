@@ -60,7 +60,7 @@
   },
   "home": {
     "heroTitle": "Your Universal",
-    "heroSubtitle": "Every tool you need to be productive, in one place. Process videos, images, PDFs and more. 100% Free and Open Source.",
+    "heroSubtitle": "Every tool you need to be productive. 100% local processing, zero data collection, fully open source.",
     "searchPlaceholder": "Search tools... (e.g. PDF, compress, convert)",
     "noResults": "No tools found",
     "noResultsHint": "Try different keywords or check the spelling",
@@ -1334,8 +1334,10 @@
     "video": "Video",
     "image": "Image",
     "audio": "Audio",
-    "devTools": "Dev Tools",
+    "code": "Code",
     "convert": "Convert",
+    "generators": "Generators",
+    "text": "Text",
     "more": "More Tools",
     "implemented": "Available",
     "comingSoon": "Coming Soon"
@@ -1585,10 +1587,6 @@
       "title": "Base64 Decoder",
       "description": "Decode Base64 to text"
     },
-      "base64": {
-        "title": "Base64 Encoder",
-        "description": "Encode and decode Base64"
-      },
       "urlEncoder": {
         "title": "URL Encoder",
         "description": "Encode and decode URLs"
@@ -1614,7 +1612,7 @@
         "description": "Convert between HEX, RGB, HSL"
       },
       "loremIpsum": {
-        "title": "Lorem Ipsum",
+        "title": "Lorem Ipsum Generator",
         "description": "Generate placeholder text"
       },
       "codeFormatter": {

@@ -90,10 +90,21 @@ export const HomeDashboard: React.FC = () => {
   // Get all modules from registry
   const allModules = getAllModules();
   
-  // Apply search filter (memoized for performance)
+  // Apply search filter and sort favorites first, then alphabetically (memoized for performance)
   const filteredModules = useMemo(() => {
-    return searchModules(allModules, searchQuery);
-  }, [allModules, searchQuery, searchModules]);
+    const filtered = searchModules(allModules, searchQuery);
+    // Sort: favorites first, then alphabetically by title
+    return filtered.sort((a, b) => {
+      const aIsFavorite = isFavorite(a.id);
+      const bIsFavorite = isFavorite(b.id);
+      if (aIsFavorite && !bIsFavorite) return -1;
+      if (!aIsFavorite && bIsFavorite) return 1;
+      // If both are favorites or both are not, sort alphabetically by title
+      const aTitle = t(a.labelKey).toLowerCase();
+      const bTitle = t(b.labelKey).toLowerCase();
+      return aTitle.localeCompare(bTitle);
+    });
+  }, [allModules, searchQuery, searchModules, isFavorite, t]);
   
   // Check if we have no results
   const hasNoResults = searchQuery.trim() !== '' && filteredModules.length === 0;
@@ -110,25 +121,49 @@ export const HomeDashboard: React.FC = () => {
   return (
     <div className="min-h-full bg-gray-50/50 dark:bg-gray-900">
       {/* Hero Section */}
-      <div className="bg-gradient-to-b from-purple-50 to-transparent dark:from-gray-800/50 dark:to-transparent py-16 px-4 text-center">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-6 tracking-tight">
-          {t('home.heroTitle')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 dark:from-purple-400 dark:to-blue-400">{t('common.appName')}</span>
-        </h1>
-        <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed mb-8">
-          {t('home.heroSubtitle')}
-        </p>
-        
-        {/* Search Bar */}
-        <div className="max-w-xl mx-auto">
-          <SearchBar
-            value={searchQuery}
-            onChange={handleSearchChange}
-          />
+      <div className="relative bg-gradient-to-b from-purple-50 to-transparent dark:from-gray-800/50 dark:to-transparent py-16 px-4 text-center overflow-hidden">
+        {/* Animated sinusoidal line */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
+            {/* Smooth sinusoidal wave using cubic Bezier curves */}
+            <path
+              d="M 0,100 Q 250,20 500,100 T 1000,100 T 1500,100 T 2000,100 T 2500,100 T 3000,100"
+              strokeWidth="2"
+              fill="none"
+              className="stroke-gray-600/30 dark:stroke-white/40"
+            >
+              <animateTransform
+                attributeName="transform"
+                type="translate"
+                from="0 0"
+                to="-1000 0"
+                dur="12s"
+                repeatCount="indefinite"
+              />
+            </path>
+          </svg>
+        </div>
+
+        <div className="relative z-10">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-6 tracking-tight">
+            {t('home.heroTitle')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 dark:from-purple-400 dark:to-blue-400">{t('common.appName')}</span>
+          </h1>
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed mb-8">
+            {t('home.heroSubtitle')}
+          </p>
+          
+          {/* Search Bar */}
+          <div className="max-w-xl mx-auto">
+            <SearchBar
+              value={searchQuery}
+              onChange={handleSearchChange}
+            />
+          </div>
         </div>
       </div>
 
       {/* Tools Grid */}
-      <div className="max-w-[1400px] mx-auto px-6 py-12">
+      <div className="max-w-[1600px] mx-auto px-2 py-12">
         {hasNoResults ? (
           /* No Results State */
           <div className="flex flex-col items-center justify-center py-20 text-center">
@@ -150,7 +185,7 @@ export const HomeDashboard: React.FC = () => {
           </div>
         ) : (
           /* Modules Grid */
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
             {filteredModules.map((module) => (
               <ModuleCard
                 key={module.id}
