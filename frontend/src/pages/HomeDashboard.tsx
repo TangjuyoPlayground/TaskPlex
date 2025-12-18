@@ -7,6 +7,7 @@ import { useModuleSearch } from '../hooks/useModuleSearch';
 import { getAllModules, type ModuleDefinition } from '../config/modules';
 import { getIcon, type IconName } from '../config/icons';
 import { SearchBar } from '../components/ui/SearchBar';
+import { WavyBackground } from '../components/ui/WavyBackground';
 
 // Module Card component - memoized for performance
 interface ModuleCardProps {
@@ -122,27 +123,13 @@ export const HomeDashboard: React.FC = () => {
     <div className="min-h-full bg-gray-50/50 dark:bg-gray-900">
       {/* Hero Section */}
       <div className="relative bg-gradient-to-b from-purple-50 to-transparent dark:from-gray-800/50 dark:to-transparent py-16 px-4 text-center overflow-hidden">
-        {/* Animated sinusoidal line */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
-            {/* Smooth sinusoidal wave using cubic Bezier curves */}
-            <path
-              d="M 0,100 Q 250,20 500,100 T 1000,100 T 1500,100 T 2000,100 T 2500,100 T 3000,100"
-              strokeWidth="2"
-              fill="none"
-              className="stroke-gray-600/30 dark:stroke-white/40"
-            >
-              <animateTransform
-                attributeName="transform"
-                type="translate"
-                from="0 0"
-                to="-1000 0"
-                dur="12s"
-                repeatCount="indefinite"
-              />
-            </path>
-          </svg>
-        </div>
+        {/* Animated wavy background */}
+        <WavyBackground
+          waveWidth={30}
+          blur={6}
+          speed="fast"
+          waveOpacity={0.4}
+        />
 
         <div className="relative z-10">
           <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-6 tracking-tight">
