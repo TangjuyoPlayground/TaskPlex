@@ -731,9 +731,9 @@
     "results": "Resultados",
     "resultsHint": "Los problemas detectados se listarán con línea y columna si están disponibles.",
     "valid": "JSON válido",
-    "invalid": "Problemas encontrados",
+    "invalid": "JSON inválido",
+    "noErrors": "No se encontraron errores. ¡Tu JSON es válido!",
     "placeholder": "Los resultados de validación aparecerán aquí.",
-    "noErrors": "No se detectaron problemas estructurales.",
     "location": "Línea {{line}}, columna {{column}}"
   },
   "xmlValidator": {
@@ -747,9 +747,9 @@
     "results": "Resultados",
     "resultsHint": "Los problemas detectados se listarán con línea y columna si están disponibles.",
     "valid": "XML válido",
-    "invalid": "Problemas encontrados",
+    "invalid": "XML inválido",
+    "noErrors": "No se encontraron errores. ¡Tu XML es válido!",
     "placeholder": "Los resultados de validación aparecerán aquí.",
-    "noErrors": "No se detectaron problemas estructurales.",
     "location": "Línea {{line}}, columna {{column}}"
   },
   "jsValidator": {
@@ -763,9 +763,9 @@
     "results": "Resultados",
     "resultsHint": "Los problemas detectados se listarán con línea y columna si están disponibles.",
     "valid": "JavaScript válido",
-    "invalid": "Problemas encontrados",
+    "invalid": "JavaScript inválido",
+    "noErrors": "No se encontraron errores. ¡Tu JavaScript es válido!",
     "placeholder": "Los resultados de validación aparecerán aquí.",
-    "noErrors": "No se detectaron problemas estructurales.",
     "location": "Línea {{line}}, columna {{column}}"
   },
   "pyValidator": {
@@ -779,9 +779,9 @@
     "results": "Resultados",
     "resultsHint": "Los problemas detectados se listarán con línea y columna si están disponibles.",
     "valid": "Python válido",
-    "invalid": "Problemas encontrados",
+    "invalid": "Python inválido",
+    "noErrors": "No se encontraron errores. ¡Tu Python es válido!",
     "placeholder": "Los resultados de validación aparecerán aquí.",
-    "noErrors": "No se detectaron problemas estructurales.",
     "location": "Línea {{line}}, columna {{column}}"
   },
   "loremIpsum": {
@@ -969,70 +969,6 @@
     "successTitle": "¡Archivos de audio fusionados!",
     "successMessage": "Tus archivos de audio se han combinado en un solo archivo.",
     "downloadResult": "Descargar archivo fusionado"
-  },
-  "jsonValidator": {
-    "title": "Validador JSON",
-    "description": "Validar la sintaxis y estructura JSON.",
-    "inputLabel": "JSON a validar",
-    "inputPlaceholder": "Pega o escribe tu JSON aquí...",
-    "inputHint": "Comprobamos la sintaxis JSON válida.",
-    "validateButton": "Validar JSON",
-    "validating": "Validando...",
-    "results": "Resultados",
-    "resultsHint": "Los problemas detectados se listarán con línea y columna si están disponibles.",
-    "valid": "JSON válido",
-    "invalid": "JSON inválido",
-    "noErrors": "No se encontraron errores. ¡Tu JSON es válido!",
-    "placeholder": "Los resultados de validación aparecerán aquí...",
-    "location": "Línea {{line}}, columna {{column}}"
-  },
-  "xmlValidator": {
-    "title": "Validador XML",
-    "description": "Validar la sintaxis y estructura XML.",
-    "inputLabel": "XML a validar",
-    "inputPlaceholder": "Pega o escribe tu XML aquí...",
-    "inputHint": "Comprobamos la sintaxis XML válida.",
-    "validateButton": "Validar XML",
-    "validating": "Validando...",
-    "results": "Resultados",
-    "resultsHint": "Los problemas detectados se listarán con línea y columna si están disponibles.",
-    "valid": "XML válido",
-    "invalid": "XML inválido",
-    "noErrors": "No se encontraron errores. ¡Tu XML es válido!",
-    "placeholder": "Los resultados de validación aparecerán aquí...",
-    "location": "Línea {{line}}, columna {{column}}"
-  },
-  "jsValidator": {
-    "title": "Validador JavaScript",
-    "description": "Validar la sintaxis JavaScript.",
-    "inputLabel": "JavaScript a validar",
-    "inputPlaceholder": "Pega o escribe tu código JavaScript aquí...",
-    "inputHint": "Comprobamos la sintaxis JavaScript válida.",
-    "validateButton": "Validar JavaScript",
-    "validating": "Validando...",
-    "results": "Resultados",
-    "resultsHint": "Los problemas detectados se listarán con línea y columna si están disponibles.",
-    "valid": "JavaScript válido",
-    "invalid": "JavaScript inválido",
-    "noErrors": "No se encontraron errores. ¡Tu JavaScript es válido!",
-    "placeholder": "Los resultados de validación aparecerán aquí...",
-    "location": "Línea {{line}}, columna {{column}}"
-  },
-  "pyValidator": {
-    "title": "Validador Python",
-    "description": "Validar la sintaxis Python.",
-    "inputLabel": "Python a validar",
-    "inputPlaceholder": "Pega o escribe tu código Python aquí...",
-    "inputHint": "Comprobamos la sintaxis Python válida.",
-    "validateButton": "Validar Python",
-    "validating": "Validando...",
-    "results": "Resultados",
-    "resultsHint": "Los problemas detectados se listarán con línea y columna si están disponibles.",
-    "valid": "Python válido",
-    "invalid": "Python inválido",
-    "noErrors": "No se encontraron errores. ¡Tu código Python es válido!",
-    "placeholder": "Los resultados de validación aparecerán aquí...",
-    "location": "Línea {{line}}, columna {{column}}"
   },
   "units": {
     "title": "Convertidor de unidades",

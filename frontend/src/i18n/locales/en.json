@@ -719,9 +719,9 @@
     "results": "Results",
     "resultsHint": "Detected issues will be listed with their line and column when available.",
     "valid": "Valid JSON",
-    "invalid": "Issues found",
+    "invalid": "Invalid JSON",
+    "noErrors": "No errors found. Your JSON is valid!",
     "placeholder": "Validation results will appear here.",
-    "noErrors": "No structural issues detected.",
     "location": "Line {{line}}, column {{column}}"
   },
   "xmlValidator": {
@@ -735,9 +735,9 @@
     "results": "Results",
     "resultsHint": "Detected issues will be listed with their line and column when available.",
     "valid": "Valid XML",
-    "invalid": "Issues found",
+    "invalid": "Invalid XML",
+    "noErrors": "No errors found. Your XML is valid!",
     "placeholder": "Validation results will appear here.",
-    "noErrors": "No structural issues detected.",
     "location": "Line {{line}}, column {{column}}"
   },
   "jsValidator": {
@@ -751,9 +751,9 @@
     "results": "Results",
     "resultsHint": "Detected issues will be listed with their line and column when available.",
     "valid": "Valid JavaScript",
-    "invalid": "Issues found",
+    "invalid": "Invalid JavaScript",
+    "noErrors": "No errors found. Your JavaScript is valid!",
     "placeholder": "Validation results will appear here.",
-    "noErrors": "No structural issues detected.",
     "location": "Line {{line}}, column {{column}}"
   },
   "pyValidator": {
@@ -767,9 +767,9 @@
     "results": "Results",
     "resultsHint": "Detected issues will be listed with their line and column when available.",
     "valid": "Valid Python",
-    "invalid": "Issues found",
+    "invalid": "Invalid Python",
+    "noErrors": "No errors found. Your Python is valid!",
     "placeholder": "Validation results will appear here.",
-    "noErrors": "No structural issues detected.",
     "location": "Line {{line}}, column {{column}}"
   },
   "loremIpsum": {
