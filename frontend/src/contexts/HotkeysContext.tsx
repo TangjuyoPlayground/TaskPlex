@@ -53,7 +53,7 @@ export function HotkeysProvider({ children }: { children: ReactNode }) {
         // Convert string hotkeys back to Hotkey objects
         const bindings: HotkeyBinding[] = parsed.map((item: { id: string; action: HotkeyAction; hotkeyString?: string; hotkey?: Hotkey; label: string }) => ({
           ...item,
-          hotkey: parseHotkeyFromString(item.hotkeyString) || item.hotkey,
+          hotkey: (item.hotkeyString ? parseHotkeyFromString(item.hotkeyString) : null) || item.hotkey || { ctrl: false, key: '' },
         }));
         // Use setTimeout to avoid synchronous setState in effect
         setTimeout(() => setHotkeys(bindings), 0);
