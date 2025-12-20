@@ -59,7 +59,8 @@ export function ProfilesProvider({ children }: { children: ReactNode }) {
       const storedProfiles = localStorage.getItem(STORAGE_KEY);
       if (storedProfiles) {
         const parsed = JSON.parse(storedProfiles);
-        setProfiles(parsed);
+        // Use setTimeout to avoid synchronous setState in effect
+        setTimeout(() => setProfiles(parsed), 0);
       } else {
         // Create default profile if none exist
         const defaultProfile: Profile = {
@@ -68,29 +69,39 @@ export function ProfilesProvider({ children }: { children: ReactNode }) {
           color: generateRandomColor(),
           createdAt: Date.now(),
         };
-        setProfiles([defaultProfile]);
-        setCurrentProfileId('default');
+        setTimeout(() => {
+          setProfiles([defaultProfile]);
+          setCurrentProfileId('default');
+        }, 0);
         localStorage.setItem(STORAGE_KEY, JSON.stringify([defaultProfile]));
         localStorage.setItem(CURRENT_PROFILE_KEY, 'default');
       }
 
       const storedCurrent = localStorage.getItem(CURRENT_PROFILE_KEY);
-      if (storedCurrent) {
-        setCurrentProfileId(storedCurrent);
-      } else if (profiles.length > 0) {
-        setCurrentProfileId(profiles[0].id);
-      }
+      setTimeout(() => {
+        if (storedCurrent) {
+          setCurrentProfileId(storedCurrent);
+        } else {
+          // Get profiles from state after they're loaded
+          const currentProfiles = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]') as Profile[];
+          if (currentProfiles.length > 0) {
+            setCurrentProfileId(currentProfiles[0].id);
+          }
+        }
+      }, 0);
     } catch (error) {
       console.error('Failed to load profiles:', error);
       // Create default profile on error
-      const defaultProfile: Profile = {
-        id: 'default',
-        name: 'Default',
-        color: generateRandomColor(),
-        createdAt: Date.now(),
-      };
-      setProfiles([defaultProfile]);
-      setCurrentProfileId('default');
+        const defaultProfile: Profile = {
+          id: 'default',
+          name: 'Default',
+          color: generateRandomColor(),
+          createdAt: Date.now(),
+        };
+        setTimeout(() => {
+          setProfiles([defaultProfile]);
+          setCurrentProfileId('default');
+        }, 0);
     }
   }, []);
 
@@ -193,6 +204,7 @@ export function ProfilesProvider({ children }: { children: ReactNode }) {
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useProfiles() {
   const context = useContext(ProfilesContext);
   if (context === undefined) {

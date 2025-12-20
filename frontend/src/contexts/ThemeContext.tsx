@@ -62,11 +62,14 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     if (typeof window !== 'undefined' && currentProfileId) {
       const storageKey = getProfileStorageKey(THEME_STORAGE_KEY_BASE);
       const stored = localStorage.getItem(storageKey) as Theme | null;
-      if (stored) {
-        setThemeState(stored);
-      } else {
-        setThemeState('system');
-      }
+      // Use setTimeout to avoid synchronous setState in effect
+      setTimeout(() => {
+        if (stored) {
+          setThemeState(stored);
+        } else {
+          setThemeState('system');
+        }
+      }, 0);
     }
   }, [currentProfileId, getProfileStorageKey]);
 

@@ -46,8 +46,11 @@ export const FavoritesProvider: React.FC<{ children: ReactNode }> = ({ children 
       const storedFavorites = localStorage.getItem(favoritesKey);
       const storedCollapsed = localStorage.getItem(collapsedKey);
       
-      setFavorites(storedFavorites ? JSON.parse(storedFavorites) : []);
-      setIsCollapsed(storedCollapsed ? JSON.parse(storedCollapsed) : false);
+      // Use setTimeout to avoid synchronous setState in effect
+      setTimeout(() => {
+        setFavorites(storedFavorites ? JSON.parse(storedFavorites) : []);
+        setIsCollapsed(storedCollapsed ? JSON.parse(storedCollapsed) : false);
+      }, 0);
     }
   }, [currentProfileId, getProfileStorageKey]);
 

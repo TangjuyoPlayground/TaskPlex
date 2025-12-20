@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTheme } from '../../contexts/ThemeContext';
+import type { AnimationConfig } from '../../config/themes';
 
 // Default wave animation
 export const DefaultWave: React.FC = () => {
@@ -27,7 +28,7 @@ export const DefaultWave: React.FC = () => {
 
 
 // Christmas animation with falling snowflakes
-export const ChristmasAnimation: React.FC<{ config?: any }> = ({ config }) => {
+export const ChristmasAnimation: React.FC<{ config?: AnimationConfig }> = ({ config }) => {
   const { resolvedTheme } = useTheme();
   
   // Use config if provided, otherwise use defaults based on theme

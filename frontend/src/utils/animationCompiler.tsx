@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTheme } from '../contexts/ThemeContext';
-// @ts-ignore - @babel/standalone doesn't have TypeScript definitions
+// @ts-expect-error - @babel/standalone doesn't have TypeScript definitions
 import { transform } from '@babel/standalone';
 
 /**

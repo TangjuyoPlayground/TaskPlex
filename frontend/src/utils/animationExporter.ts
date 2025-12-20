@@ -13,7 +13,7 @@
  * // Then store in theme.animation.code
  * ```
  */
-export function extractAnimationCode(componentFunction: Function): string {
+export function extractAnimationCode(componentFunction: (...args: unknown[]) => unknown): string {
   const functionString = componentFunction.toString();
   
   // Extract the function body (everything after the arrow or function declaration)
@@ -48,7 +48,7 @@ export function extractAnimationCode(componentFunction: Function): string {
  * - Has access to useTheme() hook
  * - Returns JSX
  */
-export function createAnimationCodeString(componentFunction: Function): string {
+export function createAnimationCodeString(componentFunction: (...args: unknown[]) => unknown): string {
   return extractAnimationCode(componentFunction);
 }
 

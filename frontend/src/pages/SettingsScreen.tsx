@@ -145,9 +145,6 @@ export const SettingsScreen: React.FC = () => {
             </div>
             <div className="space-y-3">
               {moduleHotkeys.map((binding) => {
-                const module = binding.action.type === 'navigate' 
-                  ? allModules.find(m => m.path === binding.action.path)
-                  : null;
                 return (
                   <div key={binding.id} className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
                     <div className="flex-1 min-w-0">

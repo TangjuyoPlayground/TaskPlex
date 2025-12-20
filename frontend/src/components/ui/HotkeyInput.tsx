@@ -26,11 +26,16 @@ export const HotkeyInput: React.FC<HotkeyInputProps> = ({
 
   // Update display value when value changes
   useEffect(() => {
-    if (value && value.key) {
-      setDisplayValue(formatHotkey(value, isMac));
-    } else {
-      setDisplayValue('');
-    }
+    const updateDisplay = () => {
+      if (value && value.key) {
+        setDisplayValue(formatHotkey(value, isMac));
+      } else {
+        setDisplayValue('');
+      }
+    };
+    // Use setTimeout to avoid synchronous setState in effect
+    const timeoutId = setTimeout(updateDisplay, 0);
+    return () => clearTimeout(timeoutId);
   }, [value, isMac]);
 
   useEffect(() => {

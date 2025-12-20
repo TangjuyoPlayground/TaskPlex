@@ -51,18 +51,19 @@ export function HotkeysProvider({ children }: { children: ReactNode }) {
       if (stored) {
         const parsed = JSON.parse(stored);
         // Convert string hotkeys back to Hotkey objects
-        const bindings: HotkeyBinding[] = parsed.map((item: any) => ({
+        const bindings: HotkeyBinding[] = parsed.map((item: { id: string; action: HotkeyAction; hotkeyString?: string; hotkey?: Hotkey; label: string }) => ({
           ...item,
           hotkey: parseHotkeyFromString(item.hotkeyString) || item.hotkey,
         }));
-        setHotkeys(bindings);
+        // Use setTimeout to avoid synchronous setState in effect
+        setTimeout(() => setHotkeys(bindings), 0);
       } else {
         // Reset to defaults if no stored hotkeys for this profile
-        setHotkeys(DEFAULT_HOTKEYS);
+        setTimeout(() => setHotkeys(DEFAULT_HOTKEYS), 0);
       }
     } catch (error) {
       console.error('Failed to load hotkeys from storage:', error);
-      setHotkeys(DEFAULT_HOTKEYS);
+      setTimeout(() => setHotkeys(DEFAULT_HOTKEYS), 0);
     }
   }, [getProfileStorageKey]);
 
@@ -87,7 +88,7 @@ export function HotkeysProvider({ children }: { children: ReactNode }) {
       case 'navigate':
         navigate(action.path);
         break;
-      case 'focus_search':
+      case 'focus_search': {
         // Find the search input - try multiple selectors
         let searchInput = document.querySelector('input[type="text"][placeholder*="Rechercher"]') as HTMLInputElement;
         if (!searchInput) {
@@ -104,6 +105,7 @@ export function HotkeysProvider({ children }: { children: ReactNode }) {
           searchInput.select();
         }
         break;
+      }
       case 'custom':
         // Custom actions can be handled by components that register them
         console.log('Custom action:', action.id);
@@ -228,6 +230,7 @@ export function HotkeysProvider({ children }: { children: ReactNode }) {
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useHotkeys() {
   const context = useContext(HotkeysContext);
   if (context === undefined) {

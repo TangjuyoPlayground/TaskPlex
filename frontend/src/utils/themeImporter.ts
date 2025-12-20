@@ -5,7 +5,7 @@ import { extractAnimationCode } from './animationExporter';
 /**
  * Validates if an object matches the CustomTheme interface
  */
-function isValidCustomTheme(obj: any): obj is CustomTheme {
+function isValidCustomTheme(obj: unknown): obj is CustomTheme {
   if (!obj || typeof obj !== 'object') return false;
 
   const requiredFields: (keyof CustomTheme)[] = [
@@ -64,7 +64,7 @@ function isValidCustomTheme(obj: any): obj is CustomTheme {
 /**
  * Validates if an object matches the AnimationConfig interface
  */
-function isValidAnimationConfig(obj: any): obj is AnimationConfig {
+function isValidAnimationConfig(obj: unknown): obj is AnimationConfig {
   if (!obj || typeof obj !== 'object') return false;
   if (typeof obj.code !== 'string' || obj.code.trim() === '') return false;
   return true;
@@ -73,7 +73,7 @@ function isValidAnimationConfig(obj: any): obj is AnimationConfig {
 /**
  * Validates if an object matches the ThemeDefinition interface
  */
-function isValidThemeDefinition(obj: any): obj is ThemeDefinition {
+function isValidThemeDefinition(obj: unknown): obj is ThemeDefinition {
   if (!obj || typeof obj !== 'object') return false;
   if (typeof obj.id !== 'string' || obj.id.trim() === '') return false;
   if (typeof obj.name !== 'string' || obj.name.trim() === '') return false;
@@ -130,7 +130,7 @@ export function exportTheme(theme: ThemeDefinition): string {
   // If the theme has an animation but no code, try to extract it from built-in components
   if (themeToExport.animation && !themeToExport.animation.code) {
     // Map theme IDs to their corresponding animation components
-    const themeAnimationMap: Record<string, Function> = {
+    const themeAnimationMap: Record<string, (...args: unknown[]) => unknown> = {
       'christmas': ChristmasAnimation,
     };
     
@@ -143,7 +143,7 @@ export function exportTheme(theme: ThemeDefinition): string {
   
   // Clean up: ensure only 'code' is in animation (remove any legacy fields)
   if (themeToExport.animation) {
-    const { code } = themeToExport.animation as any;
+    const { code } = themeToExport.animation as { code?: string };
     if (code) {
       themeToExport.animation = { code };
     } else {

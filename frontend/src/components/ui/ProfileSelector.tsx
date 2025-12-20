@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Plus, X } from 'lucide-react';
-import { useProfiles, type Profile } from '../../contexts/ProfilesContext';
+import { useProfiles } from '../../contexts/ProfilesContext';
 import { ProfileAvatar } from './ProfileAvatar';
 
 export const ProfileSelector: React.FC = () => {
@@ -156,7 +156,7 @@ export const ProfileSelector: React.FC = () => {
                             name: '', 
                             color: '#8B5CF6', 
                             avatarIndex: index,
-                            createdAt: Date.now()
+                            createdAt: 0
                           };
                           return (
                             <button
