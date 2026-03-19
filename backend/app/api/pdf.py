@@ -182,13 +182,11 @@ async def split_pdf_file(
 
         shutil.make_archive(str(zip_path.with_suffix("")), "zip", output_dir)
 
-        # Cleanup output dir containing split pdfs (we only keep the zip)
-        shutil.rmtree(output_dir)
-
-        # Update result with zip info
+        # Update result with zip info and individual file paths (prefixed with subdir)
         result.filename = zip_filename
         result.download_url = f"/api/v1/download/{zip_filename}"
-        result.message = "PDF split successfully (download as ZIP)"
+        result.filenames = [f"{dir_name}/{fname}" for fname in (result.filenames or [])]
+        result.message = "PDF split successfully"
 
         return result
 
