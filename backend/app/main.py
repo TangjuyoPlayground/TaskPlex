@@ -237,7 +237,7 @@ app.include_router(tasks_router, prefix="/api/v1")
 
 
 # Download endpoint for processed files
-@app.get("/api/v1/download/{filename}", tags=["Download"])
+@app.get("/api/v1/download/{filename:path}", tags=["Download"])
 async def download_file(filename: str):
     """
     Download a processed file from temporary storage
