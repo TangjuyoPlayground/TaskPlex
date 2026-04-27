@@ -33,7 +33,7 @@ python-barcode>=0.15.1
 # Code formatting and minification
 jsbeautifier>=1.15.1
 rcssmin>=1.1.2
-rjsmin>=1.2.2
+rjsmin>=1.2.5
 
 # Data generation
 rstr>=3.0.0
